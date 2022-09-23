@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/tree">
+        <file>qml/TreeNode.qml</file>
+        <file>qml/TreeNodeBackground.qml</file>
+        <file>qml/TreeNodeMouseHandler.qml</file>
+        <file>qml/TreeRowContent.qml</file>
+        <file>qml/TreeRowDragDelegate.qml</file>
+        <file>qml/TreeView.qml</file>
+        <file>qml/TestItem.qml</file>
+        <file>qml/TreeRowDelegateBase.qml</file>
+    </qresource>
+</RCC>

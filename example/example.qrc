@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/example">
+        <file>Main.qml</file>
+        <file>TreeRowDelegate.qml</file>
+    </qresource>
+    <qresource prefix="/icons">
+        <file>triangle.png</file>
+    </qresource>
+</RCC>

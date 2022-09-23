@@ -7,7 +7,7 @@
 #include <QDebug>
 #include "export.h"
 
-class TREE_VIEW_API QmlTreeModelInterface : public QAbstractItemModel
+class TREE_LIST_VIEW_API QmlTreeModelInterface : public QAbstractItemModel
 {
     Q_OBJECT
     using BaseClass = QAbstractItemModel;

@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import tree 1.0
+import treelistview 1.0
 
 Item {
     id: rowDelegate

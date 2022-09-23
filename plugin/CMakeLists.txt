@@ -1,1 +1,1 @@
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/tree)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/treelistview)

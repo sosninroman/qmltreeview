@@ -6,8 +6,6 @@
 
 #include "fixedsizetree.h"
 
-#include "foo.h"
-
 int main(int argc, char *argv[]) {
 
     qmlRegisterType<FixedSizeTreeModel>("example", 1, 0, "FixedSizeTreeModel");
@@ -19,8 +17,6 @@ int main(int argc, char *argv[]) {
 
     SimpleTreeNode n("test");
     n.row();
-
-    foo::foo();
 
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;

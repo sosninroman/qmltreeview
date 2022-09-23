@@ -1,4 +1,4 @@
-set(PLUGIN_NAME tree)
+set(PLUGIN_NAME treelistview)
 
 qt5_add_resources(RESOURCES ${CMAKE_CURRENT_LIST_DIR}/tree.qrc)
 
@@ -31,4 +31,4 @@ target_link_libraries(
         Qt5::Qml
 )
 
-target_compile_definitions(${PLUGIN_NAME} PRIVATE TREE_VIEW_EXPORT)
+target_compile_definitions(${PLUGIN_NAME} PRIVATE TREE_LIST_VIEW_EXPORT)

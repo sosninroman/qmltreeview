@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.2
 
-import tree 1.0 as T
+import treelistview 1.0 as T
 import example 1.0
 
 ApplicationWindow {

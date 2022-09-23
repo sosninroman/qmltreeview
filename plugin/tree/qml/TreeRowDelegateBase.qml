@@ -5,9 +5,11 @@ Item {
     id: rowDelegate
 
     property var index: __index
-    property var rowData: __rowData
-    property TreeRowDragDelegate dragDelegate: null
+    property var modelData: __modelData
     property Selector selector: __selector
+
+    property TreeRowDragDelegate dragDelegate: null
+
 
     signal canceled()
     signal clicked(var mouse)

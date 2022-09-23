@@ -4,42 +4,44 @@ import QtQuick.Layouts 1.12
 import tree 1.0
 
 Row {
-    property var rowData
-    property Selector selector
-    property Component rowDelegate
+    id: row
+    property var modelData
     property var index
+    property Selector selector
+
+    property Component rowDelegate
     property alias delegateItem: delegateLdr.item
 
     function onClicked(mouse) {
-        delegateLdr.item.clicked(mouse)
+        delegateItem.clicked(mouse)
     }
     function onDoubleClicked(mouse) {
-        delegateLdr.item.doubleClicked(mouse)
+        delegateItem.doubleClicked(mouse)
     }
     function onEntered() {
-        delegateLdr.item.entered()
+        delegateItem.entered()
     }
     function onExited() {
-        delegateLdr.item.exited()
+        delegateItem.exited()
     }
     function onPositionChanged(mouse) {
-        delegateLdr.item.positionChanged(mouse)
+        delegateItem.positionChanged(mouse)
     }
     function onPressAndHold(mouse) {
-        delegateLdr.item.pressAndHold(mouse)
+        delegateItem.pressAndHold(mouse)
     }
     function onPressed(mouse) {
-        delegateLdr.item.pressed(mouse)
+        delegateItem.pressed(mouse)
     }
     function onReleased(mouse) {
-        delegateLdr.item.released(mouse)
+        delegateItem.released(mouse)
     }
     function onWheel(wheel) {
-        delegateLdr.item.wheel(wheel)
+        delegateItem.wheel(wheel)
     }
 
     Item { //delegate margins
-        width: expButton.width * rowData.nodeLevel
+        width: expButton.width * modelData.nodeLevel
         height: expButton.height
     }
 
@@ -52,25 +54,25 @@ Row {
             width: expButton.width / 2
             height: expButton.height / 2
             source: "qrc:/icons/triangle.png"
-            visible: rowData.expandable
-            rotation: rowData.expanded ? 90 : 0
+            visible: modelData.expandable
+            rotation: modelData.expanded ? 90 : 0
         }
         MouseArea {
             anchors.fill: parent
             onClicked: {
-                rowData.expanded = !rowData.expanded
+                modelData.expanded = !modelData.expanded
                 mouse.accepted = false
             }
-            enabled: rowData.expandable
+            enabled: modelData.expandable
         }
     }
 
     Loader { //delegate
         id: delegateLdr
         Layout.fillWidth: true
-        property var __rowData: rowData
-        property var __selector: selector
+        property var __modelData: modelData
         property var __index: index
+        property var __selector: selector
         sourceComponent: rowDelegate
     }
 }

@@ -57,16 +57,9 @@ Column {
 
     }
 
-//    Loader {
-//        id: mouseHandlerLdr
-//        sourceComponent: view.mouseHandlerComponent
-//        property var __index: currentIndex
-//        property var __data: nodeItem.nodeData
-//        property Selector __selector: nodeItem.selector
-//    }
-
     Item { //row
-        width: Math.max(rowContent.width, nodeItem.contentWidth, view.width)
+        //width: Math.max(rowContent.width, nodeItem.contentWidth, view.width)
+        width: Math.max(rowContent.width, view.width)
         height: rowContent.height + 2 * nodeItem.spacing
         Loader { //node background
             id: nodeBackgroundLdr
@@ -76,88 +69,56 @@ Column {
             property var __index: nodeItem.currentIndex
             property Selector __selector: nodeItem.selector
         }
-        MouseArea { //node delegate
+        TreeRow { //row content
+            id: rowContent
+            modelData: nodeItem.nodeData
+            selector: nodeItem.selector
+            rowDelegate: view.rowDelegate
+            index: nodeItem.currentIndex
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+        }
+        MouseArea { //area for mouse events processing
             anchors.fill: parent
             hoverEnabled: true
             acceptedButtons: Qt.AllButtons
 //            cursorShape: mouseHandlerLdr.item.cursorShape
-            //TODO Connections MouseArea -> MouseHandlerLdr.item
-//            Component.onCompleted: {
-//                clicked.connect(mouseHandlerLdr.item.clicked)
-//            }
 
             onClicked: {
-                mouse.accepted = false
-//                if (typeof mouseHandlerLdr.item.onClicked == 'function') {
-//                    mouseHandlerLdr.item.onClicked(mouse, nodeData)
-//                }
                 rowContent.onClicked(mouse)
                 nodeBackgroundLdr.item.clicked(mouse)
             }
             onDoubleClicked: {
-                mouse.accepted = false
-//                mouseHandlerLdr.item.onDoubleClick(mouse, nodeData)
                 rowContent.onDoubleClicked(mouse)
                 nodeBackgroundLdr.item.doubleClicked(mouse)
             }
             onEntered: {
-//                if (typeof mouseHandlerLdr.item.onEntered == 'function') {
-//                    mouseHandlerLdr.item.onEntered(nodeData)
-//                }
                 rowContent.onEntered()
                 nodeBackgroundLdr.item.entered()
             }
             onExited: {
-//                if (typeof mouseHandlerLdr.item.onExit == 'function') {
-//                    mouseHandlerLdr.item.onExit(nodeData)
-//                }
                 rowContent.onExited()
                 nodeBackgroundLdr.item.exited()
             }
             onPositionChanged: {
-//                if (typeof mouseHandlerLdr.item.onPositionChanged == 'function') {
-//                    mouseHandlerLdr.item.onPositionChanged(mouse)
-//                }
                 rowContent.onPositionChanged(mouse)
                 nodeBackgroundLdr.item.positionChanged(mouse)
             }
             onPressAndHold: {
-//                if (typeof mouseHandlerLdr.item.onPressAndHold == 'function') {
-//                    mouseHandlerLdr.item.onPressAndHold(mouse)
-//                }
                 rowContent.onPressAndHold(mouse)
                 nodeBackgroundLdr.item.pressAndHold(mouse)
             }
             onPressed: {
-//                if (typeof mouseHandlerLdr.item.onPressed == 'function') {
-//                    mouseHandlerLdr.item.onPressed(mouse)
-//                }
                 rowContent.onPressed(mouse)
                 nodeBackgroundLdr.item.pressed(mouse)
             }
             onReleased: {
-//                if (typeof mouseHandlerLdr.item.onReleased == 'function') {
-//                    mouseHandlerLdr.item.onReleased(mouse)
-//                }
                 rowContent.onReleased(mouse)
                 nodeBackgroundLdr.item.released(mouse)
             }
             onWheel: {
-//                if (typeof mouseHandlerLdr.item.onWheel == 'function') {
-//                    mouseHandlerLdr.item.onWheel(wheel)
-//                }
                 rowContent.onWheel(wheel)
                 nodeBackgroundLdr.item.wheel(wheel)
-            }
-
-            TreeRowContent { //row content
-                id: rowContent
-                rowData: nodeItem.nodeData
-                selector: nodeItem.selector
-                rowDelegate: view.rowDelegate
-                index: nodeItem.currentIndex
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
             }
         }
         DropArea { //area for drop events processing

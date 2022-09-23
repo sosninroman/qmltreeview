@@ -4,8 +4,11 @@ import QtQuick.Layouts 1.12
 import tree 1.0 as T
 
 T.TreeRowDelegateBase {
+    id: textCell
+
     height: rect.height
     width: rect.width
+
     Rectangle {
         id: rect
         height: lbl.height
@@ -13,7 +16,7 @@ T.TreeRowDelegateBase {
         color: "green"
         Label {
             id: lbl
-            text: __rowData.name
+            text: modelData.name
             font.pixelSize: 12
         }
     }
@@ -33,5 +36,11 @@ T.TreeRowDelegateBase {
 
     onClicked: {
         select()
+    }
+
+    onDoubleClicked: {
+        if(modelData.expandable) {
+            modelData.expanded = !modelData.expanded
+        }
     }
 }

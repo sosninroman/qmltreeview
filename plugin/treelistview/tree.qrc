@@ -1,11 +1,10 @@
 <RCC>
     <qresource prefix="/treelistview">
-        <file>qml/TestItem.qml</file>
         <file>qml/TreeNode.qml</file>
-        <file>qml/TreeNodeBackground.qml</file>
         <file>qml/TreeRow.qml</file>
-        <file>qml/TreeRowDelegateBase.qml</file>
         <file>qml/TreeRowDragDelegate.qml</file>
         <file>qml/TreeView.qml</file>
+        <file>qml/RowBackgroundDelegateBase.qml</file>
+        <file>qml/RowContentDelegateBase.qml</file>
     </qresource>
 </RCC>

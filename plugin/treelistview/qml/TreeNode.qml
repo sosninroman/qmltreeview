@@ -63,22 +63,26 @@ Column {
         height: rowContent.height + 2 * nodeItem.spacing
         Loader { //node background
             id: nodeBackgroundLdr
+
             anchors.fill: parent
             sourceComponent: view.nodeBackgroundComponent
+
             property var __data: nodeItem.nodeData
             property var __index: nodeItem.currentIndex
             property Selector __selector: nodeItem.selector
         }
         TreeRow { //row content
             id: rowContent
-            modelData: nodeItem.nodeData
-            selector: nodeItem.selector
-            rowDelegate: view.rowDelegate
-            index: nodeItem.currentIndex
+
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
+
+            modelData: nodeItem.nodeData
+            index: nodeItem.currentIndex
+            selector: nodeItem.selector
+            rowDelegate: view.rowDelegate
         }
-        MouseArea { //area for mouse events processing
+        MouseArea { //area for mouse events dispatching
             anchors.fill: parent
             hoverEnabled: true
             acceptedButtons: Qt.AllButtons

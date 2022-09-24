@@ -9,7 +9,7 @@ Item {
     id: treeView
     property QmlTreeModelInterface treeModel
     property Component rowDelegate
-    property Component nodeBackgroundComponent: TreeNodeBackground {}
+    property Component nodeBackgroundComponent: RowBackgroundDelegateBase {}
 
     property int delegateSpacing: 3
 

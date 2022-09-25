@@ -2,7 +2,7 @@ import QtQuick 2.15
 import treelistview 1.0
 import "./private"
 
-MouseHandler {
+InputHandler {
     Image {
         anchors.centerIn: parent
         width: expButton.width / 2

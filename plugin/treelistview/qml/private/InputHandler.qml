@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import treelistview 1.0
 
-Item {
+FocusScope {
     signal canceled()
     signal clicked(var mouse)
     signal doubleClicked(var mouse)

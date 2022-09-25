@@ -8,7 +8,7 @@
         <file>qml/RowExpanderDelegateBase.qml</file>
         <file>qml/DefaultRowBackground.qml</file>
         <file>qml/RowBackgroundBase.qml</file>
-        <file>qml/private/MouseHandler.qml</file>
         <file>qml/DefaultTreeView.qml</file>
+        <file>qml/private/InputHandler.qml</file>
     </qresource>
 </RCC>

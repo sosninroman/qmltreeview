@@ -80,13 +80,7 @@ FocusScope {
                 id: nodeBackgroundLdr
 
                 anchors.fill: parent
-                sourceComponent: view.nodeBackgroundComponent
-//                sourceComponent: Item {
-//                    Rectangle {
-//                        anchors.fill: parent
-//                    color: "red"
-//                }
-//                }
+                sourceComponent: view.nodeBackground
 
                 property var __data: nodeItem.nodeData
                 property var __index: nodeItem.currentIndex
@@ -101,40 +95,58 @@ FocusScope {
 
                 onClicked: {
                     rowContent.onClicked(mouse)
-                    nodeBackgroundLdr.item.clicked(mouse)
+                    if(nodeBackgroundLdr.item) {
+                        nodeBackgroundLdr.item.clicked(mouse)
+                    }
                     mouse.accepted = false
                 }
                 onDoubleClicked: {
                     rowContent.onDoubleClicked(mouse)
-                    nodeBackgroundLdr.item.doubleClicked(mouse)
+                    if(nodeBackgroundLdr.item) {
+                        nodeBackgroundLdr.item.doubleClicked(mouse)
+                    }
                 }
                 onEntered: {
                     rowContent.onEntered()
-                    nodeBackgroundLdr.item.entered()
+                    if(nodeBackgroundLdr.item) {
+                        nodeBackgroundLdr.item.entered()
+                    }
                 }
                 onExited: {
                     rowContent.onExited()
-                    nodeBackgroundLdr.item.exited()
+                    if(nodeBackgroundLdr.item) {
+                        nodeBackgroundLdr.item.exited()
+                    }
                 }
                 onPositionChanged: {
                     rowContent.onPositionChanged(mouse)
-                    nodeBackgroundLdr.item.positionChanged(mouse)
+                    if(nodeBackgroundLdr.item) {
+                        nodeBackgroundLdr.item.positionChanged(mouse)
+                    }
                 }
                 onPressAndHold: {
                     rowContent.onPressAndHold(mouse)
-                    nodeBackgroundLdr.item.pressAndHold(mouse)
+                    if(nodeBackgroundLdr.item) {
+                        nodeBackgroundLdr.item.pressAndHold(mouse)
+                    }
                 }
                 onPressed: {
                     rowContent.onPressed(mouse)
-                    nodeBackgroundLdr.item.pressed(mouse)
+                    if(nodeBackgroundLdr.item) {
+                        nodeBackgroundLdr.item.pressed(mouse)
+                    }
                 }
                 onReleased: {
                     rowContent.onReleased(mouse)
-                    nodeBackgroundLdr.item.released(mouse)
+                    if(nodeBackgroundLdr.item) {
+                        nodeBackgroundLdr.item.released(mouse)
+                    }
                 }
                 onWheel: {
                     rowContent.onWheel(wheel)
-                    nodeBackgroundLdr.item.wheel(wheel)
+                    if(nodeBackgroundLdr.item) {
+                        nodeBackgroundLdr.item.wheel(wheel)
+                    }
                 }
             }
 

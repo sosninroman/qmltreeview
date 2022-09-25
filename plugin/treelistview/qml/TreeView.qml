@@ -8,13 +8,7 @@ FocusScope {
     id: treeView
     property QmlTreeModelInterface treeModel
     property Component rowDelegate
-    property Component nodeBackgroundComponent: DefaultRowBackground {}
-//    property Component nodeBackgroundComponent:  Item {
-//        Rectangle {
-//            anchors.fill: parent
-//        color: "red"
-//    }
-//    }
+    property Component nodeBackground
     property Selector selector: Selector {}
 
     property int delegateSpacing: 3

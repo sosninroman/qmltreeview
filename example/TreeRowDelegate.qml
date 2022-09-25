@@ -21,24 +21,17 @@ T.RowContentDelegateBase {
         }
     }
 
-    //focus: true
     Keys.onPressed: {
         console.warn(modelData.name, "Delegate: Key was pressed!")
         event.accepted = true
     }
 
-//    onFocusChanged: {
-//        console.warn("Delegate: focusChanged", focus)
-//    }
-
     Connections {
         target: selector
         function onSelectionChanged() {
-//            console.warn("on selection changed", selector.selectedIndexes)
             var i = 0
             while(i < selector.selectedIndexes.length) {
                 if(index === selector.selectedIndexes[i]) {
-//                    console.warn("set focus!")
                     textCell.focus = true
                     return
                 }

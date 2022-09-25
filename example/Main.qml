@@ -17,7 +17,7 @@ ApplicationWindow {
     }
 
 
-    T.TreeView {
+    T.DefaultTreeView {
         anchors.fill: parent
         rowDelegate: TreeRowDelegate{}
         id: projectView
@@ -29,9 +29,7 @@ ApplicationWindow {
             console.warn("TreeView: Key was pressed!")
         }
 
-        onClicked: {
-            selector.clear()
-        }
+
     }
 
 //    component TextWithFocus : TextArea {

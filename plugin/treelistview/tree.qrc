@@ -7,5 +7,7 @@
         <file>qml/RowBackgroundDelegateBase.qml</file>
         <file>qml/RowContentDelegateBase.qml</file>
         <file>qml/RowExpanderDelegateBase.qml</file>
+        <file>qml/MouseHandler.qml</file>
+        <file>qml/DefaultRowBackground.qml</file>
     </qresource>
 </RCC>

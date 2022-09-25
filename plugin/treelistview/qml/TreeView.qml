@@ -8,7 +8,13 @@ FocusScope {
     id: treeView
     property QmlTreeModelInterface treeModel
     property Component rowDelegate
-    property Component nodeBackgroundComponent: RowBackgroundDelegateBase {}
+    property Component nodeBackgroundComponent: DefaultRowBackground {}
+//    property Component nodeBackgroundComponent:  Item {
+//        Rectangle {
+//            anchors.fill: parent
+//        color: "red"
+//    }
+//    }
     property Selector selector: Selector {}
 
     property int delegateSpacing: 3
@@ -41,7 +47,6 @@ FocusScope {
 
         focus: true
         Keys.onPressed: {
-            console.warn("ScrollView: Key was pressed!")
             event.accepted = true
             treeView.Keys.pressed(event)
         }

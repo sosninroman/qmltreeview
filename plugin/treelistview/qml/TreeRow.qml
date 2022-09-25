@@ -66,7 +66,7 @@ FocusScope {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    console.warn("CLICK")
+                    //console.warn("CLICK")
                     modelData.expanded = !modelData.expanded
                     mouse.accepted = false
                 }

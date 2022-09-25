@@ -12,9 +12,11 @@ FocusScope {
 
     function onClicked(mouse) {
         delegateItem.clicked(mouse)
+        //expButton.clicked(mouse)
     }
     function onDoubleClicked(mouse) {
         delegateItem.doubleClicked(mouse)
+        //expButton.doubleClicked(mouse)
     }
     function onEntered() {
         delegateItem.entered()
@@ -43,10 +45,10 @@ FocusScope {
 
     focus: delegateLdr.item.focus
     onFocusChanged: {
-        console.warn("RowContent: focusChanged", focus)
+        //console.warn("RowContent: focusChanged", focus)
     }
     Keys.onPressed: {
-        console.warn("RowContent: Key was pressed!", index)
+        //console.warn("RowContent: Key was pressed!", index)
         event.accepted = false
     }
 
@@ -61,6 +63,15 @@ FocusScope {
             id: expButton
             width: height
             height: delegateLdr.height
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    console.warn("CLICK")
+                    modelData.expanded = !modelData.expanded
+                    mouse.accepted = false
+                }
+                enabled: modelData.expandable
+            }
         }
 
 //        Item { //expand icon

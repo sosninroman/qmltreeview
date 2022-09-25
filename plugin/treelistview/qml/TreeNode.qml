@@ -63,13 +63,13 @@ FocusScope {
 
     focus: rowScope.focus || rp.hasFocus
     Keys.onPressed: {
-        if(nodeData)
-        console.warn(nodeData.name, "Node: Key was pressed!")
+//        if(nodeData)
+//        console.warn(nodeData.name, "Node: Key was pressed!")
         event.accepted = false
     }
     onFocusChanged: {
-        if(nodeData)
-        console.warn(nodeData.name, "Node: focusChanged", focus)
+//        if(nodeData)
+//        console.warn(nodeData.name, "Node: focusChanged", focus)
     }
 
     width: col.width
@@ -81,12 +81,12 @@ FocusScope {
             id: rowScope
             focus: rowContent.focus
             onFocusChanged: {
-                if(nodeData)
-                    console.warn(nodeData.name, "Row item: focusChanged", focus)
+//                if(nodeData)
+//                    console.warn(nodeData.name, "Row item: focusChanged", focus)
             }
             Keys.onPressed: {
-                if(nodeData)
-                    console.warn(nodeData.name, "Row item: Key was pressed!")
+//                if(nodeData)
+//                    console.warn(nodeData.name, "Row item: Key was pressed!")
                 event.accepted = false
             }
 
@@ -103,17 +103,7 @@ FocusScope {
                 property var __index: nodeItem.currentIndex
                 property Selector __selector: nodeItem.selector
             }
-            TreeRow { //row content
-                id: rowContent
 
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-
-                modelData: nodeItem.nodeData
-                index: nodeItem.currentIndex
-                selector: nodeItem.selector
-                rowDelegate: view.rowDelegate
-            }
             MouseArea { //area for mouse events dispatching
                 anchors.fill: parent
                 hoverEnabled: true
@@ -123,6 +113,7 @@ FocusScope {
                 onClicked: {
                     rowContent.onClicked(mouse)
                     nodeBackgroundLdr.item.clicked(mouse)
+                    mouse.accepted = false
                 }
                 onDoubleClicked: {
                     rowContent.onDoubleClicked(mouse)
@@ -157,6 +148,19 @@ FocusScope {
                     nodeBackgroundLdr.item.wheel(wheel)
                 }
             }
+
+            TreeRow { //row content
+                id: rowContent
+
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+
+                modelData: nodeItem.nodeData
+                index: nodeItem.currentIndex
+                selector: nodeItem.selector
+                rowDelegate: view.rowDelegate
+            }
+
             DropArea { //area for drop events processing
                 anchors.fill: parent
                 onEntered: {
@@ -203,12 +207,12 @@ FocusScope {
             delegate: FocusScope {
                 focus: l.item.focus
                 onFocusChanged: {
-                    if(nodeData)
-                        console.warn(nodeData.name, "FS: focusChanged", focus)
+//                    if(nodeData)
+//                        console.warn(nodeData.name, "FS: focusChanged", focus)
                 }
                 Keys.onPressed: {
-                    if(nodeData)
-                        console.warn(nodeData.name, "FS: Key was pressed!")
+//                    if(nodeData)
+//                        console.warn(nodeData.name, "FS: Key was pressed!")
                     event.accepted = false
                 }
 
@@ -225,7 +229,7 @@ FocusScope {
                     Connections {
                         target: l.item
                         function onFocusChanged() {
-                            console.warn("Child focus changed to", l.item.focus)
+                            //console.warn("Child focus changed to", l.item.focus)
                             if(l.item.focus) {
                                 rp.hasFocus = true
                             }

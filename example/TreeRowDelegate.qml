@@ -27,9 +27,9 @@ T.RowContentDelegateBase {
         event.accepted = true
     }
 
-    onFocusChanged: {
-        console.warn("Delegate: focusChanged", focus)
-    }
+//    onFocusChanged: {
+//        console.warn("Delegate: focusChanged", focus)
+//    }
 
     Connections {
         target: selector

@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import treelistview 1.0
 
-Item {
+FocusScope {
     id: rowDelegate
 
     property var index: __index
@@ -9,7 +9,6 @@ Item {
     property Selector selector: __selector
 
     property TreeRowDragDelegate dragDelegate: null
-
 
     signal canceled()
     signal clicked(var mouse)

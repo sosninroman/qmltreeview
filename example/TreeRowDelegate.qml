@@ -13,11 +13,38 @@ T.RowContentDelegateBase {
         id: rect
         height: lbl.height
         width: lbl.width
-        color: "green"
+        color: textCell.focus ? "green" : "transparent"
         Label {
             id: lbl
             text: modelData.name
             font.pixelSize: 12
+        }
+    }
+
+    //focus: true
+    Keys.onPressed: {
+        console.warn("Delegate: Key was pressed!")
+        event.accepted = true
+    }
+
+    onFocusChanged: {
+        console.warn("Delegate: focusChanged", focus)
+    }
+
+    Connections {
+        target: selector
+        function onSelectionChanged() {
+//            console.warn("on selection changed", selector.selectedIndexes)
+            var i = 0
+            while(i < selector.selectedIndexes.length) {
+                if(index === selector.selectedIndexes[i]) {
+//                    console.warn("set focus!")
+                    textCell.focus = true
+                    return
+                }
+                i = i + 1
+            }
+            textCell.focus = false
         }
     }
 
@@ -36,6 +63,7 @@ T.RowContentDelegateBase {
 
     onClicked: {
         select()
+        textCell.focus = true
     }
 
     onDoubleClicked: {

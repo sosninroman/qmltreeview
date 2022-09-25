@@ -18,6 +18,7 @@ Column {
     property Selector selector
 
     function initProperties(parent, index) {
+        console.warn("init", parent, index)
         row = index
         parentIndex = parent.currentIndex
         spacing = parent.spacing
@@ -35,6 +36,8 @@ Column {
         if(!view) {
             return
         }
+
+        console.warn("init data", parentIndex, row)
 
         //FIXME
         if(parentIndex) {

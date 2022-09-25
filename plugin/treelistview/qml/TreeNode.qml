@@ -200,49 +200,56 @@ FocusScope {
                 }
             }
         }
-        Repeater {
-            id: rp
-            model: (nodeData.expandable && nodeData.expanded && nodeItem.childCount > 0) ? childCount : 0
-            property bool hasFocus: false
-            delegate: FocusScope {
-                focus: l.item.focus
-                onFocusChanged: {
-//                    if(nodeData)
-//                        console.warn(nodeData.name, "FS: focusChanged", focus)
-                }
-                Keys.onPressed: {
-//                    if(nodeData)
-//                        console.warn(nodeData.name, "FS: Key was pressed!")
-                    event.accepted = false
-                }
-
-                width: l.width
-                height: l.height
-                Loader {
-                    id: l
-                    focus: true
-                    source: "TreeNode.qml"
-                    onLoaded: {
-                        item.initProperties(nodeItem, index)
-                        item.initData()
+        Column {
+            //width: rp.width
+            //height: rp.height
+            visible: nodeData.expandable && nodeData.expanded && nodeItem.childCount > 0
+            Repeater {
+                id: rp
+                //model: (nodeData.expandable && nodeData.expanded && nodeItem.childCount > 0) ? childCount : 0
+                model: childCount
+                property bool hasFocus: false
+                delegate: FocusScope {
+                    focus: l.item.focus
+                    onFocusChanged: {
+    //                    if(nodeData)
+    //                        console.warn(nodeData.name, "FS: focusChanged", focus)
                     }
-                    Connections {
-                        target: l.item
-                        function onFocusChanged() {
-                            //console.warn("Child focus changed to", l.item.focus)
-                            if(l.item.focus) {
-                                rp.hasFocus = true
-                            }
-                            else {
-                                rp.hasFocus = false
-                                var i = 0
-                                while(i < rp.count) {
-                                    console.warn(rp.itemAt(i).item)
-                                    if(rp.itemAt(i).item && rp.itemAt(i).item.focus){
-                                        rp.hasFocus = true
-                                        return
+                    Keys.onPressed: {
+    //                    if(nodeData)
+    //                        console.warn(nodeData.name, "FS: Key was pressed!")
+                        event.accepted = false
+                    }
+
+                    width: l.width
+                    height: l.height
+                    Loader {
+                        id: l
+                        focus: true
+                        source: "TreeNode.qml"
+                        onLoaded: {
+                            console.warn("on loaded child")
+                            item.initProperties(nodeItem, index)
+                            item.initData()
+                        }
+                        Connections {
+                            target: l.item
+                            function onFocusChanged() {
+                                //console.warn("Child focus changed to", l.item.focus)
+                                if(l.item.focus) {
+                                    rp.hasFocus = true
+                                }
+                                else {
+                                    rp.hasFocus = false
+                                    var i = 0
+                                    while(i < rp.count) {
+                                        console.warn(rp.itemAt(i).item)
+                                        if(rp.itemAt(i).item && rp.itemAt(i).item.focus){
+                                            rp.hasFocus = true
+                                            return
+                                        }
+                                        i = i + 1
                                     }
-                                    i = i + 1
                                 }
                             }
                         }

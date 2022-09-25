@@ -6,5 +6,6 @@
         <file>qml/TreeView.qml</file>
         <file>qml/RowBackgroundDelegateBase.qml</file>
         <file>qml/RowContentDelegateBase.qml</file>
+        <file>qml/RowExpanderDelegateBase.qml</file>
     </qresource>
 </RCC>

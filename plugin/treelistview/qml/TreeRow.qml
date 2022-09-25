@@ -57,27 +57,33 @@ FocusScope {
             height: expButton.height
         }
 
-        Item { //expand icon
+        RowExpanderDelegateBase {
             id: expButton
             width: height
             height: delegateLdr.height
-            Image {
-                anchors.centerIn: parent
-                width: expButton.width / 2
-                height: expButton.height / 2
-                source: "qrc:/icons/triangle.png"
-                visible: modelData.expandable
-                rotation: modelData.expanded ? 90 : 0
-            }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    modelData.expanded = !modelData.expanded
-                    mouse.accepted = false
-                }
-                enabled: modelData.expandable
-            }
         }
+
+//        Item { //expand icon
+//            id: expButton
+//            width: height
+//            height: delegateLdr.height
+//            Image {
+//                anchors.centerIn: parent
+//                width: expButton.width / 2
+//                height: expButton.height / 2
+//                source: "qrc:/icons/triangle.png"
+//                visible: modelData.expandable
+//                rotation: modelData.expanded ? 90 : 0
+//            }
+//            MouseArea {
+//                anchors.fill: parent
+//                onClicked: {
+//                    modelData.expanded = !modelData.expanded
+//                    mouse.accepted = false
+//                }
+//                enabled: modelData.expandable
+//            }
+//        }
 
         Loader { //content delegate
             id: delegateLdr

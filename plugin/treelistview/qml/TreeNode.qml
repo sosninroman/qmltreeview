@@ -198,7 +198,7 @@ FocusScope {
         }
         Repeater {
             id: rp
-            model: childCount
+            model: (nodeData.expandable && nodeData.expanded && nodeItem.childCount > 0) ? childCount : 0
             property bool hasFocus: false
             delegate: FocusScope {
                 focus: l.item.focus

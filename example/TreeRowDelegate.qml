@@ -23,7 +23,7 @@ T.RowContentDelegateBase {
 
     //focus: true
     Keys.onPressed: {
-        console.warn("Delegate: Key was pressed!")
+        console.warn(modelData.name, "Delegate: Key was pressed!")
         event.accepted = true
     }
 

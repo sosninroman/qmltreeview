@@ -89,7 +89,7 @@ FocusScope {
             }
         }
 
-        ColumnLayout {
+        Column {
             spacing: 0
             Repeater {
                 model: treeView.treeModel
@@ -100,7 +100,6 @@ FocusScope {
                     view: treeView
                     contentWidth: scroll.contentWidth
                     selector: treeView.selector
-                    Component.onCompleted: console.warn("index", index)
                 }
             }
         }

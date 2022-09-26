@@ -3,28 +3,18 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
 import QtQml.Models 2.12
 import treelistview 1.0
+import "./private"
 
-FocusScope {
+InputHandler {
     id: treeView
     property QmlTreeModelInterface treeModel
     property Component rowDelegate
-    property Component nodeBackground
+    property Component backgroundDelegate
     property Selector selector: Selector {}
 
     property int delegateSpacing: 3
 
     property int treeRowCount: treeModel.rowCount( treeModel.rootIndex() )
-
-    signal canceled()
-    signal clicked(var mouse)
-    signal doubleClicked(var mouse)
-    signal entered()
-    signal exited()
-    signal positionChanged(var mouse)
-    signal pressAndHold(var mouse)
-    signal pressed(var mouse)
-    signal released(var mouse)
-    signal wheel(var wheel)
 
     Connections {
         target: treeModel

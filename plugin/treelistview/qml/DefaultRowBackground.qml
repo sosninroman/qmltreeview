@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import treelistview 1.0
 
-RowBackgroundBase {
+DelegateBase {
     id: delegate
 
     function checkState() {

@@ -5,7 +5,7 @@ import QtQml.Models 2.12
 import treelistview 1.0
 
 TreeView {
-    nodeBackground: DefaultRowBackground {}
+    backgroundDelegate: DefaultRowBackground {}
 
     onClicked: {
         selector.clear()

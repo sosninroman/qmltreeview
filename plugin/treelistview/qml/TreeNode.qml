@@ -80,7 +80,7 @@ FocusScope {
                 id: nodeBackgroundLdr
 
                 anchors.fill: parent
-                sourceComponent: view.nodeBackground
+                sourceComponent: view.backgroundDelegate
 
                 property var __data: nodeItem.nodeData
                 property var __index: nodeItem.currentIndex

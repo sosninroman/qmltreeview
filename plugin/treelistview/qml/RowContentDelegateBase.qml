@@ -3,5 +3,5 @@ import treelistview 1.0
 import "./private"
 
 DelegateBase {
-    property TreeRowDragDelegate dragDelegate: null
+    property DragDelegateBase dragDelegate: null
 }

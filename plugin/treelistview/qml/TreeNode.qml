@@ -12,7 +12,7 @@ FocusScope {
     property var parentIndex
     property var row
     property Item view
-    property var nodeData
+    property var modelData
     property int childCount: 0
     property var currentIndex
     property int spacing: 5
@@ -29,7 +29,7 @@ FocusScope {
     }
 
     function updateCurrentData() {
-        nodeData = !!view && !!view.treeModel ? view.treeModel.nodeData(currentIndex) : null
+        modelData = !!view && !!view.treeModel ? view.treeModel.nodeData(currentIndex) : null
         childCount = !!view && !!view.treeModel ? view.treeModel.rowCount(currentIndex) : 0
     }
 
@@ -82,7 +82,7 @@ FocusScope {
                 anchors.fill: parent
                 sourceComponent: view.backgroundDelegate
 
-                property var __data: nodeItem.nodeData
+                property var __data: nodeItem.modelData
                 property var __index: nodeItem.currentIndex
                 property Selector __selector: nodeItem.selector
             }
@@ -156,7 +156,7 @@ FocusScope {
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
 
-                modelData: nodeItem.nodeData
+                modelData: nodeItem.modelData
                 index: nodeItem.currentIndex
                 selector: nodeItem.selector
                 rowDelegate: view.rowDelegate
@@ -164,19 +164,24 @@ FocusScope {
 
             DropArea { //area for drop events processing
                 anchors.fill: parent
+                onDropped: {
+                    if(drag.source.item) {
+                        drag.source.item.dropped(drop, nodeItem.modelData)
+                    }
+                }
                 onEntered: {
                     if(drag.source.item) {
-                        drag.source.item.processRowEntering(drag, nodeItem.nodeData)
+                        drag.source.item.entered(drag, nodeItem.modelData)
                     }
                 }
                 onExited: {
                     if(drag.source.item) {
-                        drag.source.item.processRowExiting(nodeItem.nodeData)
+                        drag.source.item.exited(nodeItem.modelData)
                     }
                 }
-                onDropped: {
+                onPositionChanged: {
                     if(drag.source.item) {
-                        drag.source.item.processDropping(drop, nodeItem.nodeData)
+                        drag.source.item.positionChanged(drag, nodeItem.modelData)
                     }
                 }
             }
@@ -188,10 +193,10 @@ FocusScope {
                 id: dragDelegateLdr
                 active: false
                 Drag.active: dragDelegateLdr.active
-                property var __index: nodeItem.currentIndex
-                property var __rowData: nodeItem.nodeData
                 property Item __view: nodeItem.view
-                sourceComponent: rowContent.delegateItem.dragDelegate
+                property var __index: nodeItem.currentIndex
+                property var __rowData: nodeItem.modelData
+                sourceComponent: view.dragDelegate
             }
             Connections {
                 target: dragHandler
@@ -202,7 +207,7 @@ FocusScope {
             }
         }
         Column {
-            visible: nodeData.expandable && nodeData.expanded && nodeItem.childCount > 0
+            visible: modelData.expandable && modelData.expanded && nodeItem.childCount > 0
             Repeater {
                 id: rp
                 model: childCount
@@ -235,7 +240,6 @@ FocusScope {
                                     rp.hasFocus = false
                                     var i = 0
                                     while(i < rp.count) {
-                                        //console.warn(rp.itemAt(i).item)
                                         if(rp.itemAt(i).item && rp.itemAt(i).item.focus){
                                             rp.hasFocus = true
                                             return

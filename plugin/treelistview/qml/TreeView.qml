@@ -10,6 +10,7 @@ InputHandler {
     property QmlTreeModelInterface treeModel
     property Component rowDelegate
     property Component backgroundDelegate
+    property Component dragDelegate
     property Selector selector: Selector {}
 
     property int delegateSpacing: 3

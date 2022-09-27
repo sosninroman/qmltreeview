@@ -19,7 +19,8 @@ ApplicationWindow {
 
     T.DefaultTreeView {
         anchors.fill: parent
-        rowDelegate: TreeRowDelegate{}
+        rowDelegate: TextRowDelegate{}
+        dragDelegate: RowDragDelegate{}
         id: projectView
         treeModel:fixedTree
 
@@ -28,8 +29,6 @@ ApplicationWindow {
             event.accepted = false
             console.warn("TreeView: Key was pressed!")
         }
-
-
     }
 
 //    component TextWithFocus : TextArea {

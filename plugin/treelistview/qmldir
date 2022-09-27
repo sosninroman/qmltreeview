@@ -16,12 +16,10 @@ plugin treelistview
 # <ResourceIdentifier> <InitialVersion> <File>
 # With 'qrc:' you can tell Qt to look for files in memory and it's
 # required way for us because these files will be in 'myplugin' resources.
-TreeNode 1.0 qrc:/treelistview/qml/TreeNode.qml
 TreeView 1.0 qrc:/treelistview/qml/TreeView.qml
 RowBackgroundBase 1.0 qrc:/treelistview/qml/RowBackgroundBase.qml
-TreeRow 1.0 qrc:/treelistview/qml/TreeRow.qml
 RowContentDelegateBase 1.0 qrc:/treelistview/qml/RowContentDelegateBase.qml
-TreeRowDragDelegate 1.0 qrc:/treelistview/qml/TreeRowDragDelegate.qml
+DragDelegateBase 1.0 qrc:/treelistview/qml/DragDelegateBase.qml
 
 DefaultRowBackground 1.0 qrc:/treelistview/qml/DefaultRowBackground.qml
 DefaultTreeView 1.0 qrc:/treelistview/qml/DefaultTreeView.qml

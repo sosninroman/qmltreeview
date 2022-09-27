@@ -1,7 +1,5 @@
 <RCC>
     <qresource prefix="/treelistview">
-        <file>qml/TreeNode.qml</file>
-        <file>qml/TreeRow.qml</file>
         <file>qml/TreeView.qml</file>
         <file>qml/RowContentDelegateBase.qml</file>
         <file>qml/RowExpanderDelegateBase.qml</file>
@@ -10,5 +8,7 @@
         <file>qml/private/InputHandler.qml</file>
         <file>qml/DelegateBase.qml</file>
         <file>qml/DragDelegateBase.qml</file>
+        <file>qml/private/TreeNode.qml</file>
+        <file>qml/private/TreeRow.qml</file>
     </qresource>
 </RCC>

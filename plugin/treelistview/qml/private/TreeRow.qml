@@ -1,13 +1,14 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.12
 import treelistview 1.0
+import "../"
 
 FocusScope {
     property var modelData
     property var index
     property Selector selector
 
-    property Component rowDelegate
+    property Component rowContentDelegate
     property alias delegateItem: delegateLdr.item
 
     function onClicked(mouse) {
@@ -73,7 +74,7 @@ FocusScope {
             property var __modelData: modelData
             property var __index: index
             property var __selector: selector
-            sourceComponent: rowDelegate
+            sourceComponent: rowContentDelegate
             focus: true
         }
     }

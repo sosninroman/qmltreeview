@@ -19,7 +19,7 @@ ApplicationWindow {
 
     T.DefaultTreeView {
         anchors.fill: parent
-        rowDelegate: TextRowDelegate{}
+        rowContentDelegate: TextRowDelegate{}
         dragDelegate: RowDragDelegate{}
         id: projectView
         treeModel:fixedTree

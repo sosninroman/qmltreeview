@@ -8,10 +8,10 @@ import "./private"
 InputHandler {
     id: treeView
     property QmlTreeModelInterface treeModel
-    property Component rowDelegate
+    property Component rowContentDelegate
     property Component backgroundDelegate
     property Component dragDelegate
-    property Selector selector: Selector {}
+    property alias selector: selector
 
     property int delegateSpacing: 3
 
@@ -23,6 +23,10 @@ InputHandler {
             treeView.treeRowCount = 0
             treeView.treeRowCount = treeModel.rowCount( treeModel.rootIndex() )
         }
+    }
+
+    Selector {
+        id: selector
     }
 
     ScrollView {

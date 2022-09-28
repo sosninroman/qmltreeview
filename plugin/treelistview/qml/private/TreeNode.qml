@@ -160,6 +160,7 @@ FocusScope {
                 index: nodeItem.currentIndex
                 selector: nodeItem.selector
                 rowContentDelegate: view.rowContentDelegate
+                expanderDelegate: view.expanderDelegate
             }
 
             DropArea { //area for drop events processing

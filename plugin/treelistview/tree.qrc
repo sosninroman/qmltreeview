@@ -1,14 +1,16 @@
 <RCC>
     <qresource prefix="/treelistview">
         <file>qml/TreeView.qml</file>
-        <file>qml/RowContentDelegateBase.qml</file>
-        <file>qml/RowExpanderDelegateBase.qml</file>
         <file>qml/DefaultRowBackground.qml</file>
         <file>qml/DefaultTreeView.qml</file>
         <file>qml/private/InputHandler.qml</file>
-        <file>qml/DelegateBase.qml</file>
-        <file>qml/DragDelegateBase.qml</file>
         <file>qml/private/TreeNode.qml</file>
         <file>qml/private/TreeRow.qml</file>
+        <file>qml/base/DelegateBase.qml</file>
+        <file>qml/base/DragDelegateBase.qml</file>
+        <file>qml/base/ExpanderDelegateBase.qml</file>
+        <file>qml/base/RowContentDelegateBase.qml</file>
+        <file>qml/base/RowBackgroundDelegateBase.qml</file>
+        <file>qml/IconExpander.qml</file>
     </qresource>
 </RCC>

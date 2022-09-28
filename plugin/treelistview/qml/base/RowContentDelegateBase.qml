@@ -1,7 +1,8 @@
 import QtQuick 2.15
 import treelistview 1.0
-import "./private"
+import "../private"
 
 DelegateBase {
     property DragDelegateBase dragDelegate: null
+    property Selector selector: __selector
 }

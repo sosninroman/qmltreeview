@@ -11,6 +11,7 @@ InputHandler {
     property Component rowContentDelegate
     property Component backgroundDelegate
     property Component dragDelegate
+    property Component expanderDelegate
     property alias selector: selector
 
     property int delegateSpacing: 3

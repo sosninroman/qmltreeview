@@ -8,6 +8,7 @@ FocusScope {
     property var index
     property Selector selector
 
+    property Component expanderDelegate
     property Component rowContentDelegate
     property alias delegateItem: delegateLdr.item
 
@@ -50,22 +51,17 @@ FocusScope {
     Row {
         id: row
         Item { //delegate margins
-            width: expButton.width * modelData.nodeLevel
-            height: expButton.height
+            width: expanderLdr.width * modelData.nodeLevel
+            height: expanderLdr.height
         }
 
-        RowExpanderDelegateBase {
-            id: expButton
+        Loader { //expander
+            id: expanderLdr
             width: height
             height: delegateLdr.height
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    modelData.expanded = !modelData.expanded
-                    mouse.accepted = false
-                }
-                enabled: modelData.expandable
-            }
+            property var __modelData: modelData
+            property var __index: index
+            sourceComponent: expanderDelegate
         }
 
         Loader { //content delegate

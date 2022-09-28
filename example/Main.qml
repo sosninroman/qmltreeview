@@ -21,6 +21,29 @@ ApplicationWindow {
         anchors.fill: parent
         rowContentDelegate: TextRowDelegate{}
         dragDelegate: RowDragDelegate{}
+//        expanderDelegate: T.ExpanderDelegateBase {
+//            id: expButton
+//            Image {
+//                anchors.centerIn: parent
+//                width: expButton.width / 2
+//                height: expButton.height / 2
+//                source: "qrc:/icons/triangle.png"
+//                visible: modelData.expandable
+//                rotation: modelData.expanded ? 90 : 0
+//            }
+//            MouseArea {
+//                anchors.fill: parent
+//                onClicked: {
+//                    modelData.expanded = !modelData.expanded
+//                    mouse.accepted = false
+//                }
+//                enabled: modelData.expandable
+//            }
+//        }
+        expanderDelegate: T.IconExpander {
+            source: "qrc:/icons/triangle.png"
+        }
+
         id: projectView
         treeModel:fixedTree
 

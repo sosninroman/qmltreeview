@@ -10,40 +10,40 @@ FocusScope {
 
     property Component expanderDelegate
     property Component rowContentDelegate
-    property alias delegateItem: delegateLdr.item
+    property alias contentItem: contentLdr.item
 
     function onClicked(mouse) {
-        delegateItem.clicked(mouse)
+        contentItem.clicked(mouse)
     }
     function onDoubleClicked(mouse) {
-        delegateItem.doubleClicked(mouse)
+        contentItem.doubleClicked(mouse)
     }
     function onEntered() {
-        delegateItem.entered()
+        contentItem.entered()
     }
     function onExited() {
-        delegateItem.exited()
+        contentItem.exited()
     }
     function onPositionChanged(mouse) {
-        delegateItem.positionChanged(mouse)
+        contentItem.positionChanged(mouse)
     }
     function onPressAndHold(mouse) {
-        delegateItem.pressAndHold(mouse)
+        contentItem.pressAndHold(mouse)
     }
     function onPressed(mouse) {
-        delegateItem.pressed(mouse)
+        contentItem.pressed(mouse)
     }
     function onReleased(mouse) {
-        delegateItem.released(mouse)
+        contentItem.released(mouse)
     }
     function onWheel(wheel) {
-        delegateItem.wheel(wheel)
+        contentItem.wheel(wheel)
     }
 
     width: row.width
     height: row.height
 
-    focus: delegateLdr.item.focus
+    focus: contentLdr.item.focus
     Keys.onPressed: {
         event.accepted = false
     }
@@ -58,14 +58,14 @@ FocusScope {
         Loader { //expander
             id: expanderLdr
             width: height
-            height: delegateLdr.height
+            height: contentLdr.height
             property var __modelData: modelData
             property var __index: index
             sourceComponent: expanderDelegate
         }
 
         Loader { //content delegate
-            id: delegateLdr
+            id: contentLdr
             Layout.fillWidth: true
             property var __modelData: modelData
             property var __index: index

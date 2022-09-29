@@ -46,7 +46,7 @@ public:
         }
 
         connect(result, &QQmlPropertyMap::valueChanged, this, [rolesByName, this, index](const QString& roleName, const QVariant& val){
-            this->setData( index, rolesByName.value(roleName) );
+            this->setData( index, val, rolesByName.value(roleName) );
         });
         return QVariant::fromValue(result);
     }

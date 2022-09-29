@@ -14,3 +14,21 @@ FixedSizeTreeModel::FixedSizeTreeModel(QObject* parent)
     node2->appendChild(new SimpleTreeNode("2 2"));
     addTopLevelNode(node2);
 }
+
+void FixedSizeTreeModel::addChild(const QVariant& index, const QString& name)
+{
+    const auto parentIndex = index.value<QModelIndex>();
+    if(!parentIndex.isValid())
+    {
+        return;
+    }
+    qCritical() << "add" << parentIndex << name << "\n";
+
+    auto* node = static_cast<SimpleTreeNode*>(parentIndex.internalPointer());
+    qCritical() << "node" << node->name() << "\n";
+
+    beginInsertRows(parentIndex, node->childrenCount(), node->childrenCount());
+    node->appendChild(new SimpleTreeNode(name));
+    endInsertRows();
+    emit countChanged(parentIndex);
+}

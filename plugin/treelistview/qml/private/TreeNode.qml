@@ -47,10 +47,18 @@ FocusScope {
 
         updateCurrentData()
 
-        treeModel = view.treeModel
-        treeModel.countChanged.connect(function(ind){
+        //treeModel = view.treeModel
+        //treeModel.countChanged.connect(function(ind){
+        view.treeModel.countChanged.connect(function(ind){
             if(currentIndex === ind) {
                 childCount = 0
+                updateCurrentData()
+            }
+        })
+
+        //TODO: support QAbstractItemModel interface
+        view.treeModel.dataChanged.connect(function(topLeft, bottomRight){
+            if(currentIndex === topLeft) {
                 updateCurrentData()
             }
         })

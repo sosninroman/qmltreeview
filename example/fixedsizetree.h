@@ -60,6 +60,21 @@ public:
         }
         Q_UNREACHABLE();
     }
+
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override
+    {
+        if(role == NameRole)
+        {
+            NodeType* node = static_cast<NodeType*>( index.internalPointer() );
+            node->setName(value.toString());
+            emit dataChanged(index, index, {NameRole});
+            //emit countChanged(index.parent());
+            return true;
+        }
+        return BaseClass::setData(index, value, role);
+    }
+
+    Q_INVOKABLE void addChild(const QVariant& index, const QString& name);
 };
 
 #endif

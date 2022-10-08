@@ -45,8 +45,8 @@ ApplicationWindow {
                     var nameDialogObj = nameDialog.createObject(appWindow)
                     nameDialogObj.open()
                     nameDialogObj.accepted.connect(function() {
-                        if(nameInput.text.length > 0) {
-                            stringTree.addChild(view.selector.selectedIndexes[0], nameInput.text)
+                        if(nameDialogObj.name.length > 0) {
+                            stringTree.addChild(view.selector.selectedIndexes[0], nameDialogObj.name)
                         }
                     })
                 }
@@ -114,5 +114,10 @@ ApplicationWindow {
             event.accepted = false
             console.warn("TreeView: Key was pressed!")
         }
+//        Keys.onReleased: {
+//            event.accepted = false
+//            console.warn("TreeView: Key was released!")
+//        }
+        Keys.onUpPressed: console.warn("up pressed!")
     }
 }

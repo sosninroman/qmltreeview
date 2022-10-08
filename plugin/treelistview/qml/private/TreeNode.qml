@@ -58,7 +58,8 @@ FocusScope {
 
         //TODO: support QAbstractItemModel interface
         view.treeModel.dataChanged.connect(function(topLeft, bottomRight){
-            if(currentIndex === topLeft) {
+            if(TreeHelper.checkNodeBetween(currentIndex, topLeft, bottomRight)) {
+                console.warn("ola", currentIndex)
                 updateCurrentData()
             }
         })
@@ -67,6 +68,7 @@ FocusScope {
 
     focus: rowScope.focus || rp.hasFocus
     Keys.onPressed: {
+        console.warn("node key")
         event.accepted = false
     }
 

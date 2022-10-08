@@ -17,22 +17,24 @@ QmlTreeView {
 
     onFocusChanged: scroll.focus = treeView.focus
 
-    //focus: true
+    property alias contentWidth: scroll.contentWidth
 
-    //1. ScrollView grabs row events
-    //2. ScrollView doesn't scroll by mouse
     ScrollView {
         id: scroll
         anchors.fill: parent
         clip: true
 
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOn
-             ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+        ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
-//        focus: false
-//        onActiveFocusChanged: console.warn("active focus = ", activeFocus)
-//        Keys.onUpPressed: console.warn("up pressed! (scroll view)")
-//        Keys.forwardTo: treeView
+        Keys.onPressed: {
+            if(event.key === Qt.Key_Up
+                    || event.key === Qt.Key_Right
+                    || event.key === Qt.Key_Left
+                    || event.key === Qt.Key_Down) {
+                treeView.Keys.pressed(event)
+            }
+        }
 
         property var rootIndex
         property var topLevelNodesCount
@@ -43,7 +45,7 @@ QmlTreeView {
         }
 
         contentWidth: col.width
-        contentHeight: Math.max(col.height, height)
+        contentHeight: Math.max(col.height, treeView.height)
         wheelEnabled: true
 
         MouseArea { //area for mouse events dispatching

@@ -57,12 +57,12 @@ FocusScope {
         })
 
         //TODO: support QAbstractItemModel interface
-        view.treeModel.dataChanged.connect(function(topLeft, bottomRight){
-            if(TreeHelper.checkNodeBetween(currentIndex, topLeft, bottomRight)) {
-                console.warn("ola", currentIndex)
-                updateCurrentData()
-            }
-        })
+//        view.treeModel.dataChanged.connect(function(topLeft, bottomRight){
+//            if(TreeHelper.checkNodeBetween(currentIndex, topLeft, bottomRight)) {
+//                console.warn("ola", currentIndex)
+//                updateCurrentData()
+//            }
+//        })
 
     }
 
@@ -84,7 +84,7 @@ FocusScope {
                 event.accepted = false
             }
 
-            width: Math.max(rowContent.width, view.width)
+            width: Math.max(rowContent.width, view.contentWidth, view.width)
             height: rowContent.height + 2 * nodeItem.spacing
             Loader { //node background
                 id: nodeBackgroundLdr

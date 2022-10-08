@@ -29,8 +29,11 @@ FocusScope {
     }
 
     function updateCurrentData() {
-        modelData = !!view && !!view.treeModel ? view.treeModel.nodeData(currentIndex) : null
-        childCount = !!view && !!view.treeModel ? view.treeModel.rowCount(currentIndex) : 0
+        modelData = !!view && !!view.model ? view.model.nodeData(currentIndex) : null
+    }
+
+    function updateCurrentChildrenCount() {
+        childCount = !!view && !!view.model ? view.model.rowCount(currentIndex) : 0
     }
 
     function initData() {
@@ -39,36 +42,44 @@ FocusScope {
         }
         //FIXME
         if(parentIndex) {
-            currentIndex = !!view && !!view.treeModel ? view.treeModel.index(row, 0, parentIndex) : null
+            currentIndex = !!view && !!view.model ? view.model.index(row, 0, parentIndex) : null
         }
         else {
-            currentIndex = !!view && !!view.treeModel ? view.treeModel.index(row, 0) : null
+            currentIndex = !!view && !!view.model ? view.model.index(row, 0) : null
         }
 
         updateCurrentData()
+        updateCurrentChildrenCount()
 
-        //treeModel = view.treeModel
-        //treeModel.countChanged.connect(function(ind){
-        view.treeModel.countChanged.connect(function(ind){
+        view.nodeDataChanged.connect(function(ind){
             if(currentIndex === ind) {
-                childCount = 0
                 updateCurrentData()
             }
         })
 
-        //TODO: support QAbstractItemModel interface
-//        view.treeModel.dataChanged.connect(function(topLeft, bottomRight){
-//            if(TreeHelper.checkNodeBetween(currentIndex, topLeft, bottomRight)) {
-//                console.warn("ola", currentIndex)
-//                updateCurrentData()
-//            }
-//        })
+        view.nodeChildrenCountChanged.connect(function(ind){
+            if(currentIndex === ind) {
+                updateCurrentChildrenCount()
+            }
+        })
+    }
 
+    function checkMaxWidth() {
+        if(rowContent.width > view._maxRowContentWidth) {
+            view._maxRowContentWidth = rowContent.width
+            view._maxWidthRowIndex = currentIndex
+        }
+    }
+
+    Connections {
+        target: view
+        function onNeedToRecalcMaxRowWidth() {
+            checkMaxWidth()
+        }
     }
 
     focus: rowScope.focus || rp.hasFocus
     Keys.onPressed: {
-        console.warn("node key")
         event.accepted = false
     }
 
@@ -175,8 +186,14 @@ FocusScope {
                 expanderDelegate: view.expanderDelegate
 
                 onWidthChanged: {
-                    if(rowContent.width > view._maxRowContentWidth) {
-                        view._maxRowContentWidth = rowContent.width
+                    if(view._maxWidthRowIndex === currentIndex) {
+                        if(rowContent.width <= view._maxRowContentWidth) {
+                            view.recalcMaxRowWidth()
+                        }
+                    }
+                    else
+                    {
+                        checkMaxWidth()
                     }
                 }
             }

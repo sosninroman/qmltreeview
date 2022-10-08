@@ -7,7 +7,6 @@ import "./private"
 
 QmlTreeView {
     id: treeView
-    property QmlTreeModelInterface treeModel
     property Component rowContentDelegate
     property Component backgroundDelegate
     property Component dragDelegate
@@ -17,9 +16,14 @@ QmlTreeView {
 
     onFocusChanged: scroll.focus = treeView.focus
 
-    property alias contentWidth: scroll.contentWidth
-
     property int _maxRowContentWidth: 0
+    property var _maxWidthRowIndex
+    signal needToRecalcMaxRowWidth()
+    function recalcMaxRowWidth() {
+        _maxRowContentWidth = 0
+        _maxWidthRowIndex = null
+        needToRecalcMaxRowWidth()
+    }
 
     ScrollView {
         id: scroll
@@ -42,8 +46,8 @@ QmlTreeView {
         property var topLevelNodesCount
 
         Component.onCompleted: {
-            rootIndex = treeModel.rootIndex()
-            topLevelNodesCount = treeModel.rowCount(rootIndex)
+            rootIndex = model.rootIndex()
+            topLevelNodesCount = model.rowCount(rootIndex)
         }
 
         contentWidth: col.width
@@ -91,7 +95,7 @@ QmlTreeView {
             id: col
             spacing: 0
             Repeater {
-                model: treeView.treeModel
+                model: treeView.model
                 delegate: TreeNode {
                     row: index.row
                     parentIndex: scroll.rootIndex

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQuickItem>
 #include "selector.h"
+#include "treemodel.h"
 
 class QmlTreeView : public QQuickItem
 {
@@ -14,25 +15,9 @@ public:
     Q_PROPERTY(Selector* selector READ selector CONSTANT)
     Selector* selector() {return &m_selector;}
 
-//    Q_INVOKABLE void listenTo(QObject *object)
-//    {
-//        if (!object)
-//            return;
-
-//        object->installEventFilter(this);
-//    }
-
-//    bool eventFilter(QObject *object, QEvent *event) override
-//    {
-//        qCritical() << "v";
-//        if (event->type() == QEvent::MouseButtonRelease) {
-//            //QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
-//            //qDebug() << "key" << keyEvent->key() << "pressed on" << object;
-//            qCritical() << "mouse clicked";
-//            return true;
-//        }
-//        return false;
-//    }
+    Q_PROPERTY(QmlTreeModelInterface* model READ model WRITE setModel NOTIFY modelChanged)
+    QmlTreeModelInterface* model() {return m_model;}
+    void setModel(QmlTreeModelInterface* model);
 
 signals:
     void canceled();
@@ -46,14 +31,20 @@ signals:
     void released(QVariant mouse);
     void wheel(QVariant wheel);
 
+    void modelChanged();
+
+    void nodeDataChanged(const QModelIndex&);
+    void nodeChildrenCountChanged(const QModelIndex&);
+
 private:
-//    bool event(QEvent* event) override
-//    {
-//        qCritical() << "mouse event" << event->type() << "\n";
-//        return true;
-//    }
+    void disconnectFromModel();
+    void connectToModel();
+    void onDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
+    void onRowsInserted(const QModelIndex& index);
+
 private:
     Selector m_selector;
+    QmlTreeModelInterface* m_model = nullptr;
 };
 
 #endif

@@ -107,7 +107,7 @@ ApplicationWindow {
             source: "qrc:/icons/triangle.png"
         }
 
-        treeModel: stringTree
+        model: stringTree
 
         focus: true
         Keys.onPressed: {

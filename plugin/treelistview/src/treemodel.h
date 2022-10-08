@@ -56,6 +56,17 @@ public:
         m_root->clearChildren();
     }
 
+    using QAbstractItemModel::index;
+
+    QModelIndex index(TreeNode* node)
+    {
+        if(!node)
+        {
+            return QModelIndex();
+        }
+        return createIndex(node->row(), 0, node);
+    }
+
 signals:
     void busyChanged();
     void countChanged(const QModelIndex& index);

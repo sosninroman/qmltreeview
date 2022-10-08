@@ -43,7 +43,7 @@ QmlTreeView {
         }
 
         contentWidth: col.width
-        contentHeight: col.height
+        contentHeight: Math.max(col.height, height)
         wheelEnabled: true
 
         MouseArea { //area for mouse events dispatching
@@ -54,7 +54,6 @@ QmlTreeView {
     //            cursorShape: mouseHandlerLdr.item.cursorShape
 
             onClicked: {
-                console.warn("cl")
                 treeView.clicked(mouse)
             }
             onDoubleClicked: {
@@ -80,6 +79,7 @@ QmlTreeView {
             }
             onWheel: {
                 treeView.wheel(wheel)
+                wheel.accepted = false
             }
         }
 

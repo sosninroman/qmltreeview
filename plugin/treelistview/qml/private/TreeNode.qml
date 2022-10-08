@@ -157,6 +157,7 @@ FocusScope {
                     if(nodeBackgroundLdr.item) {
                         nodeBackgroundLdr.item.wheel(wheel)
                     }
+                    wheel.accepted = false
                 }
             }
 

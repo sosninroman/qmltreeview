@@ -2,7 +2,6 @@
     <qresource prefix="/treelistview">
         <file>qml/TreeView.qml</file>
         <file>qml/DefaultRowBackground.qml</file>
-        <file>qml/DefaultTreeView.qml</file>
         <file>qml/private/InputHandler.qml</file>
         <file>qml/private/TreeNode.qml</file>
         <file>qml/private/TreeRow.qml</file>
@@ -12,5 +11,6 @@
         <file>qml/base/RowContentDelegateBase.qml</file>
         <file>qml/base/RowBackgroundDelegateBase.qml</file>
         <file>qml/IconExpander.qml</file>
+        <file>qml/base/TreeViewBase.qml</file>
     </qresource>
 </RCC>

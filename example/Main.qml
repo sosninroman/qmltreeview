@@ -98,7 +98,7 @@ ApplicationWindow {
 //        }
 //    }
 
-    T.DefaultTreeView {
+    T.TreeView {
         id: view
         anchors.fill: parent
         rowContentDelegate: TextRowDelegate{}

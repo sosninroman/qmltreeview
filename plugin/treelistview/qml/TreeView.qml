@@ -19,6 +19,8 @@ QmlTreeView {
 
     property alias contentWidth: scroll.contentWidth
 
+    property int _maxRowContentWidth: 0
+
     ScrollView {
         id: scroll
         anchors.fill: parent

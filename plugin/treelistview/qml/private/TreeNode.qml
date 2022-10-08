@@ -84,7 +84,8 @@ FocusScope {
                 event.accepted = false
             }
 
-            width: Math.max(rowContent.width, view.contentWidth, view.width)
+            width: Math.max(view._maxRowContentWidth, view.width)
+
             height: rowContent.height + 2 * nodeItem.spacing
             Loader { //node background
                 id: nodeBackgroundLdr
@@ -172,6 +173,12 @@ FocusScope {
                 selector: nodeItem.selector
                 rowContentDelegate: view.rowContentDelegate
                 expanderDelegate: view.expanderDelegate
+
+                onWidthChanged: {
+                    if(rowContent.width > view._maxRowContentWidth) {
+                        view._maxRowContentWidth = rowContent.width
+                    }
+                }
             }
 
             DropArea { //area for drop events processing

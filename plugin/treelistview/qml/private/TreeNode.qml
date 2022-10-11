@@ -34,6 +34,7 @@ FocusScope {
 
     function updateCurrentChildrenCount() {
         childCount = !!view && !!view.model ? view.model.rowCount(currentIndex) : 0
+        updateCurrentData()
     }
 
     function initData() {

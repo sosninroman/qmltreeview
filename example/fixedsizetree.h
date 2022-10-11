@@ -68,7 +68,6 @@ public:
             NodeType* node = static_cast<NodeType*>( index.internalPointer() );
             node->setName(value.toString());
             emit dataChanged(index, index, {NameRole});
-            //emit countChanged(index.parent());
             return true;
         }
         return BaseClass::setData(index, value, role);

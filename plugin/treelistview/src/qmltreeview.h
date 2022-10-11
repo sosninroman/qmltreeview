@@ -61,7 +61,7 @@ private:
     void disconnectFromModel();
     void connectToModel();
     void onDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
-    void onRowsInserted(const QModelIndex& index);
+    void onRowsChildrenCountChanged(const QModelIndex& parent);
 
 private:
     Selector m_selector;

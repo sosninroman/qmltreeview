@@ -22,13 +22,10 @@ void FixedSizeTreeModel::addChild(const QVariant& index, const QString& name)
     {
         return;
     }
-    qCritical() << "add" << parentIndex << name << "\n";
 
     auto* node = static_cast<SimpleTreeNode*>(parentIndex.internalPointer());
-    qCritical() << "node" << node->name() << "\n";
 
     beginInsertRows(parentIndex, node->childrenCount(), node->childrenCount());
     node->appendChild(new SimpleTreeNode(name));
     endInsertRows();
-    emit countChanged(parentIndex);
 }

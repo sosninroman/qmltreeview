@@ -58,7 +58,12 @@ void QmlTreeView::connectToModel()
         return;
     }
     connect(m_model, &QAbstractItemModel::dataChanged, this, &QmlTreeView::onDataChanged);
-    connect(m_model, &QAbstractItemModel::rowsInserted, this, &QmlTreeView::onRowsInserted);
+    connect(m_model, &QAbstractItemModel::rowsInserted, this, &QmlTreeView::onRowsChildrenCountChanged);
+    connect(m_model, &QAbstractItemModel::rowsRemoved, this, &QmlTreeView::onRowsChildrenCountChanged);
+    connect(m_model, &QAbstractItemModel::rowsMoved, this, [this](const QModelIndex& parent, int, int, const QModelIndex& destination){
+        onRowsChildrenCountChanged(parent);
+        onRowsChildrenCountChanged(destination);
+    });
 }
 
 void QmlTreeView::onDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)
@@ -85,11 +90,11 @@ void QmlTreeView::onDataChanged(const QModelIndex& topLeft, const QModelIndex& b
     }
 }
 
-void QmlTreeView::onRowsInserted(const QModelIndex& index)
+void QmlTreeView::onRowsChildrenCountChanged(const QModelIndex& parent)
 {
-    if(index.isValid())
+    if(parent.isValid())
     {
-        emit nodeChildrenCountChanged(index);
+        emit nodeChildrenCountChanged(parent);
     }
 }
 

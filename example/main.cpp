@@ -4,19 +4,16 @@
 #include <QDebug>
 #include <QDir>
 
-#include "fixedsizetree.h"
+#include "editablestringstree.h"
 
 int main(int argc, char *argv[]) {
 
-    qmlRegisterType<FixedSizeTreeModel>("example", 1, 0, "FixedSizeTreeModel");
-    qRegisterMetaType<FixedSizeTreeModel*>("FixedSizeTreeModel");
+    qmlRegisterType<EditableStringsTreeModel>("example", 1, 0, "EditableStringsTreeModel");
+    qRegisterMetaType<EditableStringsTreeModel*>("EditableStringsTreeModel");
 
 #if defined(Q_OS_WIN)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-
-    SimpleTreeNode n("test");
-    n.row();
 
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;

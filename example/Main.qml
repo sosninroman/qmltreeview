@@ -13,7 +13,7 @@ ApplicationWindow {
 
     property T.QmlTreeModelInterface treeModel
 
-    FixedSizeTreeModel {
+    EditableStringsTreeModel {
         id: stringTree
     }
 

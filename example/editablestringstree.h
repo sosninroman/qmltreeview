@@ -1,15 +1,15 @@
-#ifndef FIXEDSIZETREE_H
-#define FIXEDSIZETREE_H
+#ifndef EDITABLESTRINGSTREE_H
+#define EDITABLESTRINGSTREE_H
 
 #include <QString>
 #include "src/treenode.h"
 #include "src/treemodel.h"
 
-class SimpleTreeNode : public TreeNode
+class StringTreeNode : public TreeNode
 {
     using BaseClass = TreeNode;
 public:
-    explicit SimpleTreeNode(const QString& name): m_name(name)
+    explicit StringTreeNode(const QString& name): m_name(name)
     {}
 
     QString name() const {return m_name;}
@@ -19,19 +19,19 @@ private:
     QString m_name;
 };
 
-class FixedSizeTreeModel : public TreeModel<SimpleTreeNode>
+class EditableStringsTreeModel : public TreeModel<StringTreeNode>
 {
     Q_OBJECT
-    using BaseClass = TreeModel<SimpleTreeNode>;
-    using NodeType = SimpleTreeNode;
+    using BaseClass = TreeModel<StringTreeNode>;
+    using NodeType = StringTreeNode;
 
-    enum ProjectTreeRoles
+    enum TreeRoles
     {
         NameRole = ExtraRole
     };
 
 public:
-    explicit FixedSizeTreeModel(QObject* parent = nullptr);
+    explicit EditableStringsTreeModel(QObject* parent = nullptr);
 
     QHash<int, QByteArray> roleNames() const override
     {
@@ -74,6 +74,7 @@ public:
     }
 
     Q_INVOKABLE void addChild(const QVariant& index, const QString& name);
+    Q_INVOKABLE void moveNode(const QVariant& parentIndexV, const QVariant& indexV);
 };
 
 #endif

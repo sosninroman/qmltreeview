@@ -61,3 +61,8 @@ void TreeNode::removeChild(TreeNode* child)
     m_children.removeOne(child);
     delete child;
 }
+
+void TreeNode::detachChild(TreeNode* child)
+{
+    m_children.removeOne(child);
+}

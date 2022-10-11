@@ -46,6 +46,7 @@ public:
 
     void clearChildren();
     void removeChild(TreeNode* child);
+    void detachChild(TreeNode* child);
 
     void setParent(TreeNode* val) {m_parent = val;}
 protected:

@@ -69,7 +69,6 @@ public:
 
 signals:
     void busyChanged();
-    //void countChanged(const QModelIndex& index);
 
 protected:
     std::unique_ptr<RootNode> m_root;

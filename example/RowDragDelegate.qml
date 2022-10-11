@@ -17,5 +17,6 @@ T.DragDelegateBase {
     }
     onDropped: {
         console.warn("drop \"", modelData.name, "\" to \"", hoveredModelData.name, "\"")
+        view.model.moveNode(hoveredModelData.index, index)
     }
 }

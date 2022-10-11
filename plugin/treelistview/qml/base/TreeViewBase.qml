@@ -7,10 +7,6 @@ import "../private"
 
 QmlTreeView {
     id: treeView
-    property Component rowContentDelegate
-    property Component backgroundDelegate
-    property Component dragDelegate
-    property Component expanderDelegate
 
     property int delegateSpacing: 3
 

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QQuickItem>
+#include <QQmlComponent>
 #include "selector.h"
 #include "treemodel.h"
 
@@ -18,6 +19,22 @@ public:
     Q_PROPERTY(QmlTreeModelInterface* model READ model WRITE setModel NOTIFY modelChanged)
     QmlTreeModelInterface* model() {return m_model;}
     void setModel(QmlTreeModelInterface* model);
+
+    Q_PROPERTY(QQmlComponent* rowContentDelegate READ rowContentDelegate WRITE setRowContentDelegate NOTIFY rowContentDelegateChanged)
+    QQmlComponent* rowContentDelegate() const {return m_rowContentDelegate;}
+    void setRowContentDelegate(QQmlComponent* val);
+
+    Q_PROPERTY(QQmlComponent* backgroundDelegate READ backgroundDelegate WRITE setBackgroundDelegate NOTIFY backgroundDelegateChanged)
+    QQmlComponent* backgroundDelegate() const {return m_backgroundDelegate;}
+    void setBackgroundDelegate(QQmlComponent* val);
+
+    Q_PROPERTY(QQmlComponent* dragDelegate READ dragDelegate WRITE setDragDelegate NOTIFY dragDelegateChanged)
+    QQmlComponent* dragDelegate() const {return m_dragDelegate;}
+    void setDragDelegate(QQmlComponent* val);
+
+    Q_PROPERTY(QQmlComponent* expanderDelegate READ expanderDelegate WRITE setExpanderDelegate NOTIFY expanderDelegateChanged)
+    QQmlComponent* expanderDelegate() const {return m_expanderDelegate;}
+    void setExpanderDelegate(QQmlComponent* val);
 
 signals:
     void canceled();
@@ -35,6 +52,10 @@ signals:
 
     void nodeDataChanged(const QModelIndex&);
     void nodeChildrenCountChanged(const QModelIndex&);
+    void rowContentDelegateChanged();
+    void backgroundDelegateChanged();
+    void dragDelegateChanged();
+    void expanderDelegateChanged();
 
 private:
     void disconnectFromModel();
@@ -45,6 +66,10 @@ private:
 private:
     Selector m_selector;
     QmlTreeModelInterface* m_model = nullptr;
+    QQmlComponent* m_rowContentDelegate = nullptr;
+    QQmlComponent* m_backgroundDelegate = nullptr;
+    QQmlComponent* m_dragDelegate = nullptr;
+    QQmlComponent* m_expanderDelegate = nullptr;
 };
 
 #endif

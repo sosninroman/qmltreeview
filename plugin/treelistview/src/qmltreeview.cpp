@@ -92,3 +92,39 @@ void QmlTreeView::onRowsInserted(const QModelIndex& index)
         emit nodeChildrenCountChanged(index);
     }
 }
+
+void QmlTreeView::setRowContentDelegate(QQmlComponent* val)
+{
+    if(m_rowContentDelegate != val)
+    {
+        m_rowContentDelegate = val;
+        emit rowContentDelegateChanged();
+    }
+}
+
+void QmlTreeView::setBackgroundDelegate(QQmlComponent* val)
+{
+    if(m_backgroundDelegate != val)
+    {
+        m_backgroundDelegate = val;
+        emit backgroundDelegateChanged();
+    }
+}
+
+void QmlTreeView::setDragDelegate(QQmlComponent* val)
+{
+    if(m_dragDelegate != val)
+    {
+        m_dragDelegate = val;
+        emit dragDelegateChanged();
+    }
+}
+
+void QmlTreeView::setExpanderDelegate(QQmlComponent* val)
+{
+    if(m_expanderDelegate != val)
+    {
+        m_expanderDelegate = val;
+        emit expanderDelegateChanged();
+    }
+}

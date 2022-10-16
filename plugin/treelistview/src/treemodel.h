@@ -121,10 +121,6 @@ public:
         {
             return QModelIndex();
         }
-//        if( !parent.isValid() )
-//        {
-//            return createIndex(row, column, m_topLevelNodes.at(row));
-//        }
         if( !parent.isValid() )
         {
             return createIndex(row, column, m_root->children().at(row));
@@ -153,7 +149,6 @@ public:
     {
         if( !parent.isValid() )
         {
-//            return m_topLevelNodes.size();
             return m_root->childrenCount();
         }
 
@@ -220,19 +215,11 @@ public:
     void addTopLevelNode(NodeType* node)
     {
         m_root->appendChild(node);
-//        m_topLevelNodes.push_back(node);
     }
-
-//    QVector<NodeType*> topLevelNodes() const
-//    {
-//        return m_topLevelNodes;
-//    }
 
 
     bool hasChildren(const QModelIndex& parentIndex) const override
     {
-//        if (!parentIndex.isValid())
-//            return !m_topLevelNodes.empty();
         if (!parentIndex.isValid())
             return m_root->hasChildren();
         return static_cast<NodeType*>(parentIndex.internalPointer())->hasChildren();
@@ -241,11 +228,7 @@ public:
     void clear() final
     {
         BaseClass::clear();
-//        m_topLevelNodes.clear();
     }
-
-private:
-//    QVector<NodeType*> m_topLevelNodes;
 };
 
 #endif

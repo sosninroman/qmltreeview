@@ -23,7 +23,6 @@ QmlTreeView {
 
     onNodeChildrenCountChanged: {
         if(ind === model.rootIndex()) {
-            console.warn("on root node changed")
             model.refresh()
         }
     }

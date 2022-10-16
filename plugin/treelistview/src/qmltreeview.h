@@ -51,7 +51,7 @@ signals:
     void modelChanged();
 
     void nodeDataChanged(const QModelIndex&);
-    void nodeChildrenCountChanged(const QModelIndex&);
+    void nodeChildrenCountChanged(const QModelIndex& ind);
     void rowContentDelegateChanged();
     void backgroundDelegateChanged();
     void dragDelegateChanged();

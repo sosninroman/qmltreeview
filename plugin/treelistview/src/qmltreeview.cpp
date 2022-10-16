@@ -60,9 +60,10 @@ void QmlTreeView::connectToModel()
     connect(m_model, &QAbstractItemModel::dataChanged, this, &QmlTreeView::onDataChanged);
     connect(m_model, &QAbstractItemModel::rowsInserted, this, &QmlTreeView::onRowsChildrenCountChanged);
     connect(m_model, &QAbstractItemModel::rowsRemoved, this, &QmlTreeView::onRowsChildrenCountChanged);
-    connect(m_model, &QAbstractItemModel::rowsMoved, this, [this](const QModelIndex& parent, int, int, const QModelIndex& destination){
-        onRowsChildrenCountChanged(parent);
-        onRowsChildrenCountChanged(destination);
+    connect(m_model, &QAbstractItemModel::rowsMoved, this, [this](const QModelIndex& from, int, int, const QModelIndex& to){
+        qCritical() << from << to << "\n";
+        onRowsChildrenCountChanged(from);
+        onRowsChildrenCountChanged(to);
     });
 }
 

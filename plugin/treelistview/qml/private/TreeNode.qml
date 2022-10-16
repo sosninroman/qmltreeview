@@ -37,6 +37,18 @@ FocusScope {
         updateCurrentData()
     }
 
+    function onNodeDataChanged(ind){
+        if(currentIndex === ind) {
+            updateCurrentData()
+        }
+    }
+
+    function onNodeChildrenCountChanged(ind){
+        if(currentIndex === ind) {
+            updateCurrentChildrenCount()
+        }
+    }
+
     function initData() {
         if(!view) {
             return
@@ -52,17 +64,8 @@ FocusScope {
         updateCurrentData()
         updateCurrentChildrenCount()
 
-        view.nodeDataChanged.connect(function(ind){
-            if(currentIndex === ind) {
-                updateCurrentData()
-            }
-        })
-
-        view.nodeChildrenCountChanged.connect(function(ind){
-            if(currentIndex === ind) {
-                updateCurrentChildrenCount()
-            }
-        })
+        view.nodeDataChanged.connect(onNodeDataChanged)
+        view.nodeChildrenCountChanged.connect(onNodeChildrenCountChanged)
     }
 
     function checkMaxWidth() {
@@ -294,6 +297,10 @@ FocusScope {
 
     Component.onCompleted: {
         initData()
+    }
+    Component.onDestruction: {
+        view.nodeDataChanged.disconnect(onNodeDataChanged)
+        view.nodeChildrenCountChanged.disconnect(onNodeChildrenCountChanged)
     }
 
 }

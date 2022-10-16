@@ -30,30 +30,49 @@ void EditableStringsTreeModel::addChild(const QVariant& index, const QString& na
     endInsertRows();
 }
 
+bool isParent(StringTreeNode* node, StringTreeNode* parent)
+{
+    auto currentParent = node->parent();
+    while(currentParent)
+    {
+        if(currentParent == parent)
+        {
+            return true;
+        }
+        currentParent = currentParent->parent();
+    }
+    return false;
+}
+
 void EditableStringsTreeModel::moveNode(const QVariant& parentIndexV, const QVariant& indexV)
 {
     const auto index = indexV.value<QModelIndex>();
-    const auto parentDestinationIndex = parentIndexV.value<QModelIndex>();
-    if(!parentDestinationIndex.isValid() || !index.isValid())
+    const auto toIndex = parentIndexV.value<QModelIndex>();
+    if(!toIndex.isValid() || !index.isValid() || index == toIndex)
     {
         return;
     }
 
     const auto node = static_cast<StringTreeNode*>(index.internalPointer());
-    const auto sourceParentNode = node->parent();
+    const auto fromNode = node->parent();
 
-    if(!sourceParentNode)
+    if(!fromNode)
     {
         return;
     }
 
-    const auto parentDestinationNode = static_cast<StringTreeNode*>(parentDestinationIndex.internalPointer());
-    const auto insertPos = parentDestinationNode->childrenCount();
+    const auto toNode = static_cast<StringTreeNode*>(toIndex.internalPointer());
+    const auto insertPos = toNode->childrenCount();
 
-    //beginMoveRows(QmlTreeModelInterface::index(sourceParentNode), node->row(), node->row(), parentDestinationIndex, insertPos);
-    beginResetModel();
-    sourceParentNode->detachChild(node);
-    parentDestinationNode->appendChild(node);
-    endResetModel();
-    //endMoveRows();
+    if(isParent(toNode, node) || node->parent() == toNode)
+    {
+        return;
+    }
+
+    beginMoveRows(QmlTreeModelInterface::index(fromNode), node->row(), node->row(), toIndex, insertPos);
+    //beginResetModel();
+    fromNode->detachChild(node);
+    toNode->appendChild(node);
+    //endResetModel();
+    endMoveRows();
 }

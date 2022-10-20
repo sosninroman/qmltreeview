@@ -76,3 +76,26 @@ void EditableStringsTreeModel::moveNode(const QVariant& parentIndexV, const QVar
     //endResetModel();
     endMoveRows();
 }
+
+void EditableStringsTreeModel::removeNode(const QVariant& indexV)
+{
+    const auto index = indexV.value<QModelIndex>();
+    if(!index.isValid())
+    {
+        return;
+    }
+
+    const auto node = static_cast<StringTreeNode*>(index.internalPointer());
+
+    if(!node)
+    {
+        return;
+    }
+
+    const auto parent = node->parent();
+    Q_ASSERT(parent);
+
+    beginRemoveRows(QmlTreeModelInterface::index(parent), node->row(), node->row());
+    parent->removeChild(node);
+    endRemoveRows();
+}

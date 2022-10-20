@@ -59,10 +59,8 @@ ApplicationWindow {
                     var nameDialogObj = nameDialog.createObject(appWindow)
                     nameDialogObj.open()
                     nameDialogObj.accepted.connect(function() {
-                        console.warn(nameDialogObj.name)
                         if(nameDialogObj.name.length > 0) {
                             var modelData = stringTree.nodeData(view.selector.selectedIndexes[0])
-                            console.warn(modelData.name)
                             modelData.name = nameDialogObj.name
                         }
                     })
@@ -70,13 +68,12 @@ ApplicationWindow {
                 highlighted: hovered
             }
             ToolButton {
-                text: "Up"
+                text: "Remove"
                 enabled: view.selector.hasSelection
-                highlighted: hovered
-            }
-            ToolButton {
-                text: "Down"
-                enabled: view.selector.hasSelection
+                onClicked: {
+                    stringTree.removeNode(view.selector.selectedIndexes[0])
+                    view.selector.clear()
+                }
                 highlighted: hovered
             }
             Item {
@@ -85,23 +82,14 @@ ApplicationWindow {
         }
     }
 
-//    menuBar: MenuBar {
-//        Menu {
-//            title: "Edit"
-//            Action {
-//                text: "Add a child"
-//                enabled: view.selector.hasSelection
-//                onTriggered: {
-//                    nameDialog.visible = true
-//                }
-//            }
-//        }
-//    }
-
     T.TreeView {
         id: view
         anchors.fill: parent
-        rowContentDelegate: TextRowDelegate{}
+
+        backgroundDelegate: T.RowBackground{}
+        rowContentDelegate: TextRowDelegate{
+            nameDialog: appWindow.nameDialog
+        }
         dragDelegate: RowDragDelegate{}
         expanderDelegate: T.IconExpander {
             source: "qrc:/icons/triangle.png"
@@ -114,10 +102,6 @@ ApplicationWindow {
             event.accepted = false
             console.warn("TreeView: Key was pressed!")
         }
-//        Keys.onReleased: {
-//            event.accepted = false
-//            console.warn("TreeView: Key was released!")
-//        }
         Keys.onUpPressed: console.warn("up pressed!")
     }
 }

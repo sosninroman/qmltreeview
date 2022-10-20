@@ -9,6 +9,8 @@ T.RowContentDelegateBase {
     height: rect.height
     width: rect.width
 
+    property Component nameDialog
+
     Rectangle {
         id: rect
         height: lbl.height
@@ -54,9 +56,47 @@ T.RowContentDelegateBase {
         selector.clearCurrentIndex()
     }
 
+    Menu {
+        id: contextMenu
+        MenuItem {
+            text: "Add new child"
+            onTriggered: {
+                var nameDialogObj = nameDialog.createObject(appWindow)
+                nameDialogObj.open()
+                nameDialogObj.accepted.connect(function() {
+                    if(nameDialogObj.name.length > 0) {
+                        view.model.addChild(modelData.index, nameDialogObj.name)
+                    }
+                })
+            }
+        }
+        MenuItem {
+            text: "Rename"
+            onTriggered: {
+                var nameDialogObj = nameDialog.createObject(appWindow)
+                nameDialogObj.open()
+                nameDialogObj.accepted.connect(function() {
+                    if(nameDialogObj.name.length > 0) {
+                        modelData.name = nameDialogObj.name
+                    }
+                })
+            }
+        }
+        MenuItem {
+            text: "Remove"
+            onTriggered: {
+                view.model.removeNode(modelData.index)
+                selector.clear()
+            }
+        }
+    }
+
     onClicked: {
         select()
         textCell.focus = true
+        if(mouse.button === Qt.RightButton) {
+            contextMenu.popup(mouse.x, mouse.y)
+        }
     }
 
     onDoubleClicked: {

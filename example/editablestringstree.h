@@ -75,6 +75,7 @@ public:
 
     Q_INVOKABLE void addChild(const QVariant& index, const QString& name);
     Q_INVOKABLE void moveNode(const QVariant& parentIndexV, const QVariant& indexV);
+    Q_INVOKABLE void removeNode(const QVariant& index);
 };
 
 #endif

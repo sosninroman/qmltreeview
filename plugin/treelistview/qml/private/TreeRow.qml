@@ -7,6 +7,7 @@ FocusScope {
     property var modelData
     property var index
     property Selector selector
+    property QmlTreeView view
 
     property Component expanderDelegate
     property Component rowContentDelegate
@@ -70,6 +71,7 @@ FocusScope {
             property var __modelData: modelData
             property var __index: index
             property var __selector: selector
+            property var __view: view
             sourceComponent: rowContentDelegate
             focus: true
         }

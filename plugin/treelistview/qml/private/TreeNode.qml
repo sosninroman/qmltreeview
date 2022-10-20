@@ -188,6 +188,7 @@ FocusScope {
                 selector: nodeItem.selector
                 rowContentDelegate: view.rowContentDelegate
                 expanderDelegate: view.expanderDelegate
+                view: nodeItem.view
 
                 onWidthChanged: {
                     if(view._maxWidthRowIndex === currentIndex) {

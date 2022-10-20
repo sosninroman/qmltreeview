@@ -23,7 +23,7 @@ RowBackgroundDelegateBase 1.0 qrc:/treelistview/qml/base/RowBackgroundDelegateBa
 RowContentDelegateBase 1.0 qrc:/treelistview/qml/base/RowContentDelegateBase.qml
 
 TreeView 1.0 qrc:/treelistview/qml/TreeView.qml
-DefaultRowBackground 1.0 qrc:/treelistview/qml/DefaultRowBackground.qml
+RowBackground 1.0 qrc:/treelistview/qml/RowBackground.qml
 TreeView 1.0 qrc:/treelistview/qml/TreeView.qml
 IconExpander 1.0 qrc:/treelistview/qml/IconExpander.qml
 

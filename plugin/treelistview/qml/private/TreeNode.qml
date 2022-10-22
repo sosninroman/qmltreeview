@@ -9,14 +9,18 @@ import treelistview 1.0
 FocusScope {
     id: nodeItem
 
-    property var parentIndex
-    property var row
-    property QmlTreeView view
-    property var modelData
-    property int childCount: 0
-    property var currentIndex
-    property int contentWidth
-    property Selector selector
+    TreeNodeProperties {
+        id: nodeProperties
+    }
+
+    property alias parentIndex: nodeProperties.parentIndex
+    property alias row: nodeProperties.row
+    property alias view: nodeProperties.view
+    property alias modelData: nodeProperties.modelData
+    property alias childCount: nodeProperties.childCount
+    property alias currentIndex: nodeProperties.currentIndex
+    property alias contentWidth: nodeProperties.contentWidth
+    property alias selector: nodeProperties.selector
 
     function initProperties(parent, index) {
         row = index
@@ -98,9 +102,9 @@ FocusScope {
             }
 
             width: Math.max(view._maxRowContentWidth, view.width)
-
             height: rowContent.height + 2 * view.rowContentMargin
-            Loader { //node background
+
+            Loader { //row background
                 id: nodeBackgroundLdr
 
                 anchors.fill: parent
@@ -251,8 +255,6 @@ FocusScope {
                 property bool hasFocus: false
                 delegate: FocusScope {
                     focus: l.item.focus
-                    onFocusChanged: {
-                    }
                     Keys.onPressed: {
                         event.accepted = false
                     }

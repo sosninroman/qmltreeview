@@ -8,24 +8,7 @@ import "../private"
 QmlTreeView {
     id: treeView
 
-    property int delegateSpacing: 3
-
     onFocusChanged: scroll.focus = treeView.focus
-
-    property int _maxRowContentWidth: 0
-    property var _maxWidthRowIndex
-    signal needToRecalcMaxRowWidth()
-    function recalcMaxRowWidth() {
-        _maxRowContentWidth = 0
-        _maxWidthRowIndex = null
-        needToRecalcMaxRowWidth()
-    }
-
-    onNodeChildrenCountChanged: {
-        if(ind === model.rootIndex()) {
-            model.refresh()
-        }
-    }
 
     ScrollView {
         id: scroll
@@ -44,24 +27,14 @@ QmlTreeView {
             }
         }
 
-        property var rootIndex
-        property var topLevelNodesCount
-
-        Component.onCompleted: {
-            rootIndex = model.rootIndex()
-            topLevelNodesCount = model.rowCount(rootIndex)
-        }
-
         contentWidth: col.width
         contentHeight: Math.max(col.height, treeView.height)
         wheelEnabled: true
 
         MouseArea { //area for mouse events dispatching
-            width: scroll.width
-            height: scroll.height
+            anchors.fill: parent
             hoverEnabled: true
             acceptedButtons: Qt.AllButtons
-    //            cursorShape: mouseHandlerLdr.item.cursorShape
 
             onClicked: {
                 treeView.clicked(mouse)
@@ -93,15 +66,14 @@ QmlTreeView {
             }
         }
 
-        Column {
+        Column { //tree view content
             id: col
             spacing: 0
             Repeater {
                 model: treeView.model
                 delegate: TreeNode {
                     row: index.row
-                    parentIndex: scroll.rootIndex
-                    spacing: delegateSpacing
+                    parentIndex: view.rootIndex
                     view: treeView
                     contentWidth: scroll.contentWidth
                     selector: treeView.selector

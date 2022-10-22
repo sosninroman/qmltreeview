@@ -11,18 +11,16 @@ FocusScope {
 
     property var parentIndex
     property var row
-    property Item view
+    property QmlTreeView view
     property var modelData
     property int childCount: 0
     property var currentIndex
-    property int spacing: 5
     property int contentWidth
     property Selector selector
 
     function initProperties(parent, index) {
         row = index
         parentIndex = parent.currentIndex
-        spacing = parent.spacing
         view = parent.view
         contentWidth = Qt.binding(function(){return parent.contentWidth})
         selector = parent.selector
@@ -101,7 +99,7 @@ FocusScope {
 
             width: Math.max(view._maxRowContentWidth, view.width)
 
-            height: rowContent.height + 2 * nodeItem.spacing
+            height: rowContent.height + 2 * view.rowContentMargin
             Loader { //node background
                 id: nodeBackgroundLdr
 
@@ -192,9 +190,7 @@ FocusScope {
 
                 onWidthChanged: {
                     if(view._maxWidthRowIndex === currentIndex) {
-                        if(rowContent.width <= view._maxRowContentWidth) {
-                            view.recalcMaxRowWidth()
-                        }
+                        view.recalcMaxRowWidth()
                     }
                     else
                     {

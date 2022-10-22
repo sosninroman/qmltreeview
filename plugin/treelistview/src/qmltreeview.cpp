@@ -28,7 +28,7 @@ TreeNode* nextNode(TreeNode* node)
 QmlTreeView::QmlTreeView(QQuickItem *parent):
     QQuickItem(parent)
 {
-
+    connect(this, &QmlTreeView::nodeChildrenCountChanged, this, &QmlTreeView::onNodeChildrenCountChanged);
 }
 
 void QmlTreeView::setModel(QmlTreeModelInterface* model)
@@ -99,6 +99,13 @@ void QmlTreeView::onRowsChildrenCountChanged(const QModelIndex& parent)
     }
 }
 
+void QmlTreeView::onNodeChildrenCountChanged(const QModelIndex& ind)
+{
+    if(m_model && ind == m_model->rootIndex()) {
+        m_model->refresh();
+    }
+}
+
 void QmlTreeView::setRowContentDelegate(QQmlComponent* val)
 {
     if(m_rowContentDelegate != val)
@@ -133,4 +140,40 @@ void QmlTreeView::setExpanderDelegate(QQmlComponent* val)
         m_expanderDelegate = val;
         emit expanderDelegateChanged();
     }
+}
+
+void QmlTreeView::setMaxRowContentWidth(int val)
+{
+    if(m_maxRowContentWidth != val)
+    {
+        m_maxRowContentWidth = val;
+        emit maxRowContentWidthChanged();
+    }
+}
+
+
+void QmlTreeView::setMaxWidthRowIndex(const QVariant &val)
+{
+    QModelIndex ind = val.toModelIndex();
+    if(m_maxWidthRowIndex != ind)
+    {
+        m_maxWidthRowIndex = ind;
+        emit maxWidthRowIndexChanged();
+    }
+}
+
+void QmlTreeView::setRowContentMargin(int val)
+{
+    if(m_rowContentMargin != val)
+    {
+        m_rowContentMargin = val;
+        emit rowContentMarginChanged();
+    }
+}
+
+void QmlTreeView::recalcMaxRowWidth()
+{
+    setMaxRowContentWidth(0);
+    setMaxWidthRowIndex(QModelIndex());
+    emit needToRecalcMaxRowWidth();
 }

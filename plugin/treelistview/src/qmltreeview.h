@@ -36,6 +36,24 @@ public:
     QQmlComponent* expanderDelegate() const {return m_expanderDelegate;}
     void setExpanderDelegate(QQmlComponent* val);
 
+    Q_PROPERTY(int _maxRowContentWidth READ maxRowContentWidth WRITE setMaxRowContentWidth NOTIFY maxRowContentWidthChanged)
+    int maxRowContentWidth() const {return m_maxRowContentWidth;}
+    void setMaxRowContentWidth(int val);
+
+    Q_PROPERTY(QVariant _maxWidthRowIndex READ maxWidthRowIndex WRITE setMaxWidthRowIndex NOTIFY maxWidthRowIndexChanged)
+    QVariant maxWidthRowIndex() const {return m_maxWidthRowIndex;}
+    void setMaxWidthRowIndex(const QVariant& val);
+
+    Q_PROPERTY(int rowContentMargin READ rowContentMargin WRITE setRowContentMargin NOTIFY rowContentMarginChanged)
+    int rowContentMargin() const {return m_rowContentMargin;}
+    void setRowContentMargin(int val);
+
+    Q_PROPERTY(QVariant rootIndex READ rootIndex NOTIFY modelChanged)
+    QVariant rootIndex() const {return m_model ? m_model->rootIndex() : QVariant();}
+
+public slots:
+    Q_INVOKABLE void recalcMaxRowWidth();
+
 signals:
     void canceled();
     void clicked(QVariant mouse);
@@ -56,12 +74,18 @@ signals:
     void backgroundDelegateChanged();
     void dragDelegateChanged();
     void expanderDelegateChanged();
+    void rowContentMarginChanged();
+
+    void needToRecalcMaxRowWidth();
+    void maxRowContentWidthChanged();
+    void maxWidthRowIndexChanged();
 
 private:
     void disconnectFromModel();
     void connectToModel();
     void onDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
     void onRowsChildrenCountChanged(const QModelIndex& parent);
+    void onNodeChildrenCountChanged(const QModelIndex& ind);
 
 private:
     Selector m_selector;
@@ -70,6 +94,9 @@ private:
     QQmlComponent* m_backgroundDelegate = nullptr;
     QQmlComponent* m_dragDelegate = nullptr;
     QQmlComponent* m_expanderDelegate = nullptr;
+    int m_maxRowContentWidth = 0;
+    QModelIndex m_maxWidthRowIndex;
+    int m_rowContentMargin = 0;
 };
 
 #endif

@@ -94,6 +94,7 @@ ApplicationWindow {
         expanderDelegate: T.IconExpander {
             source: "qrc:/icons/triangle.png"
         }
+        rowContentMargin: 5
 
         model: stringTree
 

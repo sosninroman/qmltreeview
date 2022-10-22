@@ -86,6 +86,8 @@ private:
     void onDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight);
     void onRowsChildrenCountChanged(const QModelIndex& parent);
     void onNodeChildrenCountChanged(const QModelIndex& ind);
+    void onRowsAboutToBeRemoved(const QModelIndex& parent, int first, int last);
+    void onRowsRemoved(const QModelIndex& parent, int first, int last);
 
 private:
     Selector m_selector;
@@ -97,6 +99,7 @@ private:
     int m_maxRowContentWidth = 0;
     QModelIndex m_maxWidthRowIndex;
     int m_rowContentMargin = 0;
+    bool m_needToRecalcMaxWidthAfterNextRowRemove = false;
 };
 
 #endif

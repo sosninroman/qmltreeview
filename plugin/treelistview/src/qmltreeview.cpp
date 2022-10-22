@@ -59,7 +59,8 @@ void QmlTreeView::connectToModel()
     }
     connect(m_model, &QAbstractItemModel::dataChanged, this, &QmlTreeView::onDataChanged);
     connect(m_model, &QAbstractItemModel::rowsInserted, this, &QmlTreeView::onRowsChildrenCountChanged);
-    connect(m_model, &QAbstractItemModel::rowsRemoved, this, &QmlTreeView::onRowsChildrenCountChanged);
+    connect(m_model, &QAbstractItemModel::rowsAboutToBeRemoved, this, &QmlTreeView::onRowsAboutToBeRemoved);
+    connect(m_model, &QAbstractItemModel::rowsRemoved, this, &QmlTreeView::onRowsRemoved);
     connect(m_model, &QAbstractItemModel::rowsMoved, this, [this](const QModelIndex& from, int, int, const QModelIndex& to){
         qCritical() << from << to << "\n";
         onRowsChildrenCountChanged(from);
@@ -103,6 +104,28 @@ void QmlTreeView::onNodeChildrenCountChanged(const QModelIndex& ind)
 {
     if(m_model && ind == m_model->rootIndex()) {
         m_model->refresh();
+    }
+}
+
+void QmlTreeView::onRowsAboutToBeRemoved(const QModelIndex& parent, int first, int last)
+{
+    for(int i = first; i <= last && !m_needToRecalcMaxWidthAfterNextRowRemove; ++i)
+    {
+        QModelIndex ind = m_model->index(i, 0, parent);
+        if(ind == m_maxWidthRowIndex)
+        {
+            m_needToRecalcMaxWidthAfterNextRowRemove = true;
+        }
+    }
+}
+
+void QmlTreeView::onRowsRemoved(const QModelIndex& parent, int first, int last)
+{
+    onRowsChildrenCountChanged(parent);
+    if(m_needToRecalcMaxWidthAfterNextRowRemove)
+    {
+        recalcMaxRowWidth();
+        m_needToRecalcMaxWidthAfterNextRowRemove = false;
     }
 }
 

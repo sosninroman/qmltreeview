@@ -11,7 +11,7 @@ class TreeNodeProperties : public QObject
 {
     Q_OBJECT
 public:
-    explicit TreeNodeProperties(QObject *parent = nullptr);
+    explicit TreeNodeProperties(QObject* parent = nullptr);
 
     Q_PROPERTY(QVariant parentIndex READ parentIndex NOTIFY changed)
     QVariant parentIndex() const {return m_parentIndex;}
@@ -25,13 +25,14 @@ public:
     Q_PROPERTY(Selector* selector READ selector NOTIFY changed)
     Selector* selector() const  {return m_view ? m_view->selector() : nullptr;}
 
-    Q_PROPERTY(int childCount READ childCount NOTIFY childrenCountChanged)
-    int childCount() const {return m_childCount;}
+    Q_PROPERTY(int childrenCount READ childrenCount NOTIFY childrenCountChanged)
+    int childrenCount() const;
 
     Q_PROPERTY(QVariant modelData READ modelData NOTIFY modelDataChanged)
     QVariant modelData() const {return m_modelData;}
 
     Q_INVOKABLE void initialize(QmlTreeView* view, QVariant parentIndex, int row);
+    Q_INVOKABLE void checkMaxWidth(int contentWidth);
 
 signals:
     void changed();
@@ -46,7 +47,6 @@ private:
     QModelIndex m_parentIndex;
     QModelIndex m_currentIndex;
     QmlTreeView* m_view = nullptr;
-    int m_childCount = 0;
     QVariant m_modelData;
 };
 

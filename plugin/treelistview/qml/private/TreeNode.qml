@@ -18,20 +18,13 @@ FocusScope {
     property alias selector: nodeProperties.selector
     property alias parentIndex: nodeProperties.parentIndex
     property alias currentIndex: nodeProperties.currentIndex
-    property alias childCount: nodeProperties.childCount
+    property alias childrenCount: nodeProperties.childrenCount
     property alias modelData: nodeProperties.modelData
-
-    function checkMaxWidth() {
-        if(rowContent.width > view._maxRowContentWidth) {
-            view._maxRowContentWidth = rowContent.width
-            view._maxWidthRowIndex = currentIndex
-        }
-    }
 
     Connections {
         target: view
         function onNeedToRecalcMaxRowWidth() {
-            checkMaxWidth()
+            properties.checkMaxWidth(rowContent.width)
         }
     }
 
@@ -149,7 +142,7 @@ FocusScope {
                     }
                     else
                     {
-                        checkMaxWidth()
+                        nodeItem.properties.checkMaxWidth(width)
                     }
                 }
             }
@@ -199,10 +192,10 @@ FocusScope {
             }
         }
         Column {
-            visible: modelData.expandable && modelData.expanded && nodeItem.childCount > 0
+            visible: modelData.expandable && modelData.expanded && nodeItem.childrenCount > 0
             Repeater {
                 id: rp
-                model: childCount
+                model: childrenCount
                 property bool hasFocus: false
                 delegate: FocusScope {
                     focus: l.item.focus

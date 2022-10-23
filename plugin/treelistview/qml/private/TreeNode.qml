@@ -29,9 +29,7 @@ FocusScope {
     }
 
     focus: rowScope.focus || rp.hasFocus
-    Keys.onPressed: {
-        event.accepted = false
-    }
+    Keys.onPressed: event.accepted = false
 
     width: col.width
     height: col.height
@@ -187,7 +185,7 @@ FocusScope {
                 }
             }
         }
-        Column {
+        Column { //child nodes
             visible: modelData.expandable && modelData.expanded && nodeItem.childrenCount > 0
             Repeater {
                 id: rp

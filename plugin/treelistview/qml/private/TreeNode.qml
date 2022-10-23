@@ -14,71 +14,12 @@ FocusScope {
     }
     property alias properties: nodeProperties
 
-//    property alias row: nodeProperties.row
     property alias view: nodeProperties.view
     property alias selector: nodeProperties.selector
     property alias parentIndex: nodeProperties.parentIndex
     property alias currentIndex: nodeProperties.currentIndex
     property alias childCount: nodeProperties.childCount
     property alias modelData: nodeProperties.modelData
-
-    onModelDataChanged: {
-        console.warn("data changed", modelData.name)
-    }
-
-    onChildCountChanged: {
-        console.warn("children count changed", modelData.name, childCount)
-        console.warn(modelData.expandable, modelData.expanded, (nodeItem.childCount > 0))
-    }
-
-//    function initProperties(parent, index) {
-//        row = index
-//        parentIndex = parent.currentIndex
-//        view = parent.view
-//        selector = parent.selector
-//    }
-
-//    function updateCurrentData() {
-//        modelData = !!view && !!view.model ? view.model.nodeData(currentIndex) : null
-//    }
-
-//    function updateCurrentChildrenCount() {
-//        childCount = !!view && !!view.model ? view.model.rowCount(currentIndex) : 0
-//        updateCurrentData()
-//    }
-
-//    function onNodeDataChanged(ind){
-//        if(currentIndex === ind) {
-//            updateCurrentData()
-//        }
-//    }
-
-//    function onNodeChildrenCountChanged(ind){
-//        if(currentIndex === ind) {
-//            updateCurrentChildrenCount()
-//        }
-//    }
-
-//    function initData() {
-//        console.warn("init begin")
-//        if(!view) {
-//            return
-//        }
-//        //FIXME
-//        if(parentIndex) {
-//            currentIndex = !!view && !!view.model ? view.model.index(row, 0, parentIndex) : null
-//        }
-//        else {
-//            currentIndex = !!view && !!view.model ? view.model.index(row, 0) : null
-//        }
-
-//        updateCurrentData()
-//        updateCurrentChildrenCount()
-
-//        view.nodeDataChanged.connect(onNodeDataChanged)
-//        view.nodeChildrenCountChanged.connect(onNodeChildrenCountChanged)
-//        console.warn("init end")
-//    }
 
     function checkMaxWidth() {
         if(rowContent.width > view._maxRowContentWidth) {
@@ -276,9 +217,6 @@ FocusScope {
                         focus: true
                         source: "TreeNode.qml"
                         onLoaded: {
-//                            item.initProperties(nodeItem, index)
-//                            item.initData()
-
                             item.properties.initialize(view, currentIndex, index)
                         }
                         Connections {
@@ -305,13 +243,4 @@ FocusScope {
             }
         }
     }
-
-//    Component.onCompleted: {
-//        initData()
-//    }
-//    Component.onDestruction: {
-//        view.nodeDataChanged.disconnect(onNodeDataChanged)
-//        view.nodeChildrenCountChanged.disconnect(onNodeChildrenCountChanged)
-//    }
-
 }

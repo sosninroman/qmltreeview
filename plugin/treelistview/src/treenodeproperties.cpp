@@ -4,67 +4,6 @@ TreeNodeProperties::TreeNodeProperties(QObject *parent):
     QObject(parent)
 {}
 
-//void TreeNodeProperties::setRow(int val)
-//{
-//    if(m_row != val)
-//    {
-//        m_row = val;
-//        emit rowChanged();
-//    }
-//}
-
-void TreeNodeProperties::setParentIndex(const QVariant &val)
-{
-    Q_UNUSED(val);
-//    QModelIndex ind = val.toModelIndex();
-//    if(m_parentIndex != ind)
-//    {
-//        m_parentIndex = ind;
-//        emit parentIndexChanged();
-//    }
-}
-
-void TreeNodeProperties::setCurrentIndex(const QVariant &val)
-{
-    Q_UNUSED(val);
-//    QModelIndex ind = val.toModelIndex();
-//    if(m_currentIndex != ind)
-//    {
-//        m_currentIndex = ind;
-//        emit currentIndexChanged();
-//    }
-}
-
-void TreeNodeProperties::setView(QmlTreeView* val)
-{
-    Q_UNUSED(val);
-//    if(m_view != val)
-//    {
-//        m_view = val;
-//        emit viewChanged();
-//    }
-}
-
-void TreeNodeProperties::setChildCount(int val)
-{
-    Q_UNUSED(val);
-//    if(m_childCount != val)
-//    {
-//        m_childCount = val;
-//        emit childCountChanged();
-//    }
-}
-
-void TreeNodeProperties::setModelData(const QVariant& val)
-{
-    Q_UNUSED(val);
-//    if(m_modelData != val)
-//    {
-//        m_modelData = val;
-//        emit modelDataChanged();
-//    }
-}
-
 void TreeNodeProperties::initialize(QmlTreeView* view, QVariant parentIndex, int row)
 {
     if(!view)
@@ -111,12 +50,3 @@ void TreeNodeProperties::onNodeChildrenCountChanged(const QModelIndex& index)
         emit modelDataChanged();
     }
 }
-
-//void TreeNodeProperties::init(const TreeNodeProperties& parentProperties, int row)
-//{
-//    qCritical() << "ola" << parentProperties.view()->test();
-//    setRow(row);
-//    setParentIndex(parentProperties.currentIndex());
-//    m_view = parentProperties.view();
-//    setView(parentProperties.view());
-//}

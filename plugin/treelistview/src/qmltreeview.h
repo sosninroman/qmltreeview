@@ -51,6 +51,13 @@ public:
     Q_PROPERTY(QVariant rootIndex READ rootIndex NOTIFY modelChanged)
     QVariant rootIndex() const {return m_model ? m_model->rootIndex() : QVariant();}
 
+    Q_PROPERTY(QString test READ test WRITE setTest NOTIFY testChanged)
+    QString m_test;
+    QString test() const {return m_test;}
+    void setTest(const QString& val){if(m_test != val) {m_test = val; emit testChanged();};}
+signals:
+    void testChanged();
+
 public slots:
     Q_INVOKABLE void recalcMaxRowWidth();
 

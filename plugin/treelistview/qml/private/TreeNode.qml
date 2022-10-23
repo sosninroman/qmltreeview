@@ -12,63 +12,73 @@ FocusScope {
     TreeNodeProperties {
         id: nodeProperties
     }
+    property alias properties: nodeProperties
 
-    property alias parentIndex: nodeProperties.parentIndex
-    property alias row: nodeProperties.row
+//    property alias row: nodeProperties.row
     property alias view: nodeProperties.view
-    property alias modelData: nodeProperties.modelData
-    property alias childCount: nodeProperties.childCount
-    property alias currentIndex: nodeProperties.currentIndex
-    property alias contentWidth: nodeProperties.contentWidth
     property alias selector: nodeProperties.selector
+    property alias parentIndex: nodeProperties.parentIndex
+    property alias currentIndex: nodeProperties.currentIndex
+    property alias childCount: nodeProperties.childCount
+    property alias modelData: nodeProperties.modelData
 
-    function initProperties(parent, index) {
-        row = index
-        parentIndex = parent.currentIndex
-        view = parent.view
-        contentWidth = Qt.binding(function(){return parent.contentWidth})
-        selector = parent.selector
+    onModelDataChanged: {
+        console.warn("data changed", modelData.name)
     }
 
-    function updateCurrentData() {
-        modelData = !!view && !!view.model ? view.model.nodeData(currentIndex) : null
+    onChildCountChanged: {
+        console.warn("children count changed", modelData.name, childCount)
+        console.warn(modelData.expandable, modelData.expanded, (nodeItem.childCount > 0))
     }
 
-    function updateCurrentChildrenCount() {
-        childCount = !!view && !!view.model ? view.model.rowCount(currentIndex) : 0
-        updateCurrentData()
-    }
+//    function initProperties(parent, index) {
+//        row = index
+//        parentIndex = parent.currentIndex
+//        view = parent.view
+//        selector = parent.selector
+//    }
 
-    function onNodeDataChanged(ind){
-        if(currentIndex === ind) {
-            updateCurrentData()
-        }
-    }
+//    function updateCurrentData() {
+//        modelData = !!view && !!view.model ? view.model.nodeData(currentIndex) : null
+//    }
 
-    function onNodeChildrenCountChanged(ind){
-        if(currentIndex === ind) {
-            updateCurrentChildrenCount()
-        }
-    }
+//    function updateCurrentChildrenCount() {
+//        childCount = !!view && !!view.model ? view.model.rowCount(currentIndex) : 0
+//        updateCurrentData()
+//    }
 
-    function initData() {
-        if(!view) {
-            return
-        }
-        //FIXME
-        if(parentIndex) {
-            currentIndex = !!view && !!view.model ? view.model.index(row, 0, parentIndex) : null
-        }
-        else {
-            currentIndex = !!view && !!view.model ? view.model.index(row, 0) : null
-        }
+//    function onNodeDataChanged(ind){
+//        if(currentIndex === ind) {
+//            updateCurrentData()
+//        }
+//    }
 
-        updateCurrentData()
-        updateCurrentChildrenCount()
+//    function onNodeChildrenCountChanged(ind){
+//        if(currentIndex === ind) {
+//            updateCurrentChildrenCount()
+//        }
+//    }
 
-        view.nodeDataChanged.connect(onNodeDataChanged)
-        view.nodeChildrenCountChanged.connect(onNodeChildrenCountChanged)
-    }
+//    function initData() {
+//        console.warn("init begin")
+//        if(!view) {
+//            return
+//        }
+//        //FIXME
+//        if(parentIndex) {
+//            currentIndex = !!view && !!view.model ? view.model.index(row, 0, parentIndex) : null
+//        }
+//        else {
+//            currentIndex = !!view && !!view.model ? view.model.index(row, 0) : null
+//        }
+
+//        updateCurrentData()
+//        updateCurrentChildrenCount()
+
+//        view.nodeDataChanged.connect(onNodeDataChanged)
+//        view.nodeChildrenCountChanged.connect(onNodeChildrenCountChanged)
+//        console.warn("init end")
+//    }
 
     function checkMaxWidth() {
         if(rowContent.width > view._maxRowContentWidth) {
@@ -266,8 +276,10 @@ FocusScope {
                         focus: true
                         source: "TreeNode.qml"
                         onLoaded: {
-                            item.initProperties(nodeItem, index)
-                            item.initData()
+//                            item.initProperties(nodeItem, index)
+//                            item.initData()
+
+                            item.properties.initialize(view, currentIndex, index)
                         }
                         Connections {
                             target: l.item
@@ -294,12 +306,12 @@ FocusScope {
         }
     }
 
-    Component.onCompleted: {
-        initData()
-    }
-    Component.onDestruction: {
-        view.nodeDataChanged.disconnect(onNodeDataChanged)
-        view.nodeChildrenCountChanged.disconnect(onNodeChildrenCountChanged)
-    }
+//    Component.onCompleted: {
+//        initData()
+//    }
+//    Component.onDestruction: {
+//        view.nodeDataChanged.disconnect(onNodeDataChanged)
+//        view.nodeChildrenCountChanged.disconnect(onNodeChildrenCountChanged)
+//    }
 
 }

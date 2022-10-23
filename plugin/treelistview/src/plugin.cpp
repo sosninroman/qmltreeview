@@ -4,7 +4,6 @@
 
 #include "treemodel.h"
 #include "selector.h"
-#include "treehelper.h"
 #include "qmltreeview.h"
 #include "treenodeproperties.h"
 
@@ -14,8 +13,6 @@ void Plugin::registerTypes(const char* uri) {
 
     qmlRegisterType<Selector>(uri, 1, 0, "Selector");
     qRegisterMetaType<Selector*>("Selector");
-
-    qmlRegisterSingletonType<TreeHelper>(uri, 1, 0, "TreeHelper", &TreeHelper::instance);
 
     qmlRegisterType<QmlTreeView>(uri, 1, 0, "QmlTreeView");
     qRegisterMetaType<QmlTreeView*>("QmlTreeView");

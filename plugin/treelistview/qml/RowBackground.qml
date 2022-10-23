@@ -2,7 +2,7 @@ import QtQuick 2.15
 import treelistview 1.0
 import "./base"
 
-RowBackgroundDelegateBase {
+Delegate {
 
     property color defaultColor: "transparent"
     property real defaultOpacity: 1
@@ -12,14 +12,14 @@ RowBackgroundDelegateBase {
     property real selectionOpacity: 0.5
 
     function checkState() {
-        if(!selector && !index)
+        if(!properties.selector && !properties.currentIndex)
         {
             background.state = "default"
         }
-        else if( selector.isSelected(index) ) {
+        else if( properties.selector.isSelected(properties.currentIndex) ) {
             background.state = "selected"
         }
-        else if(selector.currentIndex === index ) {
+        else if(properties.selector.currentIndex === properties.currentIndex ) {
             background.state = "hovered"
         }
         else
@@ -29,7 +29,7 @@ RowBackgroundDelegateBase {
     }
 
     Connections {
-        target: selector
+        target: properties.selector
         function onCurrentChanged(curIndex, prevIndex) {
             checkState()
         }

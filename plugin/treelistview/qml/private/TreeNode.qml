@@ -50,13 +50,9 @@ FocusScope {
 
             Loader { //row background
                 id: nodeBackgroundLdr
-
                 anchors.fill: parent
                 sourceComponent: view.backgroundDelegate
-
-                property var __data: nodeItem.modelData
-                property var __index: nodeItem.currentIndex
-                property Selector __selector: nodeItem.selector
+                property TreeNodeProperties __nodeProperties: nodeItem.properties
             }
 
             MouseArea { //area for mouse events dispatching

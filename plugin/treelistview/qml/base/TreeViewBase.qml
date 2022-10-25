@@ -10,8 +10,6 @@ QmlTreeView {
 
     onFocusChanged: scroll.focus = treeView.focus
 
-    test: "test string"
-
     ScrollView {
         id: scroll
         anchors.fill: parent
@@ -75,10 +73,6 @@ QmlTreeView {
                 model: treeView.model
                 delegate: TreeNode {
                     id: topLevelNode
-                    //row: index.row
-                    //parentIndex: treeView.rootIndex
-                    //view: treeView
-                    //selector: treeView.selector
                     Component.onCompleted: {
                         topLevelNode.properties.initialize(treeView, parentIndex, index.row)
                     }

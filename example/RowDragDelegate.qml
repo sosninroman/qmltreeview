@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
 import treelistview 1.0 as T
 
-T.DragDelegateBase {
+T.DragDelegate {
     Row {
         spacing: 10
         Item {

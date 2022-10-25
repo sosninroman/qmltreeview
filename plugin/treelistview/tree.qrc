@@ -4,12 +4,11 @@
         <file>qml/private/InputHandler.qml</file>
         <file>qml/private/TreeNode.qml</file>
         <file>qml/private/TreeRow.qml</file>
-        <file>qml/base/DelegateBase.qml</file>
-        <file>qml/base/DragDelegateBase.qml</file>
         <file>qml/IconExpander.qml</file>
         <file>qml/base/TreeViewBase.qml</file>
         <file>qml/RowBackground.qml</file>
         <file>qml/base/Delegate.qml</file>
         <file>qml/base/ExpanderDelegate.qml</file>
+        <file>qml/base/DragDelegate.qml</file>
     </qresource>
 </RCC>

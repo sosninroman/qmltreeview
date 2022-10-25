@@ -18,8 +18,9 @@ plugin treelistview
 # required way for us because these files will be in 'myplugin' resources.
 
 Delegate 1.0 qrc:/treelistview/qml/base/Delegate.qml
-DragDelegateBase 1.0 qrc:/treelistview/qml/base/DragDelegateBase.qml
+DragDelegate 1.0 qrc:/treelistview/qml/base/DragDelegate.qml
 ExpanderDelegate 1.0 qrc:/treelistview/qml/base/ExpanderDelegate.qml
+TreeViewBase 1.0 qrc:/treelistview/qml/base/TreeViewBase.qml
 
 TreeView 1.0 qrc:/treelistview/qml/TreeView.qml
 RowBackground 1.0 qrc:/treelistview/qml/RowBackground.qml

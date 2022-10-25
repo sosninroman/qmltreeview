@@ -65,7 +65,7 @@ T.Delegate {
                 nameDialogObj.open()
                 nameDialogObj.accepted.connect(function() {
                     if(nameDialogObj.name.length > 0) {
-                        properties.view.model.addChild(modelData.index, nameDialogObj.name)
+                        properties.view.model.addChild(properties.modelData.index, nameDialogObj.name)
                     }
                 })
             }
@@ -77,7 +77,7 @@ T.Delegate {
                 nameDialogObj.open()
                 nameDialogObj.accepted.connect(function() {
                     if(nameDialogObj.name.length > 0) {
-                        modelData.name = nameDialogObj.name
+                        properties.modelData.name = nameDialogObj.name
                     }
                 })
             }
@@ -85,8 +85,8 @@ T.Delegate {
         MenuItem {
             text: "Remove"
             onTriggered: {
-                view.model.removeNode(modelData.index)
-                selector.clear()
+                properties.view.model.removeNode(properties.modelData.index)
+                properties.selector.clear()
             }
         }
     }

@@ -119,26 +119,9 @@ FocusScope {
 
             TreeRow { //row content
                 id: rowContent
-
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
-
-                modelData: nodeItem.modelData
-                index: nodeItem.currentIndex
-                selector: nodeItem.selector
-                rowContentDelegate: view.rowContentDelegate
-                expanderDelegate: view.expanderDelegate
-                view: nodeItem.view
-
-                onWidthChanged: {
-                    if(view._maxWidthRowIndex === currentIndex) {
-                        view.recalcMaxRowWidth()
-                    }
-                    else
-                    {
-                        nodeItem.properties.checkMaxWidth(width)
-                    }
-                }
+                properties: nodeItem.properties
             }
 
             DropArea { //area for drop events processing

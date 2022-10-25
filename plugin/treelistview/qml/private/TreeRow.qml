@@ -4,13 +4,10 @@ import treelistview 1.0
 import "../"
 
 FocusScope {
-    property var modelData
-    property var index
-    property Selector selector
-    property QmlTreeView view
+    property TreeNodeProperties properties
 
-    property Component expanderDelegate
-    property Component rowContentDelegate
+    property var modelData: properties.modelData
+
     property alias contentItem: contentLdr.item
 
     function onClicked(mouse) {
@@ -49,6 +46,16 @@ FocusScope {
         event.accepted = false
     }
 
+    onWidthChanged: {
+        if(properties.view._maxWidthRowIndex === properties.currentIndex) {
+            properties.view.recalcMaxRowWidth()
+        }
+        else
+        {
+            properties.checkMaxWidth(width)
+        }
+    }
+
     Row {
         id: row
         Item { //delegate margins
@@ -61,18 +68,18 @@ FocusScope {
             width: height
             height: contentLdr.height
             property var __modelData: modelData
-            property var __index: index
-            sourceComponent: expanderDelegate
+            property var __index: properties.currentIndex
+            sourceComponent: properties.view.expanderDelegate
         }
 
         Loader { //content delegate
             id: contentLdr
             Layout.fillWidth: true
             property var __modelData: modelData
-            property var __index: index
-            property var __selector: selector
-            property var __view: view
-            sourceComponent: rowContentDelegate
+            property var __index: properties.currentIndex
+            property var __selector: properties.selector
+            property var __view: properties.view
+            sourceComponent: properties.view.rowContentDelegate
             focus: true
         }
     }

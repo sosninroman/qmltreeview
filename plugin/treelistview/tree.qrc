@@ -11,6 +11,5 @@
         <file>qml/base/TreeViewBase.qml</file>
         <file>qml/RowBackground.qml</file>
         <file>qml/base/Delegate.qml</file>
-        <file>qml/base/RowContentDelegateBase.qml</file>
     </qresource>
 </RCC>

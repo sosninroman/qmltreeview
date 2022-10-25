@@ -75,10 +75,11 @@ FocusScope {
         Loader { //content delegate
             id: contentLdr
             Layout.fillWidth: true
-            property var __modelData: modelData
-            property var __index: properties.currentIndex
-            property var __selector: properties.selector
-            property var __view: properties.view
+            property TreeNodeProperties __nodeProperties: properties
+//            property var __modelData: modelData
+//            property var __index: properties.currentIndex
+//            property var __selector: properties.selector
+//            property var __view: properties.view
             sourceComponent: properties.view.rowContentDelegate
             focus: true
         }

@@ -20,7 +20,7 @@ plugin treelistview
 DragDelegateBase 1.0 qrc:/treelistview/qml/base/DragDelegateBase.qml
 ExpanderDelegateBase 1.0 qrc:/treelistview/qml/base/ExpanderDelegateBase.qml
 RowBackgroundDelegateBase 1.0 qrc:/treelistview/qml/base/RowBackgroundDelegateBase.qml
-RowContentDelegateBase 1.0 qrc:/treelistview/qml/base/RowContentDelegateBase.qml
+Delegate 1.0 qrc:/treelistview/qml/base/Delegate.qml
 
 TreeView 1.0 qrc:/treelistview/qml/TreeView.qml
 RowBackground 1.0 qrc:/treelistview/qml/RowBackground.qml

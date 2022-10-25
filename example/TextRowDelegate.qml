@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.12
 import treelistview 1.0 as T
 
-T.RowContentDelegateBase {
+T.Delegate {
     id: textCell
 
     height: rect.height
@@ -18,22 +18,22 @@ T.RowContentDelegateBase {
         color: textCell.focus ? "green" : "transparent"
         Label {
             id: lbl
-            text: modelData.name
+            text: properties.modelData.name
             font.pixelSize: 12
         }
     }
 
     Keys.onPressed: {
-        console.warn(modelData.name, "Delegate: Key was pressed!")
+        console.warn(properties.modelData.name, "Delegate: Key was pressed!")
         event.accepted = true
     }
 
     Connections {
-        target: selector
+        target: properties.selector
         function onSelectionChanged() {
             var i = 0
-            while(i < selector.selectedIndexes.length) {
-                if(index === selector.selectedIndexes[i]) {
+            while(i < properties.selector.selectedIndexes.length) {
+                if(properties.currentIndex === properties.selector.selectedIndexes[i]) {
                     textCell.focus = true
                     return
                 }
@@ -44,16 +44,16 @@ T.RowContentDelegateBase {
     }
 
     function select() {
-        selector.clearSelection()
-        selector.select(index)
+        properties.selector.clearSelection()
+        properties.selector.select(properties.currentIndex)
     }
 
     onEntered: {
-        selector.setCurrentIndex(index)
+        properties.selector.setCurrentIndex(properties.currentIndex)
     }
 
     onExited: {
-        selector.clearCurrentIndex()
+        properties.selector.clearCurrentIndex()
     }
 
     Menu {
@@ -65,7 +65,7 @@ T.RowContentDelegateBase {
                 nameDialogObj.open()
                 nameDialogObj.accepted.connect(function() {
                     if(nameDialogObj.name.length > 0) {
-                        view.model.addChild(modelData.index, nameDialogObj.name)
+                        properties.view.model.addChild(modelData.index, nameDialogObj.name)
                     }
                 })
             }
@@ -100,8 +100,8 @@ T.RowContentDelegateBase {
     }
 
     onDoubleClicked: {
-        if(modelData.expandable) {
-            modelData.expanded = !modelData.expanded
+        if(properties.modelData.expandable) {
+            properties.modelData.expanded = !properties.modelData.expanded
         }
     }
 }

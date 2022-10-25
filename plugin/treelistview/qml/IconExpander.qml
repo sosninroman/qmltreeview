@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import "./base"
 
-ExpanderDelegateBase {
+ExpanderDelegate {
     id: expButton
 
     property alias source: img.source
@@ -11,7 +11,7 @@ ExpanderDelegateBase {
         anchors.centerIn: parent
         width: expButton.width / 2
         height: expButton.height / 2
-        visible: modelData.expandable
-        rotation: modelData.expanded ? 90 : 0
+        visible: properties.modelData.expandable
+        rotation: properties.modelData.expanded ? 90 : 0
     }
 }

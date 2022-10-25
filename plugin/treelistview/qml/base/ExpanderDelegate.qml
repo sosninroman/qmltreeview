@@ -1,13 +1,13 @@
 import QtQuick 2.15
 import treelistview 1.0
 
-DelegateBase {
+Delegate {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            modelData.expanded = !modelData.expanded
+            properties.modelData.expanded = !properties.modelData.expanded
             mouse.accepted = false
         }
-        enabled: modelData.expandable
+        enabled: properties.modelData.expandable
     }
 }

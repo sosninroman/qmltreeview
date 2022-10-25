@@ -155,9 +155,7 @@ FocusScope {
                 id: dragDelegateLdr
                 active: false
                 Drag.active: dragDelegateLdr.active
-                property Item __view: nodeItem.view
-                property var __index: nodeItem.currentIndex
-                property var __rowData: nodeItem.modelData
+                property TreeNodeProperties __nodeProperties: nodeItem.properties
                 sourceComponent: view.dragDelegate
             }
             Connections {

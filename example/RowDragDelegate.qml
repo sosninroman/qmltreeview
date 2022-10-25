@@ -11,12 +11,13 @@ T.DragDelegateBase {
         }
         Label {
             id: txt
-            text: modelData.name
+            text: properties.modelData.name
             leftPadding: 15
         }
     }
     onDropped: {
-        console.warn("drop \"", modelData.name, "\" to \"", hoveredModelData.name, "\"")
-        view.model.moveNode(hoveredModelData.index, index)
+        console.warn("drop \"", properties.modelData.name, "\" to \"", hoveredModelData.name, "\"")
+        properties.view.model.moveNode(hoveredModelData.index, properties.currentIndex)
+        properties.selector.clearSelection();
     }
 }

@@ -6,10 +6,10 @@
         <file>qml/private/TreeRow.qml</file>
         <file>qml/base/DelegateBase.qml</file>
         <file>qml/base/DragDelegateBase.qml</file>
-        <file>qml/base/ExpanderDelegateBase.qml</file>
         <file>qml/IconExpander.qml</file>
         <file>qml/base/TreeViewBase.qml</file>
         <file>qml/RowBackground.qml</file>
         <file>qml/base/Delegate.qml</file>
+        <file>qml/base/ExpanderDelegate.qml</file>
     </qresource>
 </RCC>

@@ -10,13 +10,88 @@ QmlTreeView {
 
     onFocusChanged: scroll.focus = treeView.focus
 
-    ScrollView {
+    property Component scrollBarDelegate : ScrollBar {
+        active: true
+
+        onActiveChanged: {
+            if (!active) {
+                active = true
+            }
+        }
+    }
+
+    function updateVScrollBarSize() {
+        if(vbar.active) {
+            vbar.item.size = scroll.height / scroll.contentHeight
+            updateVScrollBarPosition()
+        }
+    }
+
+    function updateHScrollBarSize() {
+        if(hbar.active) {
+            hbar.item.size = scroll.width / scroll.contentWidth
+            updateHScrollBarPosition()
+        }
+    }
+
+    function updateVScrollBarPosition() {
+        if(vbar.active) {
+            vbar.item.position = scroll.visibleArea.yPosition
+        }
+    }
+
+    function updateHScrollBarPosition() {
+        if(hbar.active) {
+            hbar.item.position = scroll.visibleArea.xPosition
+        }
+    }
+
+    Loader {
+        id: vbar
+        sourceComponent: scrollBarDelegate
+        active: treeView.height < scroll.contentHeight
+
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        onLoaded: {
+            item.orientation = Qt.Vertical
+            updateVScrollBarSize()
+        }
+    }
+
+    Loader {
+        id: hbar
+        sourceComponent: scrollBarDelegate
+        active: treeView.width < scroll.contentWidth
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        onLoaded: {
+            item.orientation = Qt.Horizontal
+            updateHScrollBarSize()
+        }
+    }
+
+    Flickable {
         id: scroll
         anchors.fill: parent
+        anchors.rightMargin: scroll.height < scroll.contentHeight ? vbar.width : 0
+        anchors.bottomMargin: hbar.height
         clip: true
 
-        ScrollBar.horizontal.policy: ScrollBar.AlwaysOn
-        ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+        boundsBehavior: Flickable.StopAtBounds
+        //interactive: false
+
+        onContentHeightChanged: treeView.updateVScrollBarSize()
+        onContentWidthChanged: treeView.updateHScrollBarSize()
+        onHeightChanged: treeView.updateVScrollBarSize()
+        onWidthChanged: treeView.updateHScrollBarSize()
+        onContentYChanged: treeView.updateVScrollBarPosition()
+        onContentXChanged: treeView.updateHScrollBarPosition()
 
         Keys.onPressed: {
             if(event.key === Qt.Key_Up
@@ -27,9 +102,9 @@ QmlTreeView {
             }
         }
 
-        contentWidth: col.width
-        contentHeight: Math.max(col.height, treeView.height)
-        wheelEnabled: true
+        contentWidth: col.width - (scroll.height < scroll.contentHeight ? vbar.width : 0)
+        contentHeight: Math.max(col.height, treeView.height) - hbar.height
+        //wheelEnabled: true
 
         MouseArea { //area for mouse events dispatching
             anchors.fill: parent

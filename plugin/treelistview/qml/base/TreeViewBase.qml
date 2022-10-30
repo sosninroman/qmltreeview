@@ -18,14 +18,14 @@ QmlTreeView {
     }
 
     function updateVScrollBarSize() {
-        if(vbar.active) {
+        if(!!vbar.item && vbar.active) {
             vbar.item.size = scroll.height / scroll.contentHeight
             updateVScrollBarPosition()
         }
     }
 
     function updateHScrollBarSize() {
-        if(hbar.active) {
+        if(!!hbar.item && hbar.active) {
             hbar.item.size = scroll.width / scroll.contentWidth
             updateHScrollBarPosition()
         }
@@ -44,17 +44,12 @@ QmlTreeView {
     }
 
     property int availableWidth: width - (treeView.height < scroll.contentHeight ? vbar.width : 0)
-    onAvailableWidthChanged: {
-        console.warn("changed", availableWidth)
-    }
 
     Loader { //vertical scroll bar
         id: vbar
         sourceComponent: scrollBarDelegate
         active: treeView.height < scroll.contentHeight
         visible: active
-
-        onWidthChanged: console.warn("width changed", width)
 
         anchors.top: parent.top
         anchors.right: parent.right
@@ -63,11 +58,11 @@ QmlTreeView {
         onLoaded: {
             item.orientation = Qt.Vertical
             updateVScrollBarSize()
-//            item.onPositionChanged.connect(function(){
-//                if(item.pressed) {
-//                    scroll.contentY = item.position * scroll.height
-//                }
-//            })
+            item.onPositionChanged.connect(function(){
+                if(item.pressed) {
+                    scroll.contentY = item.position * scroll.height
+                }
+            })
         }
     }
 
@@ -83,25 +78,19 @@ QmlTreeView {
         onLoaded: {
             item.orientation = Qt.Horizontal
             updateHScrollBarSize()
-//            item.onPositionChanged.connect(function(){
-//                if(item.pressed) {
-//                    scroll.contentX = item.position * scroll.height
-//                }
-//            })
+            item.onPositionChanged.connect(function(){
+                if(item.pressed) {
+                    scroll.contentX = item.position * scroll.height
+                }
+            })
         }
     }
 
     Flickable {
         id: scroll
-        //anchors.fill: parent
-        //anchors.rightMargin: scroll.height < scroll.contentHeight ? vbar.width : 0
-        //anchors.bottomMargin: hbar.height
-        anchors.left: treeView.left
-        anchors.top: treeView.top
-        anchors.right: treeView.right
+        anchors.fill: parent
         anchors.rightMargin: vbar.active ? vbar.width : 0
-        anchors.bottom: hbar.active ? hbar.bottom : treeView.bottom
-        //anchors.bottomMargin: hbar.active ? hbar.width : 0
+        anchors.bottomMargin: hbar.active ? hbar.height : 0
         clip: true
 
         boundsBehavior: Flickable.StopAtBounds
@@ -121,13 +110,6 @@ QmlTreeView {
             if(!!hbar.item && !hbar.item.pressed)
             {
                 treeView.updateHScrollBarPosition()
-            }
-        }
-
-        Connections {
-            target: vbar
-            function onVisibleChanged() {
-                console.warn("vbar visible changed", vbar.visible)
             }
         }
 

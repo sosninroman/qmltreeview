@@ -36,6 +36,10 @@ public:
     QQmlComponent* expanderDelegate() const {return m_expanderDelegate;}
     void setExpanderDelegate(QQmlComponent* val);
 
+    Q_PROPERTY(QQmlComponent* scrollBarDelegate READ scrollBarDelegate WRITE setScrollBarDelegate NOTIFY scrollBarDelegateChanged)
+    QQmlComponent* scrollBarDelegate() const {return m_scrollBarDelegate;}
+    void setScrollBarDelegate(QQmlComponent* val);
+
     Q_PROPERTY(int _maxRowContentWidth READ maxRowContentWidth WRITE setMaxRowContentWidth NOTIFY maxRowContentWidthChanged)
     int maxRowContentWidth() const {return m_maxRowContentWidth;}
     void setMaxRowContentWidth(int val);
@@ -75,6 +79,7 @@ signals:
     void dragDelegateChanged();
     void expanderDelegateChanged();
     void rowContentMarginChanged();
+    void scrollBarDelegateChanged();
 
     void needToRecalcMaxRowWidth();
     void maxRowContentWidthChanged();
@@ -96,6 +101,7 @@ private:
     QQmlComponent* m_backgroundDelegate = nullptr;
     QQmlComponent* m_dragDelegate = nullptr;
     QQmlComponent* m_expanderDelegate = nullptr;
+    QQmlComponent* m_scrollBarDelegate = nullptr;
     int m_maxRowContentWidth = 0;
     QModelIndex m_maxWidthRowIndex;
     int m_rowContentMargin = 0;

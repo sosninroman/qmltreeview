@@ -1,21 +1,10 @@
 import QtQuick 2.15
-import QtQuick.Controls 2.15
 import QtQml.Models 2.12
 import treelistview 1.0
 import "../private"
 
 QmlTreeView {
     id: treeView
-
-    property Component scrollBarDelegate : ScrollBar {
-        active: true
-
-        onActiveChanged: {
-            if (!active) {
-                active = true
-            }
-        }
-    }
 
     function updateVScrollBarSize() {
         if(!!vbar.item && vbar.active) {

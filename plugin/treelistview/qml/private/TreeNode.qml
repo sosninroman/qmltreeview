@@ -43,7 +43,12 @@ FocusScope {
                 event.accepted = false
             }
 
-            width: Math.max(view._maxRowContentWidth, view.width)
+            //width: Math.max(view._maxRowContentWidth, view.width)
+            width: Math.max(view._maxRowContentWidth, view.availableWidth)
+            onWidthChanged: {
+                console.warn("node width changed to", width)
+            }
+
             height: rowContent.height + 2 * view.rowContentMargin
 
             Loader { //row background

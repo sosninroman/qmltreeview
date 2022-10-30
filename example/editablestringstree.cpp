@@ -8,6 +8,7 @@ EditableStringsTreeModel::EditableStringsTreeModel(QObject* parent)
     node->appendChild(new NodeType("node #1.2"));
     addTopLevelNode(node);
     auto node2 = new NodeType("top level node #2");
+    node2->appendChild(new NodeType("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq1"));
     auto node21 = new NodeType("node #2.1");
     node21->appendChild(new NodeType("node #2.1.1"));
     node2->appendChild(node21);

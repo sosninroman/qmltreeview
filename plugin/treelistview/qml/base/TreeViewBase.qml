@@ -1,14 +1,11 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.12
 import QtQml.Models 2.12
 import treelistview 1.0
 import "../private"
 
 QmlTreeView {
     id: treeView
-
-    onFocusChanged: scroll.focus = treeView.focus
 
     property Component scrollBarDelegate : ScrollBar {
         active: true
@@ -46,10 +43,18 @@ QmlTreeView {
         }
     }
 
-    Loader {
+    property int availableWidth: width - (treeView.height < scroll.contentHeight ? vbar.width : 0)
+    onAvailableWidthChanged: {
+        console.warn("changed", availableWidth)
+    }
+
+    Loader { //vertical scroll bar
         id: vbar
         sourceComponent: scrollBarDelegate
         active: treeView.height < scroll.contentHeight
+        visible: active
+
+        onWidthChanged: console.warn("width changed", width)
 
         anchors.top: parent.top
         anchors.right: parent.right
@@ -58,13 +63,18 @@ QmlTreeView {
         onLoaded: {
             item.orientation = Qt.Vertical
             updateVScrollBarSize()
+//            item.onPositionChanged.connect(function(){
+//                if(item.pressed) {
+//                    scroll.contentY = item.position * scroll.height
+//                }
+//            })
         }
     }
 
-    Loader {
+    Loader { //horizontal scroll bar
         id: hbar
         sourceComponent: scrollBarDelegate
-        active: treeView.width < scroll.contentWidth
+        active: treeView.availableWidth < scroll.contentWidth
 
         anchors.left: parent.left
         anchors.right: parent.right
@@ -73,14 +83,25 @@ QmlTreeView {
         onLoaded: {
             item.orientation = Qt.Horizontal
             updateHScrollBarSize()
+//            item.onPositionChanged.connect(function(){
+//                if(item.pressed) {
+//                    scroll.contentX = item.position * scroll.height
+//                }
+//            })
         }
     }
 
     Flickable {
         id: scroll
-        anchors.fill: parent
-        anchors.rightMargin: scroll.height < scroll.contentHeight ? vbar.width : 0
-        anchors.bottomMargin: hbar.height
+        //anchors.fill: parent
+        //anchors.rightMargin: scroll.height < scroll.contentHeight ? vbar.width : 0
+        //anchors.bottomMargin: hbar.height
+        anchors.left: treeView.left
+        anchors.top: treeView.top
+        anchors.right: treeView.right
+        anchors.rightMargin: vbar.active ? vbar.width : 0
+        anchors.bottom: hbar.active ? hbar.bottom : treeView.bottom
+        //anchors.bottomMargin: hbar.active ? hbar.width : 0
         clip: true
 
         boundsBehavior: Flickable.StopAtBounds
@@ -90,20 +111,28 @@ QmlTreeView {
         onContentWidthChanged: treeView.updateHScrollBarSize()
         onHeightChanged: treeView.updateVScrollBarSize()
         onWidthChanged: treeView.updateHScrollBarSize()
-        onContentYChanged: treeView.updateVScrollBarPosition()
-        onContentXChanged: treeView.updateHScrollBarPosition()
-
-        Keys.onPressed: {
-            if(event.key === Qt.Key_Up
-                    || event.key === Qt.Key_Right
-                    || event.key === Qt.Key_Left
-                    || event.key === Qt.Key_Down) {
-                treeView.Keys.pressed(event)
+        onContentYChanged: {
+            if(!!vbar.item && !vbar.item.pressed)
+            {
+                treeView.updateVScrollBarPosition()
+            }
+        }
+        onContentXChanged: {
+            if(!!hbar.item && !hbar.item.pressed)
+            {
+                treeView.updateHScrollBarPosition()
             }
         }
 
-        contentWidth: col.width - (scroll.height < scroll.contentHeight ? vbar.width : 0)
-        contentHeight: Math.max(col.height, treeView.height) - hbar.height
+        Connections {
+            target: vbar
+            function onVisibleChanged() {
+                console.warn("vbar visible changed", vbar.visible)
+            }
+        }
+
+        contentWidth: col.width
+        contentHeight: Math.max(col.height, treeView.height)
         //wheelEnabled: true
 
         MouseArea { //area for mouse events dispatching

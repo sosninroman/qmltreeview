@@ -48,8 +48,10 @@ QmlTreeView {
     Loader { //vertical scroll bar
         id: vbar
         sourceComponent: scrollBarDelegate
-        active: treeView.height < scroll.contentHeight
-        visible: active
+        active: treeView.height - (hbar.active ? hbar.height : 0) < scroll.contentHeight
+        onActiveChanged: {
+            console.warn(treeView.height, (hbar.active ? hbar.height : 0), scroll.contentHeight)
+        }
 
         anchors.top: parent.top
         anchors.right: parent.right
@@ -114,7 +116,8 @@ QmlTreeView {
         }
 
         contentWidth: col.width
-        contentHeight: Math.max(col.height, treeView.height)
+        //contentHeight: Math.max(col.height, treeView.height)
+        contentHeight: col.height
         //wheelEnabled: true
 
         MouseArea { //area for mouse events dispatching

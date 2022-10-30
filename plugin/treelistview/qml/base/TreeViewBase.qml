@@ -109,40 +109,7 @@ QmlTreeView {
         contentHeight: col.height
         //wheelEnabled: true
 
-        MouseArea { //area for mouse events dispatching
-            anchors.fill: parent
-            hoverEnabled: true
-            acceptedButtons: Qt.AllButtons
 
-            onClicked: {
-                treeView.clicked(mouse)
-            }
-            onDoubleClicked: {
-                treeView.doubleClicked(mouse)
-            }
-            onEntered: {
-                treeView.entered()
-            }
-            onExited: {
-                treeView.exited()
-            }
-            onPositionChanged: {
-                treeView.positionChanged(mouse)
-            }
-            onPressAndHold: {
-                treeView.pressAndHold(mouse)
-            }
-            onPressed: {
-                treeView.pressed(mouse)
-            }
-            onReleased: {
-                treeView.released(mouse)
-            }
-            onWheel: {
-                treeView.wheel(wheel)
-                wheel.accepted = false
-            }
-        }
 
         Column { //tree view content
             id: col
@@ -156,6 +123,47 @@ QmlTreeView {
                     }
                 }
             }
+        }
+    }
+    MouseArea { //area for mouse events dispatching
+        //anchors.fill: parent
+        anchors.bottom: treeView.bottom
+        anchors.right: treeView.right
+        anchors.left: treeView.left
+        anchors.rightMargin: vbar.active ? vbar.width : 0
+        anchors.bottomMargin: hbar.active ? hbar.height : 0
+        height: scroll.height - scroll.contentHeight
+
+        hoverEnabled: true
+        acceptedButtons: Qt.AllButtons
+
+        onClicked: {
+            treeView.clicked(mouse)
+        }
+        onDoubleClicked: {
+            treeView.doubleClicked(mouse)
+        }
+        onEntered: {
+            treeView.entered()
+        }
+        onExited: {
+            treeView.exited()
+        }
+        onPositionChanged: {
+            treeView.positionChanged(mouse)
+        }
+        onPressAndHold: {
+            treeView.pressAndHold(mouse)
+        }
+        onPressed: {
+            treeView.pressed(mouse)
+        }
+        onReleased: {
+            treeView.released(mouse)
+        }
+        onWheel: {
+            treeView.wheel(wheel)
+            wheel.accepted = false
         }
     }
 }

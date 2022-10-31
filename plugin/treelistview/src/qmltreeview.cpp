@@ -174,6 +174,15 @@ void QmlTreeView::setScrollBarDelegate(QQmlComponent* val)
     }
 }
 
+void QmlTreeView::setAvailableWidth(int val)
+{
+    if(m_availableWidth != val)
+    {
+        m_availableWidth = val;
+        emit availableWidthChanged();
+    }
+}
+
 void QmlTreeView::setMaxRowContentWidth(int val)
 {
     if(m_maxRowContentWidth != val)

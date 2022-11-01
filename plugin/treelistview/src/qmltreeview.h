@@ -44,6 +44,10 @@ public:
     int availableWidth() const {return m_availableWidth;}
     void setAvailableWidth(int val);
 
+    Q_PROPERTY(int scrollVelocity READ scrollVelocity WRITE setScrollVelocity NOTIFY scrollVelocityChanged)
+    int scrollVelocity() const {return m_scrollVelocity;}
+    void setScrollVelocity(int val);
+
     Q_PROPERTY(int _maxRowContentWidth READ maxRowContentWidth WRITE setMaxRowContentWidth NOTIFY maxRowContentWidthChanged)
     int maxRowContentWidth() const {return m_maxRowContentWidth;}
     void setMaxRowContentWidth(int val);
@@ -85,6 +89,7 @@ signals:
     void rowContentMarginChanged();
     void scrollBarDelegateChanged();
     void availableWidthChanged();
+    void scrollVelocityChanged();
 
     void needToRecalcMaxRowWidth();
     void maxRowContentWidthChanged();
@@ -112,6 +117,7 @@ private:
     int m_rowContentMargin = 0;
     bool m_needToRecalcMaxWidthAfterNextRowRemove = false;
     int m_availableWidth = 0;
+    int m_scrollVelocity = 1;
 };
 
 #endif

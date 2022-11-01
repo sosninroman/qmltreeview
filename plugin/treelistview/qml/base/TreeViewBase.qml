@@ -8,6 +8,39 @@ QmlTreeView {
 
     availableWidth: width - (treeView.height < scroll.contentHeight ? vbar.width : 0)
 
+    function scrollByWheel(wheel){
+        var isHorizontal = wheel.modifiers & Qt.AltModifier
+        var speed = isHorizontal ? scroll.horizontalVelocity : scroll.verticalVelocity
+        if(!isHorizontal){
+            if(scroll.contentHeight <= scroll.height) {
+                return
+            }
+            var newContentY = scroll.contentY - (wheel.angleDelta.y / 8) * scrollVelocity
+            if(newContentY < 0) {
+                newContentY = 0
+            }
+            var maxVerticalShift = (scroll.contentHeight - scroll.height)
+            if(newContentY > maxVerticalShift) {
+                newContentY = maxVerticalShift
+            }
+            scroll.contentY = newContentY
+        }
+        else {
+            if(scroll.contentWidth <= scroll.width) {
+                return
+            }
+            var newContentX = scroll.contentX - (wheel.angleDelta.x / 8) * scrollVelocity
+            if(newContentX < 0) {
+                newContentX = 0
+            }
+            var maxHorizontalShift = (scroll.contentWidth - scroll.width)
+            if(newContentX > maxHorizontalShift) {
+                newContentX = maxHorizontalShift
+            }
+            scroll.contentX = newContentX
+        }
+    }
+
     Loader { //vertical scroll bar
         id: vbar
         anchors.top: parent.top
@@ -79,6 +112,7 @@ QmlTreeView {
         anchors.bottomMargin: hbar.active ? hbar.height : 0
         clip: true
         boundsBehavior: Flickable.StopAtBounds
+        interactive: false
         onContentHeightChanged: {
             vbar.updateSize()
         }
@@ -156,7 +190,7 @@ QmlTreeView {
         }
         onWheel: {
             treeView.wheel(wheel)
-            wheel.accepted = false
+            treeView.scrollByWheel(wheel)
         }
     }
 }

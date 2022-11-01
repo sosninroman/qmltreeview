@@ -61,10 +61,13 @@ FocusScope {
                 //TODO cursor shape
 
                 onClicked: {
+                    console.warn("on clicked")
                     rowContent.onClicked(mouse)
                     if(nodeBackgroundLdr.item) {
                         nodeBackgroundLdr.item.clicked(mouse)
                     }
+                    //view.interactive = false
+                    view.flickableDirection = Flickable.VerticalFlick
                     mouse.accepted = false
                 }
                 onDoubleClicked: {
@@ -114,7 +117,7 @@ FocusScope {
                     if(nodeBackgroundLdr.item) {
                         nodeBackgroundLdr.item.wheel(wheel)
                     }
-                    wheel.accepted = false
+                    view.scrollByWheel(wheel)
                 }
             }
 

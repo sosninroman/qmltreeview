@@ -183,6 +183,15 @@ void QmlTreeView::setAvailableWidth(int val)
     }
 }
 
+void QmlTreeView::setScrollVelocity(int val)
+{
+    if(m_scrollVelocity != val)
+    {
+        m_scrollVelocity = val;
+        emit scrollVelocityChanged();
+    }
+}
+
 void QmlTreeView::setMaxRowContentWidth(int val)
 {
     if(m_maxRowContentWidth != val)

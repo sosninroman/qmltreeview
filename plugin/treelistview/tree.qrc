@@ -10,5 +10,7 @@
         <file>qml/base/Delegate.qml</file>
         <file>qml/base/ExpanderDelegate.qml</file>
         <file>qml/base/DragDelegate.qml</file>
+        <file>qml/base/RowContentDelegate.qml</file>
+        <file>qml/TextRowContent.qml</file>
     </qresource>
 </RCC>

@@ -10,35 +10,42 @@ QmlTreeView {
 
     function scrollByWheel(wheel){
         var isHorizontal = wheel.modifiers & Qt.AltModifier
-        var speed = isHorizontal ? scroll.horizontalVelocity : scroll.verticalVelocity
         if(!isHorizontal){
-            if(scroll.contentHeight <= scroll.height) {
-                return
-            }
-            var newContentY = scroll.contentY - (wheel.angleDelta.y / 8) * scrollVelocity
-            if(newContentY < 0) {
-                newContentY = 0
-            }
-            var maxVerticalShift = (scroll.contentHeight - scroll.height)
-            if(newContentY > maxVerticalShift) {
-                newContentY = maxVerticalShift
-            }
-            scroll.contentY = newContentY
+            scrollHorizontal(wheel)
         }
         else {
-            if(scroll.contentWidth <= scroll.width) {
-                return
-            }
-            var newContentX = scroll.contentX - (wheel.angleDelta.x / 8) * scrollVelocity
-            if(newContentX < 0) {
-                newContentX = 0
-            }
-            var maxHorizontalShift = (scroll.contentWidth - scroll.width)
-            if(newContentX > maxHorizontalShift) {
-                newContentX = maxHorizontalShift
-            }
-            scroll.contentX = newContentX
+            scrollVertical(wheel)
         }
+    }
+
+    function scrollHorizontal(wheel) {
+        if(scroll.contentHeight <= scroll.height) {
+            return
+        }
+        var newContentY = scroll.contentY - (wheel.angleDelta.y / 8) * scrollVelocity
+        if(newContentY < 0) {
+            newContentY = 0
+        }
+        var maxVerticalShift = (scroll.contentHeight - scroll.height)
+        if(newContentY > maxVerticalShift) {
+            newContentY = maxVerticalShift
+        }
+        scroll.contentY = newContentY
+    }
+
+    function scrollVertical(wheel) {
+        if(scroll.contentWidth <= scroll.width) {
+            return
+        }
+        var newContentX = scroll.contentX - (wheel.angleDelta.x / 8) * scrollVelocity
+        if(newContentX < 0) {
+            newContentX = 0
+        }
+        var maxHorizontalShift = (scroll.contentWidth - scroll.width)
+        if(newContentX > maxHorizontalShift) {
+            newContentX = maxHorizontalShift
+        }
+        scroll.contentX = newContentX
     }
 
     Loader { //vertical scroll bar

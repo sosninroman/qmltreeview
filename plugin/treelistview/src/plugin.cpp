@@ -5,7 +5,7 @@
 #include "treemodel.h"
 #include "selector.h"
 #include "qmltreeview.h"
-#include "treenodeproperties.h"
+#include "rowproperties.h"
 
 void Plugin::registerTypes(const char* uri) {
     qmlRegisterUncreatableType<QmlTreeModelInterface>(uri, 1, 0, "QmlTreeModelInterface", "uncreatable type!");
@@ -17,6 +17,6 @@ void Plugin::registerTypes(const char* uri) {
     qmlRegisterType<QmlTreeView>(uri, 1, 0, "QmlTreeView");
     qRegisterMetaType<QmlTreeView*>("QmlTreeView");
 
-    qmlRegisterType<TreeNodeProperties>(uri, 1, 0, "TreeNodeProperties");
-    qRegisterMetaType<TreeNodeProperties*>("TreeNodeProperties");
+    qmlRegisterType<RowProperties>(uri, 1, 0, "RowProperties");
+    qRegisterMetaType<RowProperties*>("RowProperties");
 }

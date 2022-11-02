@@ -9,7 +9,7 @@ import treelistview 1.0
 FocusScope {
     id: nodeItem
 
-    TreeNodeProperties {
+    RowProperties {
         id: nodeProperties
     }
     property alias properties: nodeProperties
@@ -51,7 +51,7 @@ FocusScope {
                 id: nodeBackgroundLdr
                 anchors.fill: parent
                 sourceComponent: view.backgroundDelegate
-                property TreeNodeProperties __nodeProperties: nodeItem.properties
+                property RowProperties __nodeProperties: nodeItem.properties
             }
 
             MouseArea { //area for mouse events dispatching
@@ -155,7 +155,7 @@ FocusScope {
                 id: dragDelegateLdr
                 active: false
                 Drag.active: dragDelegateLdr.active
-                property TreeNodeProperties __nodeProperties: nodeItem.properties
+                property RowProperties __nodeProperties: nodeItem.properties
                 sourceComponent: view.dragDelegate
             }
             Connections {

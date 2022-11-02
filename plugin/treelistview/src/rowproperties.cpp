@@ -1,10 +1,10 @@
-#include "treenodeproperties.h"
+#include "rowproperties.h"
 
-TreeNodeProperties::TreeNodeProperties(QObject *parent):
+RowProperties::RowProperties(QObject *parent):
     QObject(parent)
 {}
 
-void TreeNodeProperties::initialize(QmlTreeView* view, QVariant parentIndex, int row)
+void RowProperties::initialize(QmlTreeView* view, QVariant parentIndex, int row)
 {
     if(!view)
     {
@@ -16,8 +16,8 @@ void TreeNodeProperties::initialize(QmlTreeView* view, QVariant parentIndex, int
         disconnect(m_view);
     }
     m_view = view;
-    connect(m_view, &QmlTreeView::nodeDataChanged, this, &TreeNodeProperties::onNodeDataChanged);
-    connect(m_view, &QmlTreeView::nodeChildrenCountChanged, this, &TreeNodeProperties::onNodeChildrenCountChanged);
+    connect(m_view, &QmlTreeView::nodeDataChanged, this, &RowProperties::onNodeDataChanged);
+    connect(m_view, &QmlTreeView::nodeChildrenCountChanged, this, &RowProperties::onNodeChildrenCountChanged);
 
     m_parentIndex = parentIndex.toModelIndex();
     Q_ASSERT(m_view->model());
@@ -29,12 +29,12 @@ void TreeNodeProperties::initialize(QmlTreeView* view, QVariant parentIndex, int
     emit childrenCountChanged();
 }
 
-int TreeNodeProperties::childrenCount() const
+int RowProperties::childrenCount() const
 {
     return m_view ? m_view->model()->rowCount(m_currentIndex) : 0;
 }
 
-void TreeNodeProperties::onNodeDataChanged(const QModelIndex& index)
+void RowProperties::onNodeDataChanged(const QModelIndex& index)
 {
     if(m_currentIndex == index)
     {
@@ -43,7 +43,7 @@ void TreeNodeProperties::onNodeDataChanged(const QModelIndex& index)
     }
 }
 
-void TreeNodeProperties::onNodeChildrenCountChanged(const QModelIndex& index)
+void RowProperties::onNodeChildrenCountChanged(const QModelIndex& index)
 {
     if(m_currentIndex == index)
     {
@@ -53,7 +53,7 @@ void TreeNodeProperties::onNodeChildrenCountChanged(const QModelIndex& index)
     }
 }
 
-void TreeNodeProperties::checkMaxWidth(int contentWidth) {
+void RowProperties::checkMaxWidth(int contentWidth) {
     if(contentWidth > m_view->maxRowContentWidth())
     {
         m_view->setMaxRowContentWidth(contentWidth);

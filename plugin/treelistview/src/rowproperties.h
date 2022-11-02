@@ -1,5 +1,5 @@
-#ifndef QMLTREENODE_H
-#define QMLTREENODE_H
+#ifndef ROWPROPERIES_H
+#define ROWPROPERIES_H
 
 #include <QObject>
 #include <QQuickItem>
@@ -7,11 +7,11 @@
 #include <QModelIndex>
 #include "qmltreeview.h"
 
-class TreeNodeProperties : public QObject
+class RowProperties : public QObject
 {
     Q_OBJECT
 public:
-    explicit TreeNodeProperties(QObject* parent = nullptr);
+    explicit RowProperties(QObject* parent = nullptr);
 
     Q_PROPERTY(QVariant parentIndex READ parentIndex NOTIFY changed)
     QVariant parentIndex() const {return m_parentIndex;}

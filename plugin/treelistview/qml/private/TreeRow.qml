@@ -4,7 +4,7 @@ import treelistview 1.0
 import "../"
 
 FocusScope {
-    property TreeNodeProperties properties
+    property RowProperties properties
 
     property var modelData: properties.modelData
 
@@ -67,14 +67,14 @@ FocusScope {
             id: expanderLdr
             width: height
             height: contentLdr.height
-            property TreeNodeProperties __nodeProperties: properties
+            property RowProperties __nodeProperties: properties
             sourceComponent: properties.view.expanderDelegate
         }
 
         Loader { //content delegate
             id: contentLdr
             Layout.fillWidth: true
-            property TreeNodeProperties __nodeProperties: properties
+            property RowProperties __nodeProperties: properties
             sourceComponent: properties.view.rowContentDelegate
             focus: true
         }

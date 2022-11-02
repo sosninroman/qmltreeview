@@ -11,7 +11,7 @@ Delegate {
         function onSelectionChanged() {
             var i = 0
             while(i < properties.selector.selectedIndexes.length) {
-                if(properties.currentIndex === properties.selector.selectedIndexes[i]) {
+                if(properties.index === properties.selector.selectedIndexes[i]) {
                     item.focus = true
                     return
                 }

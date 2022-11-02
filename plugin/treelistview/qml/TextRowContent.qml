@@ -24,11 +24,11 @@ RowContentDelegate {
 
     function select() {
         properties.selector.clearSelection()
-        properties.selector.select(properties.currentIndex)
+        properties.selector.select(properties.index)
     }
 
     onEntered: {
-        properties.selector.setCurrentIndex(properties.currentIndex)
+        properties.selector.setCurrentIndex(properties.index)
     }
 
     onExited: {

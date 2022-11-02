@@ -154,7 +154,7 @@ QmlTreeView {
                 delegate: TreeNode {
                     id: topLevelNode
                     Component.onCompleted: {
-                        topLevelNode.properties.initialize(treeView, parentIndex, index.row)
+                        topLevelNode.properties.initialize(treeView, treeView.rootIndex, index.row)
                     }
                 }
             }

@@ -47,7 +47,7 @@ FocusScope {
     }
 
     onWidthChanged: {
-        if(properties.view._maxWidthRowIndex === properties.currentIndex) {
+        if(properties.view._maxWidthRowIndex === properties.index) {
             properties.view.recalcMaxRowWidth()
         }
         else

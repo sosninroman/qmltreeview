@@ -16,8 +16,8 @@ public:
     Q_PROPERTY(QVariant parentIndex READ parentIndex NOTIFY changed)
     QVariant parentIndex() const {return m_parentIndex;}
 
-    Q_PROPERTY(QVariant currentIndex READ currentIndex NOTIFY changed)
-    QVariant currentIndex() const {return m_currentIndex;}
+    Q_PROPERTY(QVariant index READ index NOTIFY changed)
+    QVariant index() const {return m_index;}
 
     Q_PROPERTY(QmlTreeView* view READ view NOTIFY changed)
     QmlTreeView* view() const {return m_view;}
@@ -45,7 +45,7 @@ private:
 
 private:
     QModelIndex m_parentIndex;
-    QModelIndex m_currentIndex;
+    QModelIndex m_index;
     QmlTreeView* m_view = nullptr;
     QVariant m_modelData;
 };

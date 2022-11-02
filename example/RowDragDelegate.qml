@@ -17,7 +17,7 @@ T.DragDelegate {
     }
     onDropped: {
         console.warn("drop \"", properties.modelData.name, "\" to \"", hoveredModelData.name, "\"")
-        properties.view.model.moveNode(hoveredModelData.index, properties.currentIndex)
+        properties.view.model.moveNode(hoveredModelData.index, properties.index)
         properties.selector.clearSelection();
     }
 }

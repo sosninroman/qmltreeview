@@ -12,14 +12,14 @@ Delegate {
     property real selectionOpacity: 0.5
 
     function checkState() {
-        if(!properties.selector && !properties.currentIndex)
+        if(!properties.selector && !properties.index)
         {
             background.state = "default"
         }
-        else if( properties.selector.isSelected(properties.currentIndex) ) {
+        else if( properties.selector.isSelected(properties.index) ) {
             background.state = "selected"
         }
-        else if(properties.selector.currentIndex === properties.currentIndex ) {
+        else if(properties.selector.currentIndex === properties.index ) {
             background.state = "hovered"
         }
         else

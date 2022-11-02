@@ -62,7 +62,6 @@ void QmlTreeView::connectToModel()
     connect(m_model, &QAbstractItemModel::rowsAboutToBeRemoved, this, &QmlTreeView::onRowsAboutToBeRemoved);
     connect(m_model, &QAbstractItemModel::rowsRemoved, this, &QmlTreeView::onRowsRemoved);
     connect(m_model, &QAbstractItemModel::rowsMoved, this, [this](const QModelIndex& from, int, int, const QModelIndex& to){
-        qCritical() << from << to << "\n";
         onRowsChildrenCountChanged(from);
         onRowsChildrenCountChanged(to);
     });

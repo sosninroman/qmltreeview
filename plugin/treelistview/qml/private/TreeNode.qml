@@ -13,13 +13,7 @@ FocusScope {
         id: nodeProperties
     }
     property alias properties: nodeProperties
-
     property alias view: nodeProperties.view
-    property alias selector: nodeProperties.selector
-    property alias parentIndex: nodeProperties.parentIndex
-    property alias currentIndex: nodeProperties.currentIndex
-    property alias childrenCount: nodeProperties.childrenCount
-    property alias modelData: nodeProperties.modelData
 
     Connections {
         target: view
@@ -128,22 +122,22 @@ FocusScope {
                 anchors.fill: parent
                 onDropped: {
                     if(drag.source.item) {
-                        drag.source.item.dropped(drop, nodeItem.modelData)
+                        drag.source.item.dropped(drop, properties.modelData)
                     }
                 }
                 onEntered: {
                     if(drag.source.item) {
-                        drag.source.item.entered(drag, nodeItem.modelData)
+                        drag.source.item.entered(drag, properties.modelData)
                     }
                 }
                 onExited: {
                     if(drag.source.item) {
-                        drag.source.item.exited(nodeItem.modelData)
+                        drag.source.item.exited(properties.modelData)
                     }
                 }
                 onPositionChanged: {
                     if(drag.source.item) {
-                        drag.source.item.positionChanged(drag, nodeItem.modelData)
+                        drag.source.item.positionChanged(drag, properties.modelData)
                     }
                 }
             }
@@ -167,10 +161,10 @@ FocusScope {
             }
         }
         Column { //child nodes
-            visible: modelData.expandable && modelData.expanded && nodeItem.childrenCount > 0
+            visible: properties.modelData.expandable && properties.modelData.expanded && properties.childrenCount > 0
             Repeater {
                 id: rp
-                model: childrenCount
+                model: properties.childrenCount
                 property bool hasFocus: false
                 delegate: FocusScope {
                     focus: l.item.focus
@@ -185,7 +179,7 @@ FocusScope {
                         focus: true
                         source: "TreeNode.qml"
                         onLoaded: {
-                            item.properties.initialize(view, currentIndex, index)
+                            item.properties.initialize(view, properties.index, index)
                         }
                         Connections {
                             target: l.item

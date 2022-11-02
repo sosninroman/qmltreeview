@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/treelistview">
         <file>qml/TreeView.qml</file>
-        <file>qml/private/InputHandler.qml</file>
         <file>qml/private/TreeNode.qml</file>
         <file>qml/private/TreeRow.qml</file>
         <file>qml/IconExpander.qml</file>

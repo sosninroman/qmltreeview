@@ -3,11 +3,14 @@
 
 #include <QtQml/QQmlExtensionPlugin>
 
+namespace treeview
+{
+
 /**
  * @brief The MyPlugin class. Simple qml plugin example.
  */
 
-class Plugin: public QQmlExtensionPlugin {
+class TreeViewPlugin: public QQmlExtensionPlugin {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "tree/1.0")
 public:
@@ -20,4 +23,5 @@ public:
     void registerTypes(const char* uri) override;
 };
 
+}
 #endif

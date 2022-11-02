@@ -5,6 +5,9 @@
 #include <QModelIndex>
 #include <QModelIndexList>
 
+namespace treeview
+{
+
 class Selector: public QObject
 {
     Q_OBJECT
@@ -38,5 +41,7 @@ private:
     QModelIndex m_currentIndex;
     QModelIndexList m_selectedIndexes;
 };
+
+}
 
 #endif

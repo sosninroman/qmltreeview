@@ -1,6 +1,9 @@
 #include "qmltreeview.h"
 #include <stack>
 
+namespace treeview
+{
+
 namespace
 {
 
@@ -225,4 +228,6 @@ void QmlTreeView::recalcMaxRowWidth()
     setMaxRowContentWidth(0);
     setMaxWidthRowIndex(QModelIndex());
     emit needToRecalcMaxRowWidth();
+}
+
 }

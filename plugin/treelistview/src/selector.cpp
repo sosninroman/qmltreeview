@@ -1,5 +1,8 @@
 #include "selector.h"
 
+namespace treeview
+{
+
 void Selector::clear()
 {
     clearCurrentIndex();
@@ -45,4 +48,6 @@ void Selector::setCurrentIndex(QModelIndex index)
         m_currentIndex = index;
         emit currentChanged(m_currentIndex, oldInd);
     }
+}
+
 }

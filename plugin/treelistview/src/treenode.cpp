@@ -1,5 +1,8 @@
 #include "treenode.h"
 
+namespace treeview
+{
+
 TreeNode::TreeNode(TreeNode* parent):
       m_parent(parent)
 {}
@@ -65,4 +68,6 @@ void TreeNode::removeChild(TreeNode* child)
 void TreeNode::detachChild(TreeNode* child)
 {
     m_children.removeOne(child);
+}
+
 }

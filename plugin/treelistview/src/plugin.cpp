@@ -7,16 +7,21 @@
 #include "qmltreeview.h"
 #include "rowproperties.h"
 
-void Plugin::registerTypes(const char* uri) {
-    qmlRegisterUncreatableType<QmlTreeModelInterface>(uri, 1, 0, "QmlTreeModelInterface", "uncreatable type!");
-    qRegisterMetaType<QmlTreeModelInterface*>("QmlTreeModelInterface");
+namespace treeview
+{
 
-    qmlRegisterType<Selector>(uri, 1, 0, "Selector");
-    qRegisterMetaType<Selector*>("Selector");
+void TreeViewPlugin::registerTypes(const char* uri) {
+    qmlRegisterUncreatableType<treeview::QmlTreeModelInterface>(uri, 1, 0, "QmlTreeModelInterface", "uncreatable type!");
+    qRegisterMetaType<treeview::QmlTreeModelInterface*>("QmlTreeModelInterface");
 
-    qmlRegisterType<QmlTreeView>(uri, 1, 0, "QmlTreeView");
-    qRegisterMetaType<QmlTreeView*>("QmlTreeView");
+    qmlRegisterType<treeview::Selector>(uri, 1, 0, "Selector");
+    qRegisterMetaType<treeview::Selector*>("Selector");
 
-    qmlRegisterType<RowProperties>(uri, 1, 0, "RowProperties");
-    qRegisterMetaType<RowProperties*>("RowProperties");
+    qmlRegisterType<treeview::QmlTreeView>(uri, 1, 0, "QmlTreeView");
+    qRegisterMetaType<treeview::QmlTreeView*>("QmlTreeView");
+
+    qmlRegisterType<treeview::RowProperties>(uri, 1, 0, "RowProperties");
+    qRegisterMetaType<treeview::RowProperties*>("RowProperties");
+}
+
 }

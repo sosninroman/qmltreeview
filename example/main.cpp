@@ -8,8 +8,8 @@
 
 int main(int argc, char *argv[]) {
 
-    qmlRegisterType<EditableStringsTreeModel>("example", 1, 0, "EditableStringsTreeModel");
-    qRegisterMetaType<EditableStringsTreeModel*>("EditableStringsTreeModel");
+    qmlRegisterType<tvexample::EditableStringsTreeModel>("example", 1, 0, "EditableStringsTreeModel");
+    qRegisterMetaType<tvexample::EditableStringsTreeModel*>("EditableStringsTreeModel");
 
 #if defined(Q_OS_WIN)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

@@ -7,16 +7,19 @@
 #include "selector.h"
 #include "treemodel.h"
 
+namespace treeview
+{
+
 class QmlTreeView : public QQuickItem
 {
     Q_OBJECT
 public:
     explicit QmlTreeView(QQuickItem *parent = nullptr);
 
-    Q_PROPERTY(Selector* selector READ selector CONSTANT)
+    Q_PROPERTY(treeview::Selector* selector READ selector CONSTANT)
     Selector* selector() {return &m_selector;}
 
-    Q_PROPERTY(QmlTreeModelInterface* model READ model WRITE setModel NOTIFY modelChanged)
+    Q_PROPERTY(treeview::QmlTreeModelInterface* model READ model WRITE setModel NOTIFY modelChanged)
     QmlTreeModelInterface* model() {return m_model;}
     void setModel(QmlTreeModelInterface* model);
 
@@ -119,5 +122,7 @@ private:
     int m_availableWidth = 0;
     int m_scrollVelocity = 1;
 };
+
+}
 
 #endif

@@ -7,6 +7,9 @@
 #include <QModelIndex>
 #include "qmltreeview.h"
 
+namespace treeview
+{
+
 class RowProperties : public QObject
 {
     Q_OBJECT
@@ -19,10 +22,10 @@ public:
     Q_PROPERTY(QVariant index READ index NOTIFY changed)
     QVariant index() const {return m_index;}
 
-    Q_PROPERTY(QmlTreeView* view READ view NOTIFY changed)
+    Q_PROPERTY(treeview::QmlTreeView* view READ view NOTIFY changed)
     QmlTreeView* view() const {return m_view;}
 
-    Q_PROPERTY(Selector* selector READ selector NOTIFY changed)
+    Q_PROPERTY(treeview::Selector* selector READ selector NOTIFY changed)
     Selector* selector() const  {return m_view ? m_view->selector() : nullptr;}
 
     Q_PROPERTY(int childrenCount READ childrenCount NOTIFY childrenCountChanged)
@@ -49,5 +52,7 @@ private:
     QmlTreeView* m_view = nullptr;
     QVariant m_modelData;
 };
+
+}
 
 #endif

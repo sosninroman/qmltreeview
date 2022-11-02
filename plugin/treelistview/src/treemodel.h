@@ -7,6 +7,9 @@
 #include <QDebug>
 #include "export.h"
 
+namespace treeview
+{
+
 class TREE_LIST_VIEW_API QmlTreeModelInterface : public QAbstractItemModel
 {
     Q_OBJECT
@@ -230,5 +233,7 @@ public:
         BaseClass::clear();
     }
 };
+
+}
 
 #endif

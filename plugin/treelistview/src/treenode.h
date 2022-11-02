@@ -4,8 +4,8 @@
 #include <QVector>
 #include "export.h"
 
-//namespace treeview
-//{
+namespace treeview
+{
 
 //Basic tree node
 class TREE_LIST_VIEW_API TreeNode
@@ -58,6 +58,6 @@ private:
     int m_level = 0;
 };
 
-//}
+}
 
 #endif

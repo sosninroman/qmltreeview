@@ -5,7 +5,10 @@
 #include "src/treenode.h"
 #include "src/treemodel.h"
 
-class StringTreeNode : public TreeNode
+namespace tvexample
+{
+
+class StringTreeNode : public treeview::TreeNode
 {
     using BaseClass = TreeNode;
 public:
@@ -19,7 +22,7 @@ private:
     QString m_name;
 };
 
-class EditableStringsTreeModel : public TreeModel<StringTreeNode>
+class EditableStringsTreeModel : public treeview::TreeModel<StringTreeNode>
 {
     Q_OBJECT
     using BaseClass = TreeModel<StringTreeNode>;
@@ -27,7 +30,7 @@ class EditableStringsTreeModel : public TreeModel<StringTreeNode>
 
     enum TreeRoles
     {
-        NameRole = ExtraRole
+        NameRole = treeview::ExtraRole
     };
 
 public:
@@ -77,5 +80,7 @@ public:
     Q_INVOKABLE void moveNode(const QVariant& parentIndexV, const QVariant& indexV);
     Q_INVOKABLE void removeNode(const QVariant& index);
 };
+
+}
 
 #endif

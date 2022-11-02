@@ -1,5 +1,8 @@
 #include "rowproperties.h"
 
+namespace treeview
+{
+
 RowProperties::RowProperties(QObject *parent):
     QObject(parent)
 {}
@@ -59,4 +62,6 @@ void RowProperties::checkMaxWidth(int contentWidth) {
         m_view->setMaxRowContentWidth(contentWidth);
         m_view->setMaxWidthRowIndex(m_index);
     }
+}
+
 }

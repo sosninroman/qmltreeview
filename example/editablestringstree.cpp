@@ -1,5 +1,8 @@
 #include "editablestringstree.h"
 
+namespace tvexample
+{
+
 EditableStringsTreeModel::EditableStringsTreeModel(QObject* parent)
     :BaseClass(parent)
 {
@@ -99,4 +102,6 @@ void EditableStringsTreeModel::removeNode(const QVariant& indexV)
     beginRemoveRows(QmlTreeModelInterface::index(parent), node->row(), node->row());
     parent->removeChild(node);
     endRemoveRows();
+}
+
 }

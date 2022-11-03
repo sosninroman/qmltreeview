@@ -55,16 +55,16 @@ public:
     int maxRowContentWidth() const {return m_maxRowContentWidth;}
     void setMaxRowContentWidth(int val);
 
-    Q_PROPERTY(QVariant _maxWidthRowIndex READ maxWidthRowIndex WRITE setMaxWidthRowIndex NOTIFY maxWidthRowIndexChanged)
-    QVariant maxWidthRowIndex() const {return m_maxWidthRowIndex;}
-    void setMaxWidthRowIndex(const QVariant& val);
+    Q_PROPERTY(QModelIndex _maxWidthRowIndex READ maxWidthRowIndex WRITE setMaxWidthRowIndex NOTIFY maxWidthRowIndexChanged)
+    QModelIndex maxWidthRowIndex() const {return m_maxWidthRowIndex;}
+    void setMaxWidthRowIndex(const QModelIndex& val);
 
     Q_PROPERTY(int rowContentMargin READ rowContentMargin WRITE setRowContentMargin NOTIFY rowContentMarginChanged)
     int rowContentMargin() const {return m_rowContentMargin;}
     void setRowContentMargin(int val);
 
-    Q_PROPERTY(QVariant rootIndex READ rootIndex NOTIFY modelChanged)
-    QVariant rootIndex() const {return m_model ? m_model->rootIndex() : QVariant();}
+    Q_PROPERTY(QModelIndex rootIndex READ rootIndex NOTIFY modelChanged)
+    QModelIndex rootIndex() const {return m_model ? m_model->rootIndex() : QModelIndex();}
 
 public slots:
     Q_INVOKABLE void recalcMaxRowWidth();

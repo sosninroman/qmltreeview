@@ -204,9 +204,8 @@ void QmlTreeView::setMaxRowContentWidth(int val)
 }
 
 
-void QmlTreeView::setMaxWidthRowIndex(const QVariant &val)
+void QmlTreeView::setMaxWidthRowIndex(const QModelIndex& ind)
 {
-    QModelIndex ind = val.toModelIndex();
     if(m_maxWidthRowIndex != ind)
     {
         m_maxWidthRowIndex = ind;

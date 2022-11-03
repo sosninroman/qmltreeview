@@ -6,101 +6,15 @@
 #include <QQmlPropertyMap>
 #include <QDebug>
 #include "export.h"
+#include "qmltreemodel.h"
 
 namespace treeview
 {
 
-class TREE_LIST_VIEW_API QmlTreeModelInterface : public QAbstractItemModel
-{
-    Q_OBJECT
-    using BaseClass = QAbstractItemModel;
-
-    class RootNode : public TreeNode
-    {
-    public:
-        void appendChild(TreeNode *node) final {
-            node->setParent(this);
-            m_children.append(node);
-        }
-    };
-
-public:
-    explicit QmlTreeModelInterface(QObject* parent = nullptr) :
-          BaseClass(parent), m_root( new RootNode() ) {}
-
-    Q_PROPERTY(bool busy READ busy NOTIFY busyChanged)
-    bool busy() const {return m_busy;}
-    void setBusy(bool val) {m_busy = val;}
-
-    Q_INVOKABLE QModelIndex rootIndex()
-    {
-        return createIndex( 0, 0, m_root.get() );
-    }
-
-    Q_INVOKABLE QVariant nodeData(const QModelIndex& index)
-    {
-        const auto result = new QQmlPropertyMap(this);
-        const auto roles = roleNames();
-        QHash<QString, int> rolesByName;
-        for(auto roleItr = roles.cbegin(); roleItr != roles.end(); ++roleItr)
-        {
-            rolesByName.insert( roleItr.value(), roleItr.key() );
-            result->insert(roleItr.value(), data( index, roleItr.key() ) );
-        }
-
-        connect(result, &QQmlPropertyMap::valueChanged, this, [rolesByName, this, index](const QString& roleName, const QVariant& val){
-            this->setData( index, val, rolesByName.value(roleName) );
-        });
-        return QVariant::fromValue(result);
-    }
-
-    virtual void clear()
-    {
-        m_root->clearChildren();
-    }
-
-    using QAbstractItemModel::index;
-
-    QModelIndex index(TreeNode* node)
-    {
-        if(!node)
-        {
-            return QModelIndex();
-        }
-        return createIndex(node->row(), 0, node);
-    }
-
-    Q_INVOKABLE void refresh()
-    {
-        beginResetModel();
-        endResetModel();
-    }
-
-signals:
-    void busyChanged();
-
-protected:
-    std::unique_ptr<RootNode> m_root;
-
-private:
-    bool m_busy = false;
-};
-
-enum TreeModelRoles
-{
-    ExpandedRole = Qt::UserRole,
-    ExpandableRole,
-    NodeLevelRole,
-    NodeIdRole,
-    IndexRole,
-
-    ExtraRole
-};
-
 template<class NodeType>
-class TreeModel : public QmlTreeModelInterface
+class TreeModel : public QmlTreeModel
 {
-    using BaseClass = QmlTreeModelInterface;    
+    using BaseClass = QmlTreeModel;
 
 public:
     explicit TreeModel(QObject* parent = nullptr) : BaseClass(parent) {}

@@ -73,7 +73,7 @@ void EditableStringsTreeModel::moveNode(const QVariant& parentIndexV, const QVar
         return;
     }
 
-    beginMoveRows(QmlTreeModelInterface::index(fromNode), node->row(), node->row(), toIndex, insertPos);
+    beginMoveRows(QmlTreeModel::index(fromNode), node->row(), node->row(), toIndex, insertPos);
     //beginResetModel();
     fromNode->detachChild(node);
     toNode->appendChild(node);
@@ -99,7 +99,7 @@ void EditableStringsTreeModel::removeNode(const QVariant& indexV)
     const auto parent = node->parent();
     Q_ASSERT(parent);
 
-    beginRemoveRows(QmlTreeModelInterface::index(parent), node->row(), node->row());
+    beginRemoveRows(QmlTreeModel::index(parent), node->row(), node->row());
     parent->removeChild(node);
     endRemoveRows();
 }

@@ -2,7 +2,7 @@
 
 #include <QtQml/QtQml>
 
-#include "treemodel.h"
+#include "qmltreemodel.h"
 #include "selector.h"
 #include "qmltreeview.h"
 #include "rowproperties.h"
@@ -11,8 +11,8 @@ namespace treeview
 {
 
 void TreeViewPlugin::registerTypes(const char* uri) {
-    qmlRegisterUncreatableType<treeview::QmlTreeModelInterface>(uri, 1, 0, "QmlTreeModelInterface", "uncreatable type!");
-    qRegisterMetaType<treeview::QmlTreeModelInterface*>("QmlTreeModelInterface");
+    qmlRegisterUncreatableType<treeview::QmlTreeModel>(uri, 1, 0, "QmlTreeModel", "uncreatable type!");
+    qRegisterMetaType<treeview::QmlTreeModel*>("QmlTreeModel");
 
     qmlRegisterType<treeview::Selector>(uri, 1, 0, "Selector");
     qRegisterMetaType<treeview::Selector*>("Selector");

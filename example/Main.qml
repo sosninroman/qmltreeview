@@ -11,7 +11,7 @@ ApplicationWindow {
     height: 480
     title: "Tree View Example Application"
 
-    property T.QmlTreeModelInterface treeModel
+    property T.QmlTreeModel treeModel
 
     EditableStringsTreeModel {
         id: stringTree

@@ -34,7 +34,7 @@ QmlTreeView::QmlTreeView(QQuickItem *parent):
     connect(this, &QmlTreeView::nodeChildrenCountChanged, this, &QmlTreeView::onNodeChildrenCountChanged);
 }
 
-void QmlTreeView::setModel(QmlTreeModelInterface* model)
+void QmlTreeView::setModel(QmlTreeModel* model)
 {
     if(m_model != model)
     {

@@ -5,6 +5,7 @@
         <file>TextRowDelegate.qml</file>
     </qresource>
     <qresource prefix="/icons">
-        <file>triangle.png</file>
+        <file>triangle_collapsed.png</file>
+        <file>triangle_expanded.png</file>
     </qresource>
 </RCC>

@@ -92,7 +92,8 @@ ApplicationWindow {
         }
         dragDelegate: RowDragDelegate{}
         expanderDelegate: T.IconExpander {
-            source: "qrc:/icons/triangle.png"
+            expandedIconSource: "qrc:/icons/triangle_expanded.png"
+            collapsedIconSource: "qrc:/icons/triangle_collapsed.png"
         }
         rowContentMargin: 5
 

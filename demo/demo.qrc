@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/example">
+    <qresource prefix="/qml">
         <file>Main.qml</file>
         <file>RowDragDelegate.qml</file>
         <file>TextRowDelegate.qml</file>

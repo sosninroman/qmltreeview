@@ -8,7 +8,7 @@
 
 int main(int argc, char *argv[]) {
 
-    qmlRegisterType<tvexample::EditableStringsTreeModel>("example", 1, 0, "EditableStringsTreeModel");
+    qmlRegisterType<tvexample::EditableStringsTreeModel>("demo", 1, 0, "EditableStringsTreeModel");
     qRegisterMetaType<tvexample::EditableStringsTreeModel*>("EditableStringsTreeModel");
 
 #if defined(Q_OS_WIN)
@@ -23,9 +23,8 @@ int main(int argc, char *argv[]) {
     Q_ASSERT(m);
 
     // Add import search path
-//    engine.addImportPath("../plugin");
-    engine.addImportPath(".");
-    engine.load(QUrl(QLatin1String("qrc:/example/Main.qml")));
+    //engine.addImportPath(".");
+    engine.load(QUrl(QLatin1String("qrc:/qml/Main.qml")));
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }

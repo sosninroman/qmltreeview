@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.12
 import treeview 1.0 as T
-import example 1.0
+import demo 1.0
 
 ApplicationWindow {
     id: appWindow

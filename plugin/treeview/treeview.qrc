@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/treelistview">
+    <qresource prefix="/treeview">
         <file>qml/TreeView.qml</file>
         <file>qml/private/TreeNode.qml</file>
         <file>qml/private/TreeRow.qml</file>

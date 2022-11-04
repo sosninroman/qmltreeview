@@ -1,8 +1,11 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.7)
 
-project(qmltreelistview)
+project(qmltreeview)
 
 find_package(Qt5 REQUIRED COMPONENTS Quick Core Qml)
 
+set(DEMO_TARGET_NAME demo)
+set(PLUGIN_TARGET_NAME treeview)
+
 add_subdirectory(plugin)
-add_subdirectory(example)
+add_subdirectory(demo)

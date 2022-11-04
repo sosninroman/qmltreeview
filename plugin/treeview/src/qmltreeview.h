@@ -10,7 +10,7 @@
 namespace treeview
 {
 
-class QmlTreeView : public QQuickItem
+class TREE_VIEW_API QmlTreeView : public QQuickItem
 {
     Q_OBJECT
 public:
@@ -19,9 +19,10 @@ public:
     Q_PROPERTY(treeview::Selector* selector READ selector CONSTANT)
     Selector* selector() {return &m_selector;}
 
-    Q_PROPERTY(treeview::QmlTreeModel* model READ model WRITE setModel NOTIFY modelChanged)
+    Q_PROPERTY(QObject* model READ modelAsQObject WRITE setModel NOTIFY modelChanged)
+    QObject* modelAsQObject() {return m_model;}
     QmlTreeModel* model() {return m_model;}
-    void setModel(QmlTreeModel* model);
+    void setModel(QObject* model);
 
     Q_PROPERTY(QQmlComponent* rowContentDelegate READ rowContentDelegate WRITE setRowContentDelegate NOTIFY rowContentDelegateChanged)
     QQmlComponent* rowContentDelegate() const {return m_rowContentDelegate;}

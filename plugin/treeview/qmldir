@@ -1,0 +1,19 @@
+module treeview
+plugin treeview ..
+
+# Delegates
+Delegate 1.0 qrc:/treeview/qml/base/Delegate.qml
+DragDelegate 1.0 qrc:/treeview/qml/base/DragDelegate.qml
+ExpanderDelegate 1.0 qrc:/treeview/qml/base/ExpanderDelegate.qml
+RowContentDelegate 1.0 qrc:/treeview/qml/base/RowContentDelegate.qml
+
+# Base
+TreeViewBase 1.0 qrc:/treeview/qml/base/TreeViewBase.qml
+
+# Implementation
+TreeView 1.0 qrc:/treeview/qml/TreeView.qml
+RowBackground 1.0 qrc:/treeview/qml/RowBackground.qml
+IconExpander 1.0 qrc:/treeview/qml/IconExpander.qml
+TextRowContent 1.0 qrc:/treeview/qml/TextRowContent.qml
+
+typeinfo plugin.qmltypes

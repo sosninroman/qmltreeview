@@ -4,7 +4,7 @@ import QtQml.Models 2.12
 
 import QtQuick.Controls 2.12
 
-import treelistview 1.0
+import treeview 1.0
 
 FocusScope {
     id: nodeItem

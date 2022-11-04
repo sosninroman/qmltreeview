@@ -1,6 +1,7 @@
 #ifndef SELECTOR_H
 #define SELECTOR_H
 
+#include "export.h"
 #include <QObject>
 #include <QModelIndex>
 #include <QModelIndexList>
@@ -8,7 +9,7 @@
 namespace treeview
 {
 
-class Selector: public QObject
+class TREE_VIEW_API Selector: public QObject
 {
     Q_OBJECT
     using BaseClass = QObject;

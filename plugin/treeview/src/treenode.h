@@ -8,7 +8,7 @@ namespace treeview
 {
 
 //Basic tree node
-class TREE_LIST_VIEW_API TreeNode
+class TREE_VIEW_API TreeNode
 {
 public:
     explicit TreeNode(TreeNode* parent = nullptr);

@@ -22,7 +22,7 @@ enum TreeModelRoles
     ExtraRole
 };
 
-class TREE_LIST_VIEW_API QmlTreeModel : public QAbstractItemModel
+class TREE_VIEW_API QmlTreeModel : public QAbstractItemModel
 {
     Q_OBJECT
     using BaseClass = QAbstractItemModel;

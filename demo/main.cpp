@@ -18,8 +18,13 @@ int main(int argc, char *argv[]) {
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
+    QObject* model = new tvexample::EditableStringsTreeModel();
+    treeview::QmlTreeModel* m = qobject_cast<treeview::QmlTreeModel*>(model);
+    Q_ASSERT(m);
+
     // Add import search path
-    engine.addImportPath("../plugin");
+//    engine.addImportPath("../plugin");
+    engine.addImportPath(".");
     engine.load(QUrl(QLatin1String("qrc:/example/Main.qml")));
     if (engine.rootObjects().isEmpty()) {
         return -1;

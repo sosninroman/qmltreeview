@@ -10,7 +10,7 @@
 namespace treeview
 {
 
-class RowProperties : public QObject
+class TREE_VIEW_API RowProperties : public QObject
 {
     Q_OBJECT
 public:

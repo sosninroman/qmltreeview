@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import treelistview 1.0
+import treeview 1.0
 
 FocusScope {
     signal canceled()

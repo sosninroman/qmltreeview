@@ -34,12 +34,12 @@ QmlTreeView::QmlTreeView(QQuickItem *parent):
     connect(this, &QmlTreeView::nodeChildrenCountChanged, this, &QmlTreeView::onNodeChildrenCountChanged);
 }
 
-void QmlTreeView::setModel(QObject *model)
+void QmlTreeView::setModel(QmlTreeModel *model)
 {
     if(m_model != model)
     {
         disconnectFromModel();
-        m_model = qobject_cast<QmlTreeModel*>(model);
+        m_model = model;
         connectToModel();
         emit modelChanged();
     }

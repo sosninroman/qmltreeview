@@ -19,10 +19,9 @@ public:
     Q_PROPERTY(treeview::Selector* selector READ selector CONSTANT)
     Selector* selector() {return &m_selector;}
 
-    Q_PROPERTY(QObject* model READ modelAsQObject WRITE setModel NOTIFY modelChanged)
-    QObject* modelAsQObject() {return m_model;}
+    Q_PROPERTY(QmlTreeModel* model READ model WRITE setModel NOTIFY modelChanged)
     QmlTreeModel* model() {return m_model;}
-    void setModel(QObject* model);
+    void setModel(QmlTreeModel* model);
 
     Q_PROPERTY(QQmlComponent* rowContentDelegate READ rowContentDelegate WRITE setRowContentDelegate NOTIFY rowContentDelegateChanged)
     QQmlComponent* rowContentDelegate() const {return m_rowContentDelegate;}

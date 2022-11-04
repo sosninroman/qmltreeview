@@ -142,10 +142,10 @@ public:
         return static_cast<NodeType*>(parentIndex.internalPointer())->hasChildren();
     }
 
-    void clear() final
-    {
-        BaseClass::clear();
-    }
+//    void clear() final
+//    {
+//        BaseClass::clear();
+//    }
 };
 
 }

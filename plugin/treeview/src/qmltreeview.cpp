@@ -105,7 +105,8 @@ void QmlTreeView::onRowsChildrenCountChanged(const QModelIndex& parent)
 void QmlTreeView::onNodeChildrenCountChanged(const QModelIndex& ind)
 {
     if(m_model && ind == m_model->rootIndex()) {
-        m_model->refresh();
+        //m_model->refresh();
+        update();
     }
 }
 

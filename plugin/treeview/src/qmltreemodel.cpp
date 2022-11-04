@@ -30,11 +30,11 @@ QVariant QmlTreeModel::nodeData(const QModelIndex& index)
     return QVariant::fromValue(result);
 }
 
-void QmlTreeModel::refresh()
-{
-    beginResetModel();
-    endResetModel();
-}
+//void QmlTreeModel::refresh()
+//{
+//    beginResetModel();
+//    endResetModel();
+//}
 
 void QmlTreeModel::clear()
 {

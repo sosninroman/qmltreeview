@@ -43,7 +43,7 @@ public:
 
     Q_INVOKABLE QVariant nodeData(const QModelIndex& index);
 
-    Q_INVOKABLE void refresh();
+//    Q_INVOKABLE void refresh();
 
     virtual void clear();
 

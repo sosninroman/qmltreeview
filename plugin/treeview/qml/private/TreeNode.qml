@@ -38,7 +38,7 @@ FocusScope {
 
             width: Math.max(view._maxRowContentWidth, view.availableWidth)
 
-            height: rowContent.height //+ view.rowContentTopMargin + view.rowContentBottomMargin
+            height: rowContent.height
 
             Loader { //row background
                 id: nodeBackgroundLdr
@@ -112,7 +112,6 @@ FocusScope {
 
             TreeRow { //row content
                 id: rowContent
-                //y: parent.y + view.rowContentTopMargin
                 anchors.left: parent.left
                 properties: nodeItem.properties
             }

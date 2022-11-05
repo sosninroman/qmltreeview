@@ -95,9 +95,6 @@ ApplicationWindow {
             expandedIconSource: "qrc:/icons/triangle_expanded.png"
             collapsedIconSource: "qrc:/icons/triangle_collapsed.png"
         }
-//        rowContentTopMargin: 5
-//        rowContentBottomMargin: 20
-//        rowContentRightMargin: 2
 
         model: stringTree
 

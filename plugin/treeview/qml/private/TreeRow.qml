@@ -67,16 +67,23 @@ FocusScope {
             id: expanderLdr
             width: height
             height: contentLdr.height
+            anchors.verticalCenter: rowContentWrapper.verticalCenter
             property RowProperties __nodeProperties: properties
             sourceComponent: properties.view.expanderDelegate
         }
 
-        Loader { //content delegate
-            id: contentLdr
-            Layout.fillWidth: true
-            property RowProperties __nodeProperties: properties
-            sourceComponent: properties.view.rowContentDelegate
-            focus: true
+        Item { //row content with margins
+            id: rowContentWrapper
+            property int contentY: y + contentLdr.item.topMargin
+            width: contentLdr.width + contentLdr.item.rightMargin + contentLdr.item.leftMargin
+            height: contentLdr.height + contentLdr.item.topMargin + contentLdr.item.bottomMargin
+            Loader { //content delegate
+                id: contentLdr
+                y: rowContentWrapper.contentY
+                property RowProperties __nodeProperties: properties
+                sourceComponent: properties.view.rowContentDelegate
+                focus: true
+            }
         }
     }
 }

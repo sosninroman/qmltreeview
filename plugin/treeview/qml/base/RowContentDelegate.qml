@@ -6,6 +6,11 @@ import treeview 1.0
 Delegate {
     id: item
 
+    property int leftMargin: 0
+    property int topMargin: 0
+    property int rightMargin: 0
+    property int bottomMargin: 0
+
     Connections {
         target: properties.selector
         function onSelectionChanged() {

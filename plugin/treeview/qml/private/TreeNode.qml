@@ -1,5 +1,4 @@
 import QtQuick 2.15
-import QtQuick.Layouts 1.12
 import QtQml.Models 2.12
 
 import QtQuick.Controls 2.12
@@ -39,7 +38,7 @@ FocusScope {
 
             width: Math.max(view._maxRowContentWidth, view.availableWidth)
 
-            height: rowContent.height + 2 * view.rowContentMargin
+            height: rowContent.height //+ view.rowContentTopMargin + view.rowContentBottomMargin
 
             Loader { //row background
                 id: nodeBackgroundLdr
@@ -113,7 +112,7 @@ FocusScope {
 
             TreeRow { //row content
                 id: rowContent
-                anchors.verticalCenter: parent.verticalCenter
+                //y: parent.y + view.rowContentTopMargin
                 anchors.left: parent.left
                 properties: nodeItem.properties
             }

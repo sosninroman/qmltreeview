@@ -13,6 +13,23 @@ namespace treeview
 class TREE_VIEW_API QmlTreeView : public QQuickItem
 {
     Q_OBJECT
+
+    struct RowContentMargins
+    {
+        int left = 0;
+        int top = 0;
+        int right = 0;
+        int bottom = 0;
+    };
+
+    enum class MarginType
+    {
+        Left,
+        Top,
+        Right,
+        Bottom
+    };
+
 public:
     explicit QmlTreeView(QQuickItem *parent = nullptr);
 
@@ -59,12 +76,24 @@ public:
     QModelIndex maxWidthRowIndex() const {return m_maxWidthRowIndex;}
     void setMaxWidthRowIndex(const QModelIndex& val);
 
-    Q_PROPERTY(int rowContentMargin READ rowContentMargin WRITE setRowContentMargin NOTIFY rowContentMarginChanged)
-    int rowContentMargin() const {return m_rowContentMargin;}
-    void setRowContentMargin(int val);
-
     Q_PROPERTY(QModelIndex rootIndex READ rootIndex NOTIFY modelChanged)
     QModelIndex rootIndex() const {return m_model ? m_model->rootIndex() : QModelIndex();}
+
+//    Q_PROPERTY(int rowContentLeftMargin READ rowContentLeftMargin WRITE setRowContentLeftMargin NOTIFY rowContentMarginsChanged)
+//    int rowContentLeftMargin() const {return m_rowContentMargins.left;}
+//    void setRowContentLeftMargin(int val);
+
+//    Q_PROPERTY(int rowContentTopMargin READ rowContentTopMargin WRITE setRowContentTopMargin NOTIFY rowContentMarginsChanged)
+//    int rowContentTopMargin() const {return m_rowContentMargins.top;}
+//    void setRowContentTopMargin(int val);
+
+//    Q_PROPERTY(int rowContentRightMargin READ rowContentRightMargin WRITE setRowContentRightMargin NOTIFY rowContentMarginsChanged)
+//    int rowContentRightMargin() const {return m_rowContentMargins.right;}
+//    void setRowContentRightMargin(int val);
+
+//    Q_PROPERTY(int rowContentBottomMargin READ rowContentBottomMargin WRITE setRowContentBottomMargin NOTIFY rowContentMarginsChanged)
+//    int rowContentBottomMargin() const {return m_rowContentMargins.bottom;}
+//    void setRowContentBottomMargin(int val);
 
 public slots:
     Q_INVOKABLE void recalcMaxRowWidth();
@@ -89,10 +118,10 @@ signals:
     void backgroundDelegateChanged();
     void dragDelegateChanged();
     void expanderDelegateChanged();
-    void rowContentMarginChanged();
     void scrollBarDelegateChanged();
     void availableWidthChanged();
     void scrollVelocityChanged();
+    void rowContentMarginsChanged();
 
     void needToRecalcMaxRowWidth();
     void maxRowContentWidthChanged();
@@ -106,6 +135,7 @@ private:
     void onNodeChildrenCountChanged(const QModelIndex& ind);
     void onRowsAboutToBeRemoved(const QModelIndex& parent, int first, int last);
     void onRowsRemoved(const QModelIndex& parent, int first, int last);
+    void setMargin(MarginType type, int val);
 
 private:
     Selector m_selector;
@@ -117,10 +147,10 @@ private:
     QQmlComponent* m_scrollBarDelegate = nullptr;
     int m_maxRowContentWidth = 0;
     QModelIndex m_maxWidthRowIndex;
-    int m_rowContentMargin = 0;
     bool m_needToRecalcMaxWidthAfterNextRowRemove = false;
     int m_availableWidth = 0;
     int m_scrollVelocity = 1;
+//    RowContentMargins m_rowContentMargins;
 };
 
 }

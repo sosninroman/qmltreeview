@@ -214,14 +214,65 @@ void QmlTreeView::setMaxWidthRowIndex(const QModelIndex& ind)
     }
 }
 
-void QmlTreeView::setRowContentMargin(int val)
-{
-    if(m_rowContentMargin != val)
-    {
-        m_rowContentMargin = val;
-        emit rowContentMarginChanged();
-    }
-}
+//void QmlTreeView::setRowContentLeftMargin(int val)
+//{
+//    setMargin(MarginType::Left, val);
+//}
+
+//void QmlTreeView::setRowContentTopMargin(int val)
+//{
+//    setMargin(MarginType::Top, val);
+//}
+
+//void QmlTreeView::setRowContentRightMargin(int val)
+//{
+//    setMargin(MarginType::Right, val);
+//}
+
+//void QmlTreeView::setRowContentBottomMargin(int val)
+//{
+//    setMargin(MarginType::Bottom, val);
+//}
+
+//void QmlTreeView::setMargin(MarginType type, int val)
+//{
+//    bool changed = false;
+//    switch (type)
+//    {
+//    case MarginType::Left:
+//        if(m_rowContentMargins.left != val)
+//        {
+//            m_rowContentMargins.left = val;
+//            changed = true;
+//        }
+//        break;
+//    case MarginType::Top:
+//        if(m_rowContentMargins.top != val)
+//        {
+//            m_rowContentMargins.top = val;
+//            changed = true;
+//        }
+//        break;
+//    case MarginType::Right:
+//        if(m_rowContentMargins.right != val)
+//        {
+//            m_rowContentMargins.right = val;
+//            changed = true;
+//        }
+//        break;
+//    case MarginType::Bottom:
+//        if(m_rowContentMargins.bottom != val)
+//        {
+//            m_rowContentMargins.bottom = val;
+//            changed = true;
+//        }
+//        break;
+//    }
+//    if(changed)
+//    {
+//        emit rowContentMarginsChanged();
+//    }
+//}
 
 void QmlTreeView::recalcMaxRowWidth()
 {

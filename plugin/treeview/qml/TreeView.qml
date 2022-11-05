@@ -1,5 +1,6 @@
 import QtQuick.Controls 2.15
 import "./base"
+import treeview 1.0
 
 TreeViewBase {
     scrollBarDelegate : ScrollBar {

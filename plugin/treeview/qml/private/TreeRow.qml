@@ -58,6 +58,8 @@ FocusScope {
 
     Row {
         id: row
+        spacing: 0
+
         Item { //delegate margins
             width: expanderLdr.width * modelData.nodeLevel
             height: expanderLdr.height
@@ -74,12 +76,14 @@ FocusScope {
 
         Item { //row content with margins
             id: rowContentWrapper
-            property int contentY: y + contentLdr.item.topMargin
+
             width: contentLdr.width + contentLdr.item.rightMargin + contentLdr.item.leftMargin
             height: contentLdr.height + contentLdr.item.topMargin + contentLdr.item.bottomMargin
+
             Loader { //content delegate
                 id: contentLdr
-                y: rowContentWrapper.contentY
+                y: item.topMargin
+                x: item.leftMargin
                 property RowProperties __nodeProperties: properties
                 sourceComponent: properties.view.rowContentDelegate
                 focus: true

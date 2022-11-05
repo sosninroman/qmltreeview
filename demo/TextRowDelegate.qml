@@ -4,9 +4,10 @@ import QtQuick.Layouts 1.12
 import treeview 1.0 as T
 
 T.TextRowContent {
-    topMargin: 5
+    topMargin: 10
     bottomMargin: 10
-    leftMargin: 2
+    rightMargin: 5
+    leftMargin: 10
 
     property Component nameDialog
 

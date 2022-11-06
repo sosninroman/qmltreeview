@@ -1,151 +1,85 @@
 #ifndef TREEMODEL_H
 #define TREEMODEL_H
 
+#include <memory>
 #include <QAbstractItemModel>
-#include "treenode.h"
-#include <QQmlPropertyMap>
-#include <QDebug>
 #include "export.h"
-#include "qmltreemodel.h"
+#include "treenode.h"
 
 namespace treeview
 {
 
-template<class NodeType>
-class TreeModel : public QmlTreeModel
+class TreeNode;
+
+enum TreeModelRoles
 {
-    using BaseClass = QmlTreeModel;
+    ExpandedRole = Qt::UserRole,
+    ExpandableRole,
+    NodeLevelRole,
+    NodeIdRole,
+    IndexRole,
+
+    ExtraRole
+};
+
+/*!
+ * \brief Base class for tree models.
+ */
+class TREE_VIEW_API TreeModel : public QAbstractItemModel
+{
+    Q_OBJECT
+    using BaseClass = QAbstractItemModel;
+
+    class RootNode : public TreeNode
+    {
+    public:
+        void appendChild(TreeNode *node) final {
+            node->setParent(this);
+            m_children.append(node);
+        }
+    };
 
 public:
-    explicit TreeModel(QObject* parent = nullptr) : BaseClass(parent) {}
+    explicit TreeModel(QObject* parent = nullptr);
 
-    QHash<int, QByteArray> roleNames() const override
-    {
-        QHash<int, QByteArray> roles = BaseClass::roleNames();
-        roles.insert(QHash<int, QByteArray>{
-            {ExpandedRole, QByteArrayLiteral("expanded")},
-            {ExpandableRole, QByteArrayLiteral("expandable")},
-            {NodeLevelRole, QByteArrayLiteral("nodeLevel")},
-            {NodeIdRole, QByteArrayLiteral("nodeId")},
-            {IndexRole, QByteArrayLiteral("index")},
-        });
-        return roles;
-    }
+    /*!
+     * \brief Returns root index of the model
+     */
+    Q_INVOKABLE QModelIndex rootIndex();
 
-    QModelIndex index( int row, int column, const QModelIndex& parent = QModelIndex() ) const override
-    {
-        if(row < 0 )
-        {
-            return QModelIndex();
-        }
-        if( !parent.isValid() )
-        {
-            return createIndex(row, column, m_root->children().at(row));
-        }
-        const auto node = static_cast<NodeType*>( parent.internalPointer() );
-        Q_ASSERT(node);
-        const auto child = node->child(row);
-        return child ? createIndex(row, column, child) : QModelIndex();
-    }
+    /*!
+     * \brief Returns QQmlPropertyMap with model data by its index. Model data is wrapped by QVariant.
+     */
+    Q_INVOKABLE QVariant nodeData(const QModelIndex& index);
 
-    QModelIndex parent(const QModelIndex &index) const override
-    {
-        if ( !index.isValid() )
-            return QModelIndex();
+    /*!
+     * \brief Creates index of the node by its pointer
+     */
+    QModelIndex index(TreeNode* node);
 
-        NodeType* child = static_cast<NodeType*>( index.internalPointer() );
-        auto parent = child->parent();
+    /*!
+     * \brief Attaches new node to the root node.
+     * Root node is responsible for calling destructor of child nodes.
+     */
+    void addTopLevelNode(TreeNode* node);
 
-        if(!parent)
-            return QModelIndex();
+    /*!
+     * \brief Resets model without its changing.
+     */
+    void reset();
 
-        return createIndex(parent->row(), 0, parent);
-    }
+    // QAbstractItemModel interface
+    QHash<int, QByteArray> roleNames() const override;
+    int columnCount(const QModelIndex&) const override;
+    bool hasChildren(const QModelIndex& parentIndex) const override;
+    QModelIndex parent(const QModelIndex &index) const override;
+    int rowCount(const QModelIndex& parent) const override;
+    QVariant data(const QModelIndex& index, int role) const override;
+    bool setData(const QModelIndex& index, const QVariant &value, int role = Qt::EditRole) override;
+    QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;
 
-    int rowCount(const QModelIndex& parent) const override
-    {
-        if( !parent.isValid() )
-        {
-            return m_root->childrenCount();
-        }
-
-        const auto parentNode = static_cast<NodeType*>( parent.internalPointer() );
-
-        return parentNode->childrenCount();
-    }
-
-    int columnCount(const QModelIndex&) const override
-    {
-        return 1;
-    }
-
-    QVariant data(const QModelIndex& index, int role) const override
-    {
-        if( !index.isValid() )
-        {
-            return QVariant();
-        }
-
-        NodeType* node = static_cast<NodeType*>( index.internalPointer() );
-
-        switch(role)
-        {
-        case ExpandedRole:
-            return node->expanded();
-        case ExpandableRole:
-            return node->childrenCount() > 0;
-        case NodeLevelRole:
-            return node->level();
-        case NodeIdRole:
-            return reinterpret_cast<quint64>(node);
-        case IndexRole:
-            return index;
-        default:
-            return QVariant();
-        }
-        Q_UNREACHABLE();
-    }
-
-    bool setData(const QModelIndex& index, const QVariant &value, int role = Qt::EditRole) override
-    {
-        if( !index.isValid() )
-        {
-            return false;
-        }
-
-        NodeType* node = static_cast<NodeType*>( index.internalPointer() );
-        switch(role)
-        {
-        case ExpandedRole:
-        {
-            bool val = value.toBool();
-            if(val != node->expanded())
-            {
-                node->setExpanded(val);
-                emit dataChanged(index, index, {ExpandedRole});
-            }
-        }
-        }
-        return false;
-    }
-
-    void addTopLevelNode(NodeType* node)
-    {
-        m_root->appendChild(node);
-    }
-
-
-    bool hasChildren(const QModelIndex& parentIndex) const override
-    {
-        if (!parentIndex.isValid())
-            return m_root->hasChildren();
-        return static_cast<NodeType*>(parentIndex.internalPointer())->hasChildren();
-    }
-
-//    void clear() final
-//    {
-//        BaseClass::clear();
-//    }
+private:
+    std::unique_ptr<RootNode> m_root;
 };
 
 }

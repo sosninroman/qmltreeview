@@ -6,9 +6,20 @@ find_package(Qt5 REQUIRED COMPONENTS Quick Core Qml)
 
 set(DEMO_TARGET_NAME demo)
 set(PLUGIN_TARGET_NAME treeview)
+set(GTEST_LOCATION "" CACHE PATH "Google test library location")
+set(BUILD_TESTS FALSE CACHE BOOLEAN "Build tests")
 
 add_subdirectory(plugin)
 add_subdirectory(demo)
+
+if(${BUILD_TESTS})
+    set(INSTALL_GTEST OFF)
+    set(GTEST_ROOT ${GTEST_LOCATION})
+    add_subdirectory(tests)
+endif()
+
+#Post build step
+#On this step we copy plugin to build directory of demo and tests
 
 add_custom_target(PostBuild ALL DEPENDS ${DEMO_TARGET_NAME} ${PLUGIN_TARGET_NAME})
 

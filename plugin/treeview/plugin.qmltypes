@@ -9,9 +9,9 @@ import QtQuick.tooling 1.2
 Module {
     dependencies: ["QtQuick 2.0"]
     Component {
-        name: "treeview::QmlTreeModelInterface"
+        name: "treeview::TreeModel"
         prototype: "QAbstractItemModel"
-        exports: ["tree/QmlTreeModelInterface 1.0"]
+        exports: ["tree/TreeModel 1.0"]
         isCreatable: false
         exportMetaObjectRevisions: [0]
         Property { name: "busy"; type: "bool"; isReadonly: true }

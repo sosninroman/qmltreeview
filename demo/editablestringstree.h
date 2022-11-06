@@ -22,10 +22,10 @@ private:
     QString m_name;
 };
 
-class EditableStringsTreeModel : public treeview::TreeModel<StringTreeNode>
+class EditableStringsTreeModel : public treeview::TreeModel
 {
     Q_OBJECT
-    using BaseClass = TreeModel<StringTreeNode>;
+    using BaseClass = treeview::TreeModel;
     using NodeType = StringTreeNode;
 
     enum TreeRoles

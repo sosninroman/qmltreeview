@@ -19,9 +19,9 @@ public:
     Q_PROPERTY(treeview::Selector* selector READ selector CONSTANT)
     Selector* selector() {return &m_selector;}
 
-    Q_PROPERTY(QmlTreeModel* model READ model WRITE setModel NOTIFY modelChanged)
-    QmlTreeModel* model() {return m_model;}
-    void setModel(QmlTreeModel* model);
+    Q_PROPERTY(TreeModel* model READ model WRITE setModel NOTIFY modelChanged)
+    TreeModel* model() {return m_model;}
+    void setModel(TreeModel* model);
 
     Q_PROPERTY(QModelIndex rootIndex READ rootIndex NOTIFY modelChanged)
     QModelIndex rootIndex() const {return m_model ? m_model->rootIndex() : QModelIndex();}
@@ -104,7 +104,7 @@ private:
 
 private:
     Selector m_selector;
-    QmlTreeModel* m_model = nullptr;
+    TreeModel* m_model = nullptr;
     QQmlComponent* m_rowContentDelegate = nullptr;
     QQmlComponent* m_backgroundDelegate = nullptr;
     QQmlComponent* m_dragDelegate = nullptr;

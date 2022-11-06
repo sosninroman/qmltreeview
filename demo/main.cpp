@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
     QQmlApplicationEngine engine;
 
     QObject* model = new tvexample::EditableStringsTreeModel();
-    treeview::QmlTreeModel* m = qobject_cast<treeview::QmlTreeModel*>(model);
+    treeview::TreeModel* m = qobject_cast<treeview::TreeModel*>(model);
     Q_ASSERT(m);
 
     // Add import search path

@@ -68,12 +68,19 @@ public:
      */
     void reset();
 
+    /*!
+     * \brief Returns pointer on the root node of the tree model.
+     */
+    TreeNode* rootNode() const {return m_root.get();}
+
     // QAbstractItemModel interface
     QHash<int, QByteArray> roleNames() const override;
     int columnCount(const QModelIndex&) const override;
+    int rowCount(const QModelIndex& parent) const override;
+
     bool hasChildren(const QModelIndex& parentIndex) const override;
     QModelIndex parent(const QModelIndex &index) const override;
-    int rowCount(const QModelIndex& parent) const override;
+
     QVariant data(const QModelIndex& index, int role) const override;
     bool setData(const QModelIndex& index, const QVariant &value, int role = Qt::EditRole) override;
     QModelIndex index(int row, int column, const QModelIndex& parent = QModelIndex()) const override;

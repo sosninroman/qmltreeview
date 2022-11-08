@@ -3,7 +3,7 @@ import QtQml.Models 2.12
 import treeview 1.0
 import "../private"
 
-QmlTreeView {
+TreeViewItem {
     id: treeView
 
     availableWidth: width - (treeView.height < scroll.contentHeight ? vbar.width : 0)

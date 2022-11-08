@@ -1,5 +1,5 @@
-#ifndef QMLTREEVIEW_H
-#define QMLTREEVIEW_H
+#ifndef TREEVIEWITEM_H
+#define TREEVIEWITEM_H
 
 #include <QObject>
 #include <QQuickItem>
@@ -10,11 +10,15 @@
 namespace treeview
 {
 
-class TREE_VIEW_API QmlTreeView : public QQuickItem
+/*!
+ * \brief Base item for tree view.
+ * It contains all properties, signals and internal logic.
+ */
+class TREE_VIEW_API TreeViewItem : public QQuickItem
 {
     Q_OBJECT
 public:
-    explicit QmlTreeView(QQuickItem *parent = nullptr);
+    explicit TreeViewItem(QQuickItem *parent = nullptr);
 
     Q_PROPERTY(treeview::Selector* selector READ selector CONSTANT)
     Selector* selector() {return &m_selector;}

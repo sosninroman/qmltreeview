@@ -4,7 +4,7 @@
 
 #include "treemodel.h"
 #include "selector.h"
-#include "qmltreeview.h"
+#include "treeviewitem.h"
 #include "rowproperties.h"
 
 namespace treeview
@@ -17,8 +17,8 @@ void TreeViewPlugin::registerTypes(const char* uri) {
     qmlRegisterType<treeview::Selector>(uri, 1, 0, "Selector");
     qRegisterMetaType<treeview::Selector*>("Selector");
 
-    qmlRegisterType<treeview::QmlTreeView>(uri, 1, 0, "QmlTreeView");
-    qRegisterMetaType<treeview::QmlTreeView*>("QmlTreeView");
+    qmlRegisterType<treeview::TreeViewItem>(uri, 1, 0, "TreeViewItem");
+    qRegisterMetaType<treeview::TreeViewItem*>("TreeViewItem");
 
     qmlRegisterType<treeview::RowProperties>(uri, 1, 0, "RowProperties");
     qRegisterMetaType<treeview::RowProperties*>("RowProperties");

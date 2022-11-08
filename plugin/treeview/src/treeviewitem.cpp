@@ -1,4 +1,4 @@
-#include "qmltreeview.h"
+#include "treeviewitem.h"
 #include <stack>
 
 namespace treeview
@@ -28,13 +28,13 @@ TreeNode* nextNode(TreeNode* node)
 
 }
 
-QmlTreeView::QmlTreeView(QQuickItem *parent):
+TreeViewItem::TreeViewItem(QQuickItem *parent):
     QQuickItem(parent)
 {
-    connect(this, &QmlTreeView::nodeChildrenCountChanged, this, &QmlTreeView::onNodeChildrenCountChanged);
+    connect(this, &TreeViewItem::nodeChildrenCountChanged, this, &TreeViewItem::onNodeChildrenCountChanged);
 }
 
-void QmlTreeView::setModel(TreeModel *model)
+void TreeViewItem::setModel(TreeModel *model)
 {
     if(m_model != model)
     {
@@ -45,7 +45,7 @@ void QmlTreeView::setModel(TreeModel *model)
     }
 }
 
-void QmlTreeView::disconnectFromModel()
+void TreeViewItem::disconnectFromModel()
 {
     if(!m_model)
     {
@@ -54,23 +54,23 @@ void QmlTreeView::disconnectFromModel()
     disconnect(m_model);
 }
 
-void QmlTreeView::connectToModel()
+void TreeViewItem::connectToModel()
 {
     if(!m_model)
     {
         return;
     }
-    connect(m_model, &QAbstractItemModel::dataChanged, this, &QmlTreeView::onDataChanged);
-    connect(m_model, &QAbstractItemModel::rowsInserted, this, &QmlTreeView::onRowsChildrenCountChanged);
-    connect(m_model, &QAbstractItemModel::rowsAboutToBeRemoved, this, &QmlTreeView::onRowsAboutToBeRemoved);
-    connect(m_model, &QAbstractItemModel::rowsRemoved, this, &QmlTreeView::onRowsRemoved);
+    connect(m_model, &QAbstractItemModel::dataChanged, this, &TreeViewItem::onDataChanged);
+    connect(m_model, &QAbstractItemModel::rowsInserted, this, &TreeViewItem::onRowsChildrenCountChanged);
+    connect(m_model, &QAbstractItemModel::rowsAboutToBeRemoved, this, &TreeViewItem::onRowsAboutToBeRemoved);
+    connect(m_model, &QAbstractItemModel::rowsRemoved, this, &TreeViewItem::onRowsRemoved);
     connect(m_model, &QAbstractItemModel::rowsMoved, this, [this](const QModelIndex& from, int, int, const QModelIndex& to){
         onRowsChildrenCountChanged(from);
         onRowsChildrenCountChanged(to);
     });
 }
 
-void QmlTreeView::onDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)
+void TreeViewItem::onDataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight)
 {
     if(!topLeft.isValid())
     {
@@ -94,7 +94,7 @@ void QmlTreeView::onDataChanged(const QModelIndex& topLeft, const QModelIndex& b
     }
 }
 
-void QmlTreeView::onRowsChildrenCountChanged(const QModelIndex& parent)
+void TreeViewItem::onRowsChildrenCountChanged(const QModelIndex& parent)
 {
     if(parent.isValid())
     {
@@ -102,14 +102,14 @@ void QmlTreeView::onRowsChildrenCountChanged(const QModelIndex& parent)
     }
 }
 
-void QmlTreeView::onNodeChildrenCountChanged(const QModelIndex& ind)
+void TreeViewItem::onNodeChildrenCountChanged(const QModelIndex& ind)
 {
     if(m_model && ind == m_model->rootIndex()) {
         m_model->reset();
     }
 }
 
-void QmlTreeView::onRowsAboutToBeRemoved(const QModelIndex& parent, int first, int last)
+void TreeViewItem::onRowsAboutToBeRemoved(const QModelIndex& parent, int first, int last)
 {
     for(int i = first; i <= last && !m_needToRecalcMaxWidthAfterNextRowRemove; ++i)
     {
@@ -121,7 +121,7 @@ void QmlTreeView::onRowsAboutToBeRemoved(const QModelIndex& parent, int first, i
     }
 }
 
-void QmlTreeView::onRowsRemoved(const QModelIndex& parent, int first, int last)
+void TreeViewItem::onRowsRemoved(const QModelIndex& parent, int first, int last)
 {
     onRowsChildrenCountChanged(parent);
     if(m_needToRecalcMaxWidthAfterNextRowRemove)
@@ -131,7 +131,7 @@ void QmlTreeView::onRowsRemoved(const QModelIndex& parent, int first, int last)
     }
 }
 
-void QmlTreeView::setRowContentDelegate(QQmlComponent* val)
+void TreeViewItem::setRowContentDelegate(QQmlComponent* val)
 {
     if(m_rowContentDelegate != val)
     {
@@ -140,7 +140,7 @@ void QmlTreeView::setRowContentDelegate(QQmlComponent* val)
     }
 }
 
-void QmlTreeView::setBackgroundDelegate(QQmlComponent* val)
+void TreeViewItem::setBackgroundDelegate(QQmlComponent* val)
 {
     if(m_backgroundDelegate != val)
     {
@@ -149,7 +149,7 @@ void QmlTreeView::setBackgroundDelegate(QQmlComponent* val)
     }
 }
 
-void QmlTreeView::setDragDelegate(QQmlComponent* val)
+void TreeViewItem::setDragDelegate(QQmlComponent* val)
 {
     if(m_dragDelegate != val)
     {
@@ -158,7 +158,7 @@ void QmlTreeView::setDragDelegate(QQmlComponent* val)
     }
 }
 
-void QmlTreeView::setExpanderDelegate(QQmlComponent* val)
+void TreeViewItem::setExpanderDelegate(QQmlComponent* val)
 {
     if(m_expanderDelegate != val)
     {
@@ -167,7 +167,7 @@ void QmlTreeView::setExpanderDelegate(QQmlComponent* val)
     }
 }
 
-void QmlTreeView::setScrollBarDelegate(QQmlComponent* val)
+void TreeViewItem::setScrollBarDelegate(QQmlComponent* val)
 {
     if(m_scrollBarDelegate != val)
     {
@@ -176,7 +176,7 @@ void QmlTreeView::setScrollBarDelegate(QQmlComponent* val)
     }
 }
 
-void QmlTreeView::setAvailableWidth(int val)
+void TreeViewItem::setAvailableWidth(int val)
 {
     if(m_availableWidth != val)
     {
@@ -185,7 +185,7 @@ void QmlTreeView::setAvailableWidth(int val)
     }
 }
 
-void QmlTreeView::setScrollVelocity(int val)
+void TreeViewItem::setScrollVelocity(int val)
 {
     if(m_scrollVelocity != val)
     {
@@ -194,7 +194,7 @@ void QmlTreeView::setScrollVelocity(int val)
     }
 }
 
-void QmlTreeView::setMaxRowContentWidth(int val)
+void TreeViewItem::setMaxRowContentWidth(int val)
 {
     if(m_maxRowContentWidth != val)
     {
@@ -204,7 +204,7 @@ void QmlTreeView::setMaxRowContentWidth(int val)
 }
 
 
-void QmlTreeView::setMaxWidthRowIndex(const QModelIndex& ind)
+void TreeViewItem::setMaxWidthRowIndex(const QModelIndex& ind)
 {
     if(m_maxWidthRowIndex != ind)
     {
@@ -213,7 +213,7 @@ void QmlTreeView::setMaxWidthRowIndex(const QModelIndex& ind)
     }
 }
 
-void QmlTreeView::recalcMaxRowWidth()
+void TreeViewItem::recalcMaxRowWidth()
 {
     setMaxRowContentWidth(0);
     setMaxWidthRowIndex(QModelIndex());

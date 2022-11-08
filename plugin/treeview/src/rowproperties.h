@@ -5,7 +5,7 @@
 #include <QQuickItem>
 #include <QQmlComponent>
 #include <QModelIndex>
-#include "qmltreeview.h"
+#include "treeviewitem.h"
 
 namespace treeview
 {
@@ -22,8 +22,8 @@ public:
     Q_PROPERTY(QVariant index READ index NOTIFY changed)
     QVariant index() const {return m_index;}
 
-    Q_PROPERTY(treeview::QmlTreeView* view READ view NOTIFY changed)
-    QmlTreeView* view() const {return m_view;}
+    Q_PROPERTY(treeview::TreeViewItem* view READ view NOTIFY changed)
+    TreeViewItem* view() const {return m_view;}
 
     Q_PROPERTY(treeview::Selector* selector READ selector NOTIFY changed)
     Selector* selector() const  {return m_view ? m_view->selector() : nullptr;}
@@ -34,7 +34,7 @@ public:
     Q_PROPERTY(QVariant modelData READ modelData NOTIFY modelDataChanged)
     QVariant modelData() const {return m_modelData;}
 
-    Q_INVOKABLE void initialize(QmlTreeView* view, QVariant parentIndex, int row);
+    Q_INVOKABLE void initialize(TreeViewItem* view, QVariant parentIndex, int row);
     Q_INVOKABLE void checkMaxWidth(int contentWidth);
 
 signals:
@@ -49,7 +49,7 @@ private:
 private:
     QModelIndex m_parentIndex;
     QModelIndex m_index;
-    QmlTreeView* m_view = nullptr;
+    TreeViewItem* m_view = nullptr;
     QVariant m_modelData;
 };
 

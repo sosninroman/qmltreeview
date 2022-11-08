@@ -7,7 +7,7 @@ RowProperties::RowProperties(QObject *parent):
     QObject(parent)
 {}
 
-void RowProperties::initialize(QmlTreeView* view, QVariant parentIndex, int row)
+void RowProperties::initialize(TreeViewItem* view, QVariant parentIndex, int row)
 {
     if(!view)
     {
@@ -19,8 +19,8 @@ void RowProperties::initialize(QmlTreeView* view, QVariant parentIndex, int row)
         disconnect(m_view);
     }
     m_view = view;
-    connect(m_view, &QmlTreeView::nodeDataChanged, this, &RowProperties::onNodeDataChanged);
-    connect(m_view, &QmlTreeView::nodeChildrenCountChanged, this, &RowProperties::onNodeChildrenCountChanged);
+    connect(m_view, &TreeViewItem::nodeDataChanged, this, &RowProperties::onNodeDataChanged);
+    connect(m_view, &TreeViewItem::nodeChildrenCountChanged, this, &RowProperties::onNodeChildrenCountChanged);
 
     m_parentIndex = parentIndex.toModelIndex();
     Q_ASSERT(m_view->model());

@@ -77,7 +77,7 @@ bool TreeModel::hasChildren(const QModelIndex& parentIndex) const
 
 QModelIndex TreeModel::index(int row, int column, const QModelIndex& parent) const
 {
-    if(row < 0)
+    if(row < 0 || column)
     {
         return QModelIndex();
     }

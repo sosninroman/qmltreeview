@@ -48,7 +48,10 @@ public:
     Q_INVOKABLE QModelIndex rootIndex();
 
     /*!
-     * \brief Returns QQmlPropertyMap with model data by its index. Model data is wrapped by QVariant.
+     * \brief Returns model data by its index.
+     * Model data is a QQmlPropertyMap wrapped by QVariant.
+     * This map contains is filled with help of data function and emits
+     * signals after any value changing.
      */
     Q_INVOKABLE QVariant nodeData(const QModelIndex& index);
 
@@ -59,17 +62,19 @@ public:
 
     /*!
      * \brief Attaches new node to the root node.
-     * Root node is responsible for calling destructor of child nodes.
+     * Root node removes top level nodes on model destruction.
      */
     void addTopLevelNode(TreeNode* node);
 
     /*!
-     * \brief Resets model without its changing.
+     * \brief Resets model without content changing.
      */
     void reset();
 
     /*!
      * \brief Returns pointer on the root node of the tree model.
+     * Root node is invisible node, which contains all top level nodes.
+     * This owns top level nodes and responsible for their deleting.
      */
     TreeNode* rootNode() const {return m_root.get();}
 

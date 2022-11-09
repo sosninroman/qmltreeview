@@ -8,31 +8,26 @@ ApplicationWindow {
     id: appWindow
     visible: true
     width: 640
+    minimumWidth: 320
     height: 480
-    title: "Tree View Example Application"
-
-    property T.TreeModel treeModel
-
-    EditableStringsTreeModel {
-        id: stringTree
-    }
+    minimumHeight: 240
+    title: "Tree View Demo"
 
     property Component nameDialog: Dialog {
         title: "Enter a name"
-        standardButtons: Dialog.Ok | Dialog.Cancel
 
         anchors.centerIn: parent
+        standardButtons: Dialog.Ok | Dialog.Cancel
+        closePolicy: Popup.CloseOnEscape
+        modal: true
+        focus: true
 
         property alias name: nameInput.text
 
-        contentItem: Frame {
-            TextInput {
-                id: nameInput
-                anchors.fill: parent
-            }
+        contentItem: TextField {
+            id: nameInput
+            focus: true
         }
-
-        visible: false
     }
 
     header: ToolBar {
@@ -96,13 +91,14 @@ ApplicationWindow {
             collapsedIconSource: "qrc:/icons/triangle_collapsed.png"
         }
 
-        model: stringTree
+        model: EditableStringsTreeModel {
+            id: stringTree
+        }
 
         focus: true
         Keys.onPressed: {
             event.accepted = false
             console.warn("TreeView: Key was pressed!")
         }
-        Keys.onUpPressed: console.warn("up pressed!")
     }
 }

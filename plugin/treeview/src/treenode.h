@@ -7,7 +7,10 @@
 namespace treeview
 {
 
-//Basic tree node
+/*!
+ * \brief Base class of tree node.
+ *
+ */
 class TREE_VIEW_API TreeNode
 {
 public:

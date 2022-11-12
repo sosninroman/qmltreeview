@@ -43,42 +43,42 @@ public:
     explicit TreeModel(QObject* parent = nullptr);
 
     /*!
-     * \brief Returns root index of the model
+     * \brief Return root index of the model
      */
     Q_INVOKABLE QModelIndex rootIndex();
 
     /*!
-     * \brief Returns model data by its index.
+     * \brief Return model data by index.
      * Model data is a QQmlPropertyMap wrapped by QVariant.
-     * This map contains is filled with help of data function and emits
-     * signals after any value changing.
+     * Values can be readed and writed there by role name.
+     * There is no need to use this function directly, data of each row
+     * is avaliable via modelData property in all delegates.
      */
     Q_INVOKABLE QVariant nodeData(const QModelIndex& index);
 
     /*!
-     * \brief Creates index of the node by its pointer
+     * \brief Create index of the node.
      */
     QModelIndex index(TreeNode* node);
 
     /*!
-     * \brief Attaches new node to the root node.
+     * \brief Attache new node to the root node.
      * Root node removes top level nodes on model destruction.
      */
     void addTopLevelNode(TreeNode* node);
 
     /*!
-     * \brief Resets model without content changing.
+     * \brief Reset model without content changing.
      */
     void reset();
 
     /*!
-     * \brief Returns pointer on the root node of the tree model.
+     * \brief Return pointer on the root node of the tree model.
      * Root node is invisible node, which contains all top level nodes.
-     * This owns top level nodes and responsible for their deleting.
      */
     TreeNode* rootNode() const {return m_root.get();}
 
-    // QAbstractItemModel interface
+    // QAbstractItemModel interface implementation
     QHash<int, QByteArray> roleNames() const override;
     int columnCount(const QModelIndex&) const override;
     int rowCount(const QModelIndex& parent) const override;

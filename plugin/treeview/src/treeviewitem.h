@@ -11,8 +11,8 @@ namespace treeview
 {
 
 /*!
- * \brief Base item for tree view.
- * It contains all properties, signals and internal logic.
+ * \brief This class contains all properties, signals and internal logic for the view.
+ * TreeViewItem is a base class for qml implementation classes.
  */
 class TREE_VIEW_API TreeViewItem : public QQuickItem
 {
@@ -81,18 +81,18 @@ signals:
     void released(QVariant mouse);
     void wheel(QVariant wheel);
 
+    void scrollVelocityChanged();
+    void availableWidthChanged();
+
+    // Internal signals
     void modelChanged();
     void nodeDataChanged(const QModelIndex&);
     void nodeChildrenCountChanged(const QModelIndex& ind);
-
     void rowContentDelegateChanged();
     void backgroundDelegateChanged();
     void dragDelegateChanged();
     void expanderDelegateChanged();
     void scrollBarDelegateChanged();
-
-    void availableWidthChanged();
-    void scrollVelocityChanged();
     void needToRecalcMaxRowWidth();
     void maxRowContentWidthChanged();
     void maxWidthRowIndexChanged();

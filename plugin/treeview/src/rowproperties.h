@@ -11,7 +11,7 @@ namespace treeview
 {
 
 /*!
- * \brief This class represents all data available inside a row.
+ * \brief This class represents all data available inside row delegates.
  * RowProperties can be used in delegates to set and get information
  * about current model data, selection state and view properties.
  */

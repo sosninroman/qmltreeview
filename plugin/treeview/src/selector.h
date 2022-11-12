@@ -10,22 +10,21 @@ namespace treeview
 {
 
 /*!
- * \brief This class contains selection of tree view.
+ * \brief This class contains selection state the tree.
  * Selector is used inside row delegates in order to control selection
  * behavior and tune delegates styles.
  */
 class TREE_VIEW_API Selector: public QObject
 {
     Q_OBJECT
-    using BaseClass = QObject;
 
 public:
-    explicit Selector(QObject* parent = nullptr): BaseClass(parent) {}
+    explicit Selector(QObject* parent = nullptr): QObject(parent) {}
 
     Q_PROPERTY(QModelIndex currentIndex READ currentIndex NOTIFY currentChanged)
     /*!
      * \brief Return current index of the view.
-     * Current index could be used for containing an index of row with mouse cursor.
+     * The current index can be used to store the index of the row with the mouse cursor.
      */
     QModelIndex currentIndex() const {return m_currentIndex;}
 
@@ -37,7 +36,7 @@ public:
 
     Q_PROPERTY(QModelIndexList selectedIndexes READ selectedIndexes NOTIFY selectionChanged)
     /*!
-     * \brief Return a list of selected indexes
+     * \brief Return a list of selected indexes.
      */
     QModelIndexList selectedIndexes() const {return m_selectedIndexes;}
 
@@ -47,27 +46,27 @@ signals:
 
 public slots:
     /*!
-     * \brief Clear selection and current index
+     * \brief Clear selection state.
      */
     void clear();
     /*!
-     * \brief Clear current index
+     * \brief Clear current index.
      */
     void clearCurrentIndex();
     /*!
-     * \brief Clear the list of selected indexes
+     * \brief Clear the list of selected indexes.
      */
     void clearSelection();
     /*!
-     * \brief Return true if particular index is selected
+     * \brief Return true if a specific index is selected.
      */
     bool isSelected(QModelIndex index);
     /*!
-     * \brief Put particular index into selected indexes list
+     * \brief Add a specific index to the list of selected indexes.
      */
     void select(QModelIndex index);
     /*!
-     * \brief Update current index
+     * \brief Update the current view index.
      */
     void setCurrentIndex(QModelIndex index);
 

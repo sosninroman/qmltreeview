@@ -8,7 +8,7 @@ namespace treeview
 
 class TreeViewPlugin: public QQmlExtensionPlugin {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "tree/1.0")
+    Q_PLUGIN_METADATA(IID "treeview/1.0")
 public:
     void registerTypes(const char* uri) override;
 };

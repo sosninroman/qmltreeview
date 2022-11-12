@@ -28,6 +28,18 @@ TreeNode* TreeNode::child(int row)
     return m_children.at(row);
 }
 
+QVector<TreeNode*> TreeNode::children() const
+{
+    return m_children;
+}
+
+QVector<TreeNode*> TreeNode::takeChildren()
+{
+    const auto result = m_children;
+    m_children.clear();
+    return result;
+}
+
 int TreeNode::row() const
 {
     if(!m_parent)

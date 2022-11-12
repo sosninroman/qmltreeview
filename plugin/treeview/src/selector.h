@@ -41,7 +41,7 @@ public:
     QModelIndexList selectedIndexes() const {return m_selectedIndexes;}
 
 signals:
-    void currentChanged(QModelIndex current, QModelIndex previous);
+    void currentChanged(const QModelIndex& current, const QModelIndex& previous);
     void selectionChanged();
 
 public slots:
@@ -60,15 +60,15 @@ public slots:
     /*!
      * \brief Return true if a specific index is selected.
      */
-    bool isSelected(QModelIndex index);
+    bool isSelected(const QModelIndex& index);
     /*!
      * \brief Add a specific index to the list of selected indexes.
      */
-    void select(QModelIndex index);
+    void select(const QModelIndex& index);
     /*!
      * \brief Update the current view index.
      */
-    void setCurrentIndex(QModelIndex index);
+    void setCurrentIndex(const QModelIndex& index);
 
 private:
     QModelIndex m_currentIndex;

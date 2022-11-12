@@ -26,12 +26,12 @@ void Selector::clearSelection()
     }
 }
 
-bool Selector::isSelected(QModelIndex index)
+bool Selector::isSelected(const QModelIndex& index)
 {
     return std::find(m_selectedIndexes.cbegin(), m_selectedIndexes.cend(), index) != m_selectedIndexes.cend();
 }
 
-void Selector::select(QModelIndex index)
+void Selector::select(const QModelIndex& index)
 {
     if( !isSelected(index) )
     {
@@ -40,7 +40,7 @@ void Selector::select(QModelIndex index)
     }
 }
 
-void Selector::setCurrentIndex(QModelIndex index)
+void Selector::setCurrentIndex(const QModelIndex& index)
 {
     if(m_currentIndex != index)
     {

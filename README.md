@@ -1,6 +1,6 @@
 # qmltreeview
 
-This repository contains a QML TreeView implementation for Qt 5.15. The component is implemented as a qml plugin and uses only QtQuickControls2 components inside.
+This repository contains a qml TreeView implementation for Qt 5.15. The component is implemented as a qml plugin and uses only QtQuickControls2 components inside.
 
 # Features
 
